@@ -17,7 +17,7 @@ checkValuesFn() {
 }
 
 changeConfigFn() {
-  . /etc/profile.d/fedorajam-pwjack.sh
+  . /etc/profile.d/fedorajam-pwjack.sh || true
     pwBuff=$(echo $PIPEWIRE_QUANTUM | cut -d "/" -f 1)
     pwFreq=$(echo $PIPEWIRE_QUANTUM | cut -d "/" -f 2)
     pwUserBuff=$(grep "node.latency" $HOME/.config/pipewire/jack.conf.d/fedorajam.conf | cut -d "=" -f 2 | cut -d "/" -f 1 | cut -c 2-)
@@ -375,6 +375,10 @@ while true; do
   strExit=$?
   if [ "${strExit}" = "1" ]; then
     exit 0;
+  fi
+
+  if [ "${changeConfig}" = "Configure Current Audio Configuration" ]; then
+    changeConfigFn
   fi
 
   if [ "${changeConfig}" = "Change Kernel Boot Parameters" ]; then
