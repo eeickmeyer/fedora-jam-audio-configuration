@@ -383,7 +383,7 @@ while true; do
 
   if [ "${changeConfig}" = "Change Kernel Boot Parameters" ]; then
     # Parse current Boot Parameters
-    bootParamsLine=$(grep 'GRUB_CMDLINE_LINUX_DEFAULT' /etc/default/grub.d/fedorajam.cfg)
+    bootParamsLine=$(grep 'GRUB_CMDLINE_LINUX' /etc/default/grub.d/fedorajam.cfg)
     bootParamsLine=${bootParamsLine::-1}
     bootParamsLine=$(echo "${bootParamsLine}" | cut -c 57- )
     bootParamOne="FALSE"; bootParamTwo="FALSE"; bootParamThree="FALSE"; bootParamFour="FALSE"
@@ -442,7 +442,7 @@ while true; do
     else
       grubCfg=$(cat << EOF
 # Activate lowlatency effects of kernel
-GRUB_CMDLINE_LINUX_DEFAULT="\$GRUB_CMDLINE_LINUX_DEFAULT ${newBootParams[@]}"
+GRUB_CMDLINE_LINUX="\$GRUB_CMDLINE_LINUX ${newBootParams[@]}"
 EOF
 );
       if pkexec /usr/bin/fedorajam-audio-config writeparams "${grubCfg}" ${newBootParams[@]} | \
