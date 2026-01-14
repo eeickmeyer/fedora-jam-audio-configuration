@@ -16,7 +16,6 @@ PipeWire-JACK configuration
 %prep
 # No upstream tarball to unpack; use repository files directly
 # Avoid running %autosetup which expects a tar archive
-:
 
 %build
 # blank
