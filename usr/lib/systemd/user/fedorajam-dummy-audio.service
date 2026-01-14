@@ -1,0 +1,12 @@
+[Unit]
+Description=Fedora Jam Dummy Audio Device
+After=pipewire.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/fedorajam-audio-config dummystart
+ExecStop=/usr/bin/fedorajam-audio-config dummystop
+RemainAfterExit=yes
+
+[Install]
+WantedBy=pipewire.service

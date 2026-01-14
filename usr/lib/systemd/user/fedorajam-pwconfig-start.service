@@ -1,0 +1,10 @@
+[Unit]
+Description=PipeWire Startup
+After=pipewire.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/fedorajam-audio-config startup
+
+[Install]
+WantedBy=pipewire.service

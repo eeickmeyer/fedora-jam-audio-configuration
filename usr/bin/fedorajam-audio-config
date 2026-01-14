@@ -1,0 +1,529 @@
+#!/bin/bash
+
+checkValuesFn() {
+  if [ "$1" = "16" ] || [ "$1" = "32" ] || [ "$1" = "64" ] ||\
+     [ "$1" = "128" ] || [ "$1" = "256" ] || [ "$1" = "512" ] || [ "$1" = "1024" ] ||\
+     [ "$1" = "2048" ] || [ "$1" = "4096" ]; then
+    if [ "$2" = "22050" ] || [ "$2" = "32000" ] || [ "$2" = "44100" ] ||\
+       [ "$2" = "48000" ] || [ "$2" = "88200" ] || [ "$2" = "96000" ] ||\
+       [ "$2" = "192000" ]; then
+      return 0
+    else
+      return 1
+    fi
+  else
+    return 1
+  fi
+}
+
+changeConfigFn() {
+  . /etc/profile.d/fedorajam-pwjack.sh
+    pwBuff=$(echo $PIPEWIRE_QUANTUM | cut -d "/" -f 1)
+    pwFreq=$(echo $PIPEWIRE_QUANTUM | cut -d "/" -f 2)
+    pwUserBuff=$(grep "node.latency" $HOME/.config/pipewire/jack.conf.d/fedorajam.conf | cut -d "=" -f 2 | cut -d "/" -f 1 | cut -c 2-)
+    pwUserFreq=$(grep "node.latency" $HOME/.config/pipewire/jack.conf.d/fedorajam.conf | cut -d "=" -f 2 | cut -d "/" -f 2)
+    pwSetStr=$(zenity \
+    --title "Fedora Jam Audio Configuration" \
+    --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+    --entry \
+    --ok-label="Next" \
+    --cancel-label="Cancel" \
+    --text="Please enter the values for the PipeWire Quantum / JACK Plugin
+  configuration separated by a space.\n
+  First value is the Buffer Size which can be one of the following:
+  16, 32, 64, 128, 256, 512, 1024, 2048, or 4096\n
+  Next value is the Sample Rate in Hertz (Hz) which can be one of the following:
+  22050, 32000, 44100, 48000, 88200, 96000, or 192000\n
+  Example (default): $pwBuff $pwFreq\n
+  Leaving this blank will reset to default unless cancelled
+  Field is prepopulated with the current settings.\n
+  If you're not sure what to do here, it's best to reset to defaults or leave current settings in place.\n
+  Note: Defaults are controlled via the fedorajam-pwjack-config terminal command" \
+    --entry-text="${pwUserBuff} ${pwUserFreq}" )
+    strExit=$?
+    if ! [ "${strExit}" = "1" ]; then
+      if [ -n "${pwSetStr}" ]; then
+        pwSetArry[0]=$(echo "${pwSetStr}" | cut -d " " -f 1)
+        pwSetArry[1]=$(echo "${pwSetStr}" | cut -d " " -f 2)
+        if checkValuesFn ${pwSetArry[0]} ${pwSetArry[1]}; then
+          true
+        else
+          zenity --title "Fedora Jam Audio Configuration" \
+          --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+          --error \
+          --text="An error has occurred. Check your entry and try again."
+          return 1
+        fi
+      else
+          pwSetArry[0]=$pwBuff
+          pwSetArry[1]=$pwFreq
+      fi
+    else
+      return
+    fi
+    # Parse JACK configuration
+    declare -a jackConfig=(
+    [0]=jack.show-monitor
+    [1]=jack.merge-monitor
+    [2]=jack.show-midi
+    [3]=jack.short-name
+    )
+    jackBool=0
+    for param in ${jackConfig[@]}; do
+      bool=$(grep "${param}" $HOME/.config/pipewire/jack.conf.d/fedorajam.conf | cut -d "=" -f 2 | cut -c 2-)
+      if [ "${bool}" = "true" ]; then
+        jackParam[jackBool]="TRUE"
+      else
+        jackParam[jackBool]="FALSE"
+      fi
+      jackBool=$((jackBool + 1))
+    done
+    # Build the Paremeter table for the UI
+    declare -a jackTableArry=(
+      [0]=${jackParam[0]}
+      [1]=jack.show-monitor
+      [2]="Show the Monitor client and its ports."
+      [3]=${jackParam[1]}
+      [4]=jack.merge-monitor
+      [5]="Exposes the capture ports and monitor ports on the same JACK device client."
+      [6]=${jackParam[2]}
+      [7]=jack.show-midi
+      [8]="Show the MIDI clients and their ports."
+      [9]=${jackParam[3]}
+      [10]=jack.short-name
+      [11]="Use shorter names for the device client name."
+    )
+    newParams=$(zenity --width=850 --height=350 \
+      --title "Fedora Jam Audio Configuration" \
+      --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+      --list \
+      --checklist \
+      --separator=" " \
+      --text="Select which JACK plugin options you would like" \
+      --ok-label="Next" \
+      --cancel-label="Cancel" \
+      --column=" " \
+      --column="Parameter" \
+      --column="Description" \
+      "${jackTableArry[@]}"
+    )
+    exitCode=$?
+    if [ "${exitCode}" = "1" ]; then
+      return
+    else
+      read -a newJackParams <<< "${newParams}"
+      p=0
+      for param in "${jackConfig[@]}"; do
+        for i in "${newJackParams[@]}"; do
+          if [ "${i}" = "${jackConfig[p]}" ]; then
+            jackParamWrite[p]=true; continue
+          else
+            if ! [ "${jackParamWrite[p]}" = "true" ]; then
+              jackParamWrite[p]=false
+            fi
+          fi
+        done
+        p=$((p + 1))
+      done
+      scparam=$(grep "jack.self-connect-mode" $HOME/.config/pipewire/jack.conf.d/fedorajam.conf | cut -d "=" -f 2 | cut -c 2-)
+      declare scParamArry=(
+      [0]=allow
+      [1]=fail-external
+      [2]=ignore-external
+      [3]=fail-all
+      [4]=ignore-all
+      )
+      for sc in "${scParamArry[@]}"; do
+        if [ "${sc}" = "${scparam}" ]; then
+          declare "$sc"="TRUE"
+        else
+          declare "$sc"="FALSE"
+        fi
+      done
+      declare -a scTableArry=(
+      [0]=${allow}
+      [1]=allow
+      [2]="Don't restrict self connect requests (default)"
+      [3]=${fail-external}
+      [4]=fail-external
+      [5]="Fail self connect requests to external ports only"
+      [6]=${ignore-external}
+      [7]=ignore-external
+      [8]="Ignore self connect requests to external ports only"
+      [9]=${fail-all}
+      [10]=fail-all
+      [11]="Fail all self connect requests"
+      [12]=${ignore-all}
+      [13]=ignore-all
+      [14]="Ignore all self connect requests"
+      )
+      selfConnect=$(zenity --width=850 --height=350 \
+      --title "Fedora Jam Audio Configuration" \
+      --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+      --list \
+      --radiolist \
+      --separator=" " \
+      --text="Select the self-connect mode. If you don't know what this is, leave it alone." \
+      --ok-label="Apply" \
+      --cancel-label="Cancel" \
+      --column=" " \
+      --column="Parameter" \
+      --column="Description" \
+      "${scTableArry[@]}"
+      )
+      exitCode=$?
+      if [ "${exitCode}" = "1" ]; then return; fi
+      jackCfg=$(cat << EOF
+#THIS FILE IS AUTOMATICALLY GENERATED BY Fedora Jam Audio Configuration
+jack.properties = {
+    #rt.prio             = 88
+    node.latency        = ${pwSetArry[0]}/${pwSetArry[1]}
+    #node.lock-quantum   = true
+    #node.force-quantum  = 0
+    jack.show-monitor   = ${jackParamWrite[0]}
+    jack.merge-monitor  = ${jackParamWrite[1]}
+    jack.show-midi      = ${jackParamWrite[2]}
+    jack.short-name     = ${jackParamWrite[3]}
+    #jack.filter-name    = false
+    #jack.filter-char    = " "
+    #
+    # allow:           Don't restrict self connect requests
+    # fail-external:   Fail self connect requests to external ports only
+    # ignore-external: Ignore self connect requests to external ports only
+    # fail-all:        Fail all self connect requests
+    # ignore-all:      Ignore all self connect requests
+    #jack.self-connect-mode  = ${selfConnect}
+    #jack.locked-process     = true
+    #jack.default-as-system  = false
+    #jack.fix-midi-events    = true
+    jack.global-buffer-size = true
+    #jack.passive-links      = false
+    #jack.max-client-ports   = 768
+    #jack.fill-aliases       = false
+    #jack.writable-input     = false
+    #jack.flag-midi2         = false
+}
+EOF
+)
+      echo "$jackCfg" > $HOME/.config/pipewire/jack.conf.d/fedorajam.conf
+      systemctl --user restart pipewire
+      pw-metadata -n settings 0 clock.force-quantum ${pwSetArry[0]}
+      pw-metadata -n settings 0 clock.force-rate ${pwSetArry[1]}
+      if [ "${dummyDead}" = "FALSE" ]; then
+        systemctl --user restart fedorajam-dummy-audio.service
+      fi
+      zenity --title "Fedora Jam Audio Configuration" \
+          --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+          --info \
+          --text "PipeWire Quantum set to ${pwSetArry[0]} Buffer and ${pwSetArry[1]} Hz Sample Rate.\n
+jack.show-monitor   = ${jackParamWrite[0]}
+jack.merge-monitor  = ${jackParamWrite[1]}
+jack.show-midi      = ${jackParamWrite[2]}
+jack.short-name     = ${jackParamWrite[3]}
+jack.self-connect-mode = ${selfConnect}"
+    fi
+}
+
+updateGrubfn() {
+  sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+  if [ -d /sys/firmware/efi ] then
+    sudo dnf reinstall grub2-common
+  fi
+}
+
+if [ "$1" = "dummystart" ] || [ "$1" = "dummystop" ]; then
+  case $1 in
+    dummystart)
+      pactl load-module module-null-sink media.class=Audio/Sink sink_name=Dummy channel_map=stereo
+      pactl load-module module-virtual-source media.class=Audio/Source source_name=Dummy channel_map=stereo
+    ;;
+    dummystop)
+      pactl unload-module module-null-sink
+      pactl unload-module module-virtual-source
+    ;;
+  esac
+  exit 0
+fi
+
+if [ "$1" = "startup" ]; then
+  set -e
+  if ! [ -f "$HOME/.config/pipewire/jack.conf.d/fedorajam.conf" ]; then
+    . /etc/profile.d/fedorajam-pwjack.sh
+    pwBuff=$(echo $PIPEWIRE_QUANTUM | cut -d "/" -f 1)
+    pwFreq=$(echo $PIPEWIRE_QUANTUM | cut -d "/" -f 2)
+    pw-metadata -n settings 0 clock.force-quantum ${pwBuff}
+    pw-metadata -n settings 0 clock.force-rate ${pwFreq}
+    writeFile=$(cat << EOF
+#THIS FILE IS AUTOMATICALLY GENERATED BY Fedora Jam Audio Configuration
+jack.properties = {
+    #rt.prio             = 88
+    node.latency        = $pwBuff/$pwFreq
+    #node.lock-quantum   = true
+    #node.force-quantum  = 0
+    jack.show-monitor   = true
+    jack.merge-monitor  = true
+    jack.show-midi      = true
+    jack.short-name     = true
+    #jack.filter-name    = false
+    #jack.filter-char    = " "
+    #
+    # allow:           Don't restrict self connect requests
+    # fail-external:   Fail self connect requests to external ports only
+    # ignore-external: Ignore self connect requests to external ports only
+    # fail-all:        Fail all self connect requests
+    # ignore-all:      Ignore all self connect requests
+    #jack.self-connect-mode  = allow
+    #jack.locked-process     = true
+    #jack.default-as-system  = false
+    #jack.fix-midi-events    = true
+    jack.global-buffer-size = true
+    #jack.passive-links      = false
+    #jack.max-client-ports   = 768
+    #jack.fill-aliases       = false
+    #jack.writable-input     = false
+    #jack.flag-midi2         = false
+}
+EOF
+    )
+    mkdir -p $HOME/.config/pipewire/jack.conf.d
+    echo -e "$writeFile" > $HOME/.config/pipewire/jack.conf.d/fedorajam.conf
+  else
+    pwBuff=$(grep "node.latency" $HOME/.config/pipewire/jack.conf.d/fedorajam.conf | cut -f "=" | cut -d "/" -f 1)
+    pwFreq=$(grep "node.latency" $HOME/.config/pipewire/jack.conf.d/fedorajam.conf | cut -f "=" | cut -d "/" -f 2)
+    pw-metadata -n settings 0 clock.force-quantum ${pwBuff}
+    pw-metadata -n settings 0 clock.force-rate ${pwFreq}
+  fi
+  exit 0
+fi
+
+if [ "$1" = "writeparams" ]; then
+  mkdir -p /etc/default/grub.d
+  echo "$2" > /etc/default/grub.d/fedorajam.cfg
+  updateGrubfn
+  if [ -e /boot/refind_linux.conf ]; then
+    if grep -qi 'lowlatency' /boot/refind_linux.conf; then
+      _rootUuid=$(lsblk -no UUID "$(df -P / | awk 'END{print $1}')");
+      _refindRead=$(grep 'lowlatency' /boot/refind_linux.conf);
+      _refindWrite="\"Boot with lowlatency options\" \"root=UUID=${_rootUuid} ro quiet splash $3 $4 $5 $6 vt.handoff=1\"";
+      echo -e "${_refindRead}\n${_refindWrite}"
+      sed -i "/\\$_refindRead/c\\$_refindWrite" /boot/refind_linux.conf;
+    fi
+  fi
+  exit 0
+fi
+
+#if ! [ "$(id -nu)" = "fedora-jam" ]; then
+#  if ! [ -e /etc/security/limits.d/30-fedorajam-audio.conf ] || [ -z "$(groups | grep 'audio')" ]; then
+#    infotext="Your system and/or user configuration is not optimally configured for audio \
+#production. In order to fix this, a system restart will be required."
+#    zenity \
+#    --title "Fedora Jam Audio Configuration" \
+#    --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+#    --info \
+#    --text="${infotext}"
+#   if pkexec /usr/sbin/fedorajam-installer-fix; then
+#       touch "${HOME}/.config/fedorajam-audio-firstrun"
+#       reboot
+#    else
+#      zenity --title "Fedora Jam Audio Configuration" \
+#      --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+#      --error \
+#      --text="An error has occurred."
+#    fi
+#    exit 0
+#  else
+#    if ! [ -e "${HOME}/.config/fedorajam-audio-firstrun" ]; then
+#      touch "${HOME}/.config/fedorajam-audio-firstrun"
+#      exit 0
+#    fi
+#  fi
+#fi
+
+while true; do
+
+#  if [ -e /etc/ld.so.conf.d/pipewire-jack.conf ]; then
+#    pwJackStr="DISABLE PipeWire-JACK (to use JACKd2 with QJackCtl, for Advanced Users)"
+#  else
+#    pwJackStr="ENABLE PipeWire-JACK (Default Configuration)"
+#  fi
+
+  # Get dummy device status
+  dummyDead=$(systemctl --user status fedorajam-dummy-audio.service | grep active | grep dead)
+  if [ "${dummyDead}" = "" ]; then
+    dummyDead="FALSE"
+  else
+    dummyDead="TRUE"
+  fi
+  if [ "${dummyDead}" = "FALSE" ]; then
+    dummyStr="STOP Dummy Audio Device"
+  else
+    dummyStr="START Dummy Audio Device"
+  fi
+
+  changeConfig=$(zenity --width=600 --height=450 \
+      --title "Fedora Jam Audio Configuration" \
+      --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+      --list \
+      --radiolist \
+      --separator="|" \
+      --text="What would you like to do?" \
+      --ok-label="Continue" \
+      --cancel-label="Close" \
+      --column="Select" \
+      --column="Selection" \
+      FALSE "Configure Current Audio Configuration" FALSE "Change Kernel Boot Parameters" FALSE "${dummyStr}" ); #FALSE "${pwJackStr}" );
+  strExit=$?
+  if [ "${strExit}" = "1" ]; then
+    exit 0;
+  fi
+
+  if [ "${changeConfig}" = "Change Kernel Boot Parameters" ]; then
+    # Parse current Boot Parameters
+    bootParamsLine=$(grep 'GRUB_CMDLINE_LINUX_DEFAULT' /etc/default/grub.d/fedorajam.cfg)
+    bootParamsLine=${bootParamsLine::-1}
+    bootParamsLine=$(echo "${bootParamsLine}" | cut -c 57- )
+    bootParamOne="FALSE"; bootParamTwo="FALSE"; bootParamThree="FALSE"; bootParamFour="FALSE"
+    echo "${bootParamsLine}"
+    declare -a j=(
+    [1]=1
+    [2]=2
+    [3]=3
+    [4]=4
+    )
+    for i in ${j[@]}; do
+      parameter=$(echo ${bootParamsLine} | cut -d ' ' -f ${i} )
+      echo "${parameter}"
+      if [ "${parameter}" = "preempt=full" ]; then
+        bootParamOne="TRUE"
+      elif [ "${parameter}" = "threadirqs" ]; then
+        bootParamTwo="TRUE"
+      elif [ "${parameter}" = "rcu_nocbs=all" ]; then
+        bootParamThree="TRUE"
+      elif [ "${parameter}" = "nohz_full=all" ]; then
+        bootParamFour="TRUE"
+      fi
+    done
+    # Build the Parameter table for the UI
+    declare -a paramTableArry=(
+    [0]=${bootParamOne}
+    [1]="preempt=full"
+    [2]="Makes the kernel fully-preemptible, best for lowlatency workloads"
+    [3]=${bootParamTwo}
+    [4]="threadirqs"
+    [5]="Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
+    [6]=${bootParamThree}
+    [7]="rcu_nocbs=all"
+    [8]="Offloads Read-Copy-Update (RCU) callbacks from all CPUs to dedicated kernel threads, improves real-time performance."
+    [9]=${bootParamFour}
+    [10]="nohz_full=all"
+    [11]="Reduces noise in latency critical applications such as virtualization"
+    )
+    newBootParams=$(zenity --width=850 --height=350 \
+      --title "Fedora Jam Audio Configuration" \
+      --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+      --list \
+      --checklist \
+      --separator=" " \
+      --text="Select which kernel boot parameters you would like. Default is first three." \
+      --ok-label="Apply (Password Required)" \
+      --cancel-label="Back" \
+      --column=" " \
+      --column="Parameter" \
+      --column="Description" \
+      "${paramTableArry[@]}"
+    )
+    exitCode=$?
+    if [ "${exitCode}" = "1" ]; then
+      true; #do nothing
+    else
+      grubCfg=$(cat << EOF
+# Activate lowlatency effects of kernel
+GRUB_CMDLINE_LINUX_DEFAULT="\$GRUB_CMDLINE_LINUX_DEFAULT ${newBootParams[@]}"
+EOF
+);
+      if pkexec /usr/bin/fedorajam-audio-config writeparams "${grubCfg}" ${newBootParams[@]} | \
+      zenity --progress --auto-close --no-cancel --pulsate; then
+        zenity \
+           --title "Fedora Jam Audio Configuration" \
+           --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+           --info \
+           --text="You must restart your computer for these changes to take effect."
+      else
+        zenity --title "Fedora Jam Audio Configuration" \
+          --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+          --error \
+          --text="An error has occurred or action was cancelled."
+      fi
+    fi
+  fi
+
+  if [ "${changeConfig}" = "${dummyStr}" ]; then
+    if [ "${dummyDead}" = "TRUE" ]; then
+      dummyInfoText="Sometimes, you may wish to enable a dummy audio device for your system \
+audio or an audio application so that you don't inadvertently feed that to \
+your main output or draw from your main input. This can be useful when you wish \
+to send a music application to your your DAW or other mixer without sending to \
+your main system output. There may be other workflow reasons as well.\n\n \
+Do you wish to start a stereo dummy audio device?"
+      if (zenity --width=400 --height=200 \
+        --question \
+        --title="Fedora Jam Audio Configuration" \
+        --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+        --cancel-label="Go Back" \
+        --text="${dummyInfoText}"); then
+        systemctl --user start fedorajam-dummy-audio.service
+        if (zenity --width=200 --height=100 \
+          --question \
+          --title="Fedora Jam Audio Configuration" \
+          --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+          --ok-label="Yes" \
+          --cancel-label="No" \
+          --text="Would you like the dummy audio device to start at login?"); then
+          systemctl --user enable fedorajam-dummy-audio.service || true
+        else
+          systemctl --user disable fedorajam-dummy-audio.service || true
+        fi
+      fi
+    else
+      if (zenity --width=200 --height=100 \
+        --question \
+        --title="Fedora Jam Audio Configuration" \
+        --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+        --ok-label="Yes" \
+        --cancel-label="No" \
+        --text="Would you like to stop the dummy audio device?"); then
+        systemctl --user stop fedorajam-dummy-audio.service
+        if (zenity --width=200 --height=100 \
+          --question \
+          --title="Fedora Jam Audio Configuration" \
+          --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+          --ok-label="Yes" \
+          --cancel-label="No" \
+          --text="Would you like the dummy audio device to start at login?"); then
+          systemctl --user enable fedorajam-dummy-audio.service || true
+        else
+          systemctl --user disable fedorajam-dummy-audio.service || true
+        fi
+      fi
+    fi
+  fi
+
+  if [ "${changeConfig}" = "${pwJackStr}" ]; then
+    if [ -e /etc/ld.so.conf.d/pipewire-jack.conf ]; then
+      if pkexec fedorajam-pwjack-config disable; then true; else
+        zenity --title "Fedora Jam Audio Configuration" \
+          --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+          --error \
+          --text="An error has occurred."
+      fi
+    else
+      if pkexec fedorajam-pwjack-config enable; then true; else
+        zenity --title "Fedora Jam Audio Configuration" \
+          --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
+          --error \
+          --text="An error has occurred."
+      fi
+    fi
+  fi
+
+done
