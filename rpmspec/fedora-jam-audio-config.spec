@@ -12,14 +12,19 @@ BuildRequires:  systemd-rpm-macros
 Requires:       grub2-common bash zenity polkit systemd pipewire pipewire-utils pulseaudio-utils
 
 %description
-A lightweight set of scripts for manipulating a user's
-PipeWire-JACK configuration
+A lightweight set of GUI scripts for manipulating a user's
+PipeWire-JACK configuration as well as a system's GRUB configuration
+to optimize for low-latency audio performance on Fedora Jam.
 
 %prep
 %setup -q
 
 %build
 # blank
+
+%check
+bash -n usr/bin/fedorajam-audio-config
+bash -n usr/sbin/fedorajam-pwjack-config
 
 %install
 rm -rf %{buildroot}
