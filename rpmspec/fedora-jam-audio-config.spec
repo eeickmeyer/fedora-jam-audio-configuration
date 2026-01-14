@@ -15,7 +15,11 @@ PipeWire-JACK configuration
 
 %prep
 # No upstream tarball to unpack; use repository files directly
-# Avoid running %autosetup which expects a tar archive
+# Create a source dir so builds that expect %{name}-%{version} succeed
+mkdir -p %{name}-%{version}
+# Copy repository files into the source dir (ignore errors if none)
+cp -a ./* %{name}-%{version}/ 2>/dev/null || :
+cd %{name}-%{version} || :
 
 %build
 # blank
