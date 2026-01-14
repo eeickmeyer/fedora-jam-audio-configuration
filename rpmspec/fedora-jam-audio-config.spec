@@ -9,7 +9,7 @@ License:        GPL-2.0-or-later
 URL:            https://pagure.io/fedora-jam-audio-configuration
 Source0:        %{name}-%{version}.tar.gz
 BuildRequires:  systemd-rpm-macros
-Requires:       grub bash zenity polkit systemd pipewire pipewire-utils pulseaudio-utils
+Requires:       grub2-common bash zenity polkit systemd pipewire pipewire-utils pulseaudio-utils
 
 %description
 A lightweight set of scripts for manipulating a user's
