@@ -226,7 +226,7 @@ jack.self-connect-mode = ${selfConnect}"
 
 updateGrubfn() {
   sudo grub2-mkconfig -o /boot/grub2/grub.cfg
-  if [ -d /sys/firmware/efi ] then
+  if [ -d /sys/firmware/efi ]; then
     sudo dnf reinstall grub2-common
   fi
 }
