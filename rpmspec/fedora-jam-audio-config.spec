@@ -39,7 +39,7 @@ install -m 0644 ${src}/usr/share/applications/fedorajam-audio-config.desktop %{b
 %post
 %systemd_user_post fedorajam-dummy-audio.service fedorajam-pwconfig-start.service
 if ! [ -f %{_sysconfdir}/profile.d/fedorajam-pwjack.sh ]; then
-   %{_sbindir}fedorajam-pwjack-config 1024 48000
+   %{_sbindir}/fedorajam-pwjack-config 1024 48000
 fi
 
 %preun
