@@ -21,14 +21,16 @@ PipeWire-JACK configuration
 # blank
 
 %install
-tar cpf - . | tar --directory %{buildroot} -xvpf -
-	
-if [ %{_prefix} != /usr ] ; then
-   pushd %{buildroot}
-   mv %{buildroot}/usr %{buildroot}%{_prefix}
-   mv %{buildroot}/etc %{buildroot}%{_sysconfdir}
-   popd
-fi
+rm -rf %{buildroot}
+install -d -m 0755 %{buildroot}%{_bindir} %{buildroot}%{_sbindir} \
+  %{buildroot}%{_sysconfdir}/default/grub.d %{buildroot}%{_userunitdir} %{buildroot}%{_docdir}/%{name}
+
+install -m 0755 usr/bin/fedorajam-audio-config %{buildroot}%{_bindir}/fedorajam-audio-config
+install -m 0755 usr/sbin/fedorajam-pwjack-config %{buildroot}%{_sbindir}/fedorajam-pwjack-config
+install -m 0644 usr/lib/systemd/user/fedorajam-dummy-audio.service %{buildroot}%{_userunitdir}/fedorajam-dummy-audio.service
+install -m 0644 usr/lib/systemd/user/fedorajam-pwconfig-start.service %{buildroot}%{_userunitdir}/fedorajam-pwconfig-start.service
+install -m 0644 etc/default/grub.d/fedorajam.cfg %{buildroot}%{_sysconfdir}/default/grub.d/fedorajam.cfg
+install -m 0644 COPYING %{buildroot}%{_docdir}/%{name}/COPYING
 
 %post
 %{?systemd_requires}
@@ -44,11 +46,12 @@ fi
 
 %files
 %license COPYING
+%doc %{_docdir}/%{name}/COPYING
 %config(noreplace) %{_sysconfdir}/default/grub.d/fedorajam.cfg
 %{_bindir}/fedorajam-audio-config
 %{_sbindir}/fedorajam-pwjack-config
-%{_libdir}/systemd/user/fedorajam-dummy-audio.service
-%{_libdir}/systemd/user/fedorajam-pwconfig-start.service
+%{_userunitdir}/fedorajam-dummy-audio.service
+%{_userunitdir}/fedorajam-pwconfig-start.service
 
 %changelog
 * Wed Jan 14 2026 Erich Eickmeyer <erich@ericheickmeyer.com>
