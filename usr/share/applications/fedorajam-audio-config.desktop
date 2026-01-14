@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Fedora Jam Audio Configuration
+GenericName=Audio Configuration
+Comment=Used to configure PipeWire Quantum or switch between PipeWire and JACK/PulseAudio setups
+Exec=fedorajam-audio-config
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=start-here
+Categories=System;
+Keywords=Audio;Config;Apps;
