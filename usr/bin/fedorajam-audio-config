@@ -17,7 +17,7 @@ checkValuesFn() {
 }
 
 changeConfigFn() {
-  . /etc/profile.d/fedorajam-pwjack.sh || true
+  . /etc/profile.d/fedorajam-pwjack.sh
     pwBuff=$(echo $PIPEWIRE_QUANTUM | cut -d "/" -f 1)
     pwFreq=$(echo $PIPEWIRE_QUANTUM | cut -d "/" -f 2)
     pwUserBuff=$(grep "node.latency" $HOME/.config/pipewire/jack.conf.d/fedorajam.conf | cut -d "=" -f 2 | cut -d "/" -f 1 | cut -c 2-)
