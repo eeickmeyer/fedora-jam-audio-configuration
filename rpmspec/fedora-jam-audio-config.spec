@@ -1,7 +1,7 @@
 Name:           fedora-jam-audio-config
 Version:        1.0
 Release:        1%{?dist}
-Summary:        
+Summary:        PipeWire-JACK audio configuration scripts for Fedora Jam
 
 License:        GPL-2.0-or-later
 URL:            https://pagure.io/fedora-jam-audio-configuration
