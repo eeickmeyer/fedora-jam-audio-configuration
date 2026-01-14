@@ -7,7 +7,7 @@ Summary:        PipeWire-JACK audio configuration scripts for Fedora Jam
 
 License:        GPL-2.0-or-later
 URL:            https://pagure.io/fedora-jam-audio-configuration
-Source0:        %{name}-%{version}.tar.gz
+Source0:        https://releases.pagure.org/fedora-jam-audio-configuration/%{name}-%{version}.tar.gz
 BuildRequires:  systemd-rpm-macros
 Requires:       grub2-common bash zenity polkit systemd pipewire pipewire-utils pulseaudio-utils
 
@@ -26,7 +26,7 @@ rm -rf %{buildroot}
 install -d -m 0755 %{buildroot}%{_bindir} %{buildroot}%{_sbindir} \
   %{buildroot}%{_sysconfdir}/default/grub.d %{buildroot}%{_userunitdir} %{buildroot}%{_userpresetdir} %{buildroot}%{_docdir}/%{name} %{buildroot}%{_datadir}/applications
 
-# Source is the current directory after %prep
+# Source is the current directory after prep
 src="."
 
 install -m 0755 ${src}/usr/bin/fedorajam-audio-config %{buildroot}%{_bindir}/fedorajam-audio-config
