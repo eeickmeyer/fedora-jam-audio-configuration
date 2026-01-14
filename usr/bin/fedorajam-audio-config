@@ -385,7 +385,7 @@ while true; do
     # Parse current Boot Parameters
     bootParamsLine=$(grep 'GRUB_CMDLINE_LINUX' /etc/default/grub.d/fedorajam.cfg)
     bootParamsLine=${bootParamsLine::-1}
-    bootParamsLine=$(echo "${bootParamsLine}" | cut -c 57- )
+    bootParamsLine=$(echo "${bootParamsLine}" | cut -c 41- )
     bootParamOne="FALSE"; bootParamTwo="FALSE"; bootParamThree="FALSE"; bootParamFour="FALSE"
     echo "${bootParamsLine}"
     declare -a j=(
