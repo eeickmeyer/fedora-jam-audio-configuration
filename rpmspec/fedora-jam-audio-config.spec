@@ -37,7 +37,7 @@ install -m 0644 ${src}/etc/default/grub.d/fedorajam.cfg %{buildroot}%{_sysconfdi
 install -m 0644 ${src}/usr/share/applications/fedorajam-audio-config.desktop %{buildroot}%{_datadir}/applications/fedorajam-audio-config.desktop
 
 %post
-%systemd_user_post fedorajam-dummy-audio.service fedorajam-pwconfig-start.service
+%systemd_user_post fedorajam-pwconfig-start.service
 if ! [ -f %{_sysconfdir}/profile.d/fedorajam-pwjack.sh ]; then
    %{_sbindir}/fedorajam-pwjack-config 1024 48000
 fi
