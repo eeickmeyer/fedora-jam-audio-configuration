@@ -29,12 +29,22 @@ rm -rf %{buildroot}
 install -d -m 0755 %{buildroot}%{_bindir} %{buildroot}%{_sbindir} \
   %{buildroot}%{_sysconfdir}/default/grub.d %{buildroot}%{_userunitdir} %{buildroot}%{_docdir}/%{name}
 
-install -m 0755 usr/bin/fedorajam-audio-config %{buildroot}%{_bindir}/fedorajam-audio-config
-install -m 0755 usr/sbin/fedorajam-pwjack-config %{buildroot}%{_sbindir}/fedorajam-pwjack-config
-install -m 0644 usr/lib/systemd/user/fedorajam-dummy-audio.service %{buildroot}%{_userunitdir}/fedorajam-dummy-audio.service
-install -m 0644 usr/lib/systemd/user/fedorajam-pwconfig-start.service %{buildroot}%{_userunitdir}/fedorajam-pwconfig-start.service
-install -m 0644 etc/default/grub.d/fedorajam.cfg %{buildroot}%{_sysconfdir}/default/grub.d/fedorajam.cfg
-install -m 0644 COPYING %{buildroot}%{_docdir}/%{name}/COPYING
+# Locate source directory (support building from repo top or an unpacked tarball)
+src=""
+for d in . .. ../.. ../../..; do
+  if [ -f "${d}/usr/bin/fedorajam-audio-config" ]; then src="${d}"; break; fi
+done
+if [ -z "$src" ]; then
+  echo "FATAL: source files not found (searched ., .., ../.., ../../..)" >&2
+  exit 1
+fi
+
+install -m 0755 ${src}/usr/bin/fedorajam-audio-config %{buildroot}%{_bindir}/fedorajam-audio-config
+install -m 0755 ${src}/usr/sbin/fedorajam-pwjack-config %{buildroot}%{_sbindir}/fedorajam-pwjack-config
+install -m 0644 ${src}/usr/lib/systemd/user/fedorajam-dummy-audio.service %{buildroot}%{_userunitdir}/fedorajam-dummy-audio.service
+install -m 0644 ${src}/usr/lib/systemd/user/fedorajam-pwconfig-start.service %{buildroot}%{_userunitdir}/fedorajam-pwconfig-start.service
+install -m 0644 ${src}/etc/default/grub.d/fedorajam.cfg %{buildroot}%{_sysconfdir}/default/grub.d/fedorajam.cfg
+install -m 0644 ${src}/COPYING %{buildroot}%{_docdir}/%{name}/COPYING
 
 %post
 %{?systemd_requires}
