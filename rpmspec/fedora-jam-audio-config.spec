@@ -39,7 +39,6 @@ install -m 0755 ${src}/usr/sbin/fedorajam-pwjack-config %{buildroot}%{_sbindir}/
 install -m 0644 ${src}/usr/lib/systemd/user/fedorajam-dummy-audio.service %{buildroot}%{_userunitdir}/fedorajam-dummy-audio.service
 install -m 0644 ${src}/usr/lib/systemd/user/fedorajam-pwconfig-start.service %{buildroot}%{_userunitdir}/fedorajam-pwconfig-start.service
 install -m 0644 ${src}/usr/lib/systemd/user-preset/90_fedorajam-pwconfig-start.preset %{buildroot}%{_userpresetdir}/90_fedorajam-pwconfig-start.preset
-install -m 0644 ${src}/etc/default/grub.d/fedorajam.cfg %{buildroot}%{_sysconfdir}/default/grub.d/fedorajam.cfg || :
 install -m 0644 ${src}/usr/share/applications/fedorajam-audio-config.desktop %{buildroot}%{_datadir}/applications/fedorajam-audio-config.desktop
 
 %post
@@ -51,13 +50,13 @@ fi
 %preun
 %systemd_user_preun fedorajam-dummy-audio.service fedorajam-pwconfig-start.service
 rm -f %{_sysconfdir}/profile.d/fedorajam-pwjack.sh
+rm -f %{_sysconfdir}/fedorajamboot.cfg || true
 
 %postun
 %systemd_user_postun_with_restart fedorajam-dummy-audio.service fedorajam-pwconfig-start.service
 
 %files
 %license COPYING
-%config(noreplace) %{_sysconfdir}/default/grub.d/fedorajam.cfg
 %{_bindir}/fedorajam-audio-config
 %{_sbindir}/fedorajam-pwjack-config
 %{_userunitdir}/fedorajam-dummy-audio.service
