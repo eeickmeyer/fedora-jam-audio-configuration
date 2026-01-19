@@ -227,7 +227,7 @@ jack.self-connect-mode = ${selfConnect}"
 updateGrubfn() {
   sudo grub2-mkconfig -o /boot/grub2/grub.cfg
   if [ -d /sys/firmware/efi ]; then
-    sudo dnf reinstall grub2-common
+    sudo dnf reinstall -y grub2-common
   fi
 }
 
@@ -297,16 +297,24 @@ EOF
 fi
 
 if [ "$1" = "writeparams" ]; then
-  mkdir -p /etc/default/grub.d
-  echo "$2" > /etc/default/grub.d/fedorajam.cfg
+  grubby --update-kernel=ALL --remove-args="preempt=full threadirqs rcu_nocbs=all nohz_full=all"
+  grubby --update-kernel=ALL --args="$3 $4 $5 $6"
   updateGrubfn
+  echo "$3 $4 $5 $6" > /etc/fedorajamboot.cfg
   if [ -e /boot/refind_linux.conf ]; then
     if grep -qi 'lowlatency' /boot/refind_linux.conf; then
       _rootUuid=$(lsblk -no UUID "$(df -P / | awk 'END{print $1}')");
       _refindRead=$(grep 'lowlatency' /boot/refind_linux.conf);
-      _refindWrite="\"Boot with lowlatency options\" \"root=UUID=${_rootUuid} ro quiet splash $3 $4 $5 $6 vt.handoff=1\"";
+      _bootLine=$(cat /boot/refind_linux.conf | grep "standard" | cut -d '"' -f 4)
+      _refindWrite="\"Boot with lowlatency options\" \"${_bootLine} $3 $4 $5 $6\"";
       echo -e "${_refindRead}\n${_refindWrite}"
       sed -i "/\\$_refindRead/c\\$_refindWrite" /boot/refind_linux.conf;
+    else
+      _rootUuid=$(lsblk -no UUID "$(df -P / | awk 'END{print $1}')");
+      _refindRead=$(cat /boot/refind_linux.conf);
+      _bootLine=$(cat /boot/refind_linux.conf | grep "standard" | cut -d '"' -f 4)
+      _refindWrite="\"Boot with lowlatency options\" \"${_bootLine} $3 $4 $5 $6\"";
+      echo -e "${_refindWrite}\n${_refindRead}" > /boot/refind_linux.conf;
     fi
   fi
   exit 0
@@ -383,9 +391,9 @@ while true; do
 
   if [ "${changeConfig}" = "Change Kernel Boot Parameters" ]; then
     # Parse current Boot Parameters
-    bootParamsLine=$(grep 'GRUB_CMDLINE_LINUX' /etc/default/grub.d/fedorajam.cfg)
+    bootParamsLine=$(cat /etc/fedorajamboot.cfg || echo "preempt=full threadirqs rcu_nocbs=all")
     bootParamsLine=${bootParamsLine::-1}
-    bootParamsLine=$(echo "${bootParamsLine}" | cut -c 41- )
+    bootParamsLine=$(echo "${bootParamsLine}")
     bootParamOne="FALSE"; bootParamTwo="FALSE"; bootParamThree="FALSE"; bootParamFour="FALSE"
     echo "${bootParamsLine}"
     declare -a j=(
