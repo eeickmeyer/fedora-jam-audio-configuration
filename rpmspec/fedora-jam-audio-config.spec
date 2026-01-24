@@ -1,5 +1,5 @@
 Name:           fedora-jam-audio-config
-Version:        1.0
+Version:        1.1
 Release:        1%{?dist}
 Summary:        PipeWire-JACK audio configuration scripts for Fedora Jam
 
@@ -65,5 +65,8 @@ rm -f %{_sysconfdir}/fedorajamboot.cfg || true
 %{_datadir}/applications/fedorajam-audio-config.desktop
 
 %changelog
+* Sat Jan 24 2026 Erich Eickmeyer <erich@ericheickmeyer.com>
+- Update to version 1.1
+
 * Wed Jan 14 2026 Erich Eickmeyer <erich@ericheickmeyer.com>
 - Initial release
