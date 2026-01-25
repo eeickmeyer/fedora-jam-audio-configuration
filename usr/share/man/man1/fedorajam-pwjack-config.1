@@ -1,0 +1,18 @@
+.TH fedorajam-pwjack-config 1 "24 January 2026" "1.1" "User Commands"
+.SH NAME
+fedorajam-pwjack-config \- Configure PipeWire\-JACK settings (buffersize samplerate)
+.SH SYNOPSIS
+fedorajam-pwjack-config BUFFERSIZE SAMPLERATE
+.SH DESCRIPTION
+fedorajam-pwjack-config writes a small profile file to /etc/profile.d to set
+PipeWire quantum and sample rate for low-latency JACK-style setups.
+
+BUFFERSIZE must be one of: 16, 32, 64, 128, 256, 512, 1024, 2048, 4096.
+SAMPLERATE must be one of: 22050, 32000, 44100, 48000, 88200, 96000, 192000.
+
+On success the tool writes /etc/profile.d/fedorajam-pwjack.sh and advises the user to
+log out and back in for the change to take effect.
+.SH EXAMPLES
+fedorajam-pwjack-config 1024 48000
+.SH SEE ALSO
+fedorajam-audio-config(1)
