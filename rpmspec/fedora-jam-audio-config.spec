@@ -17,7 +17,7 @@ PipeWire-JACK configuration as well as a system's GRUB configuration
 to optimize for low-latency audio performance on Fedora Jam.
 
 %prep
-%setup -q
+%autosetup -C
 
 %build
 # blank
