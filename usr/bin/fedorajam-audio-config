@@ -22,6 +22,16 @@ changeConfigFn() {
     pwFreq=$(echo $PIPEWIRE_QUANTUM | cut -d "/" -f 2)
     pwUserBuff=$(grep "node.latency" $HOME/.config/pipewire/jack.conf.d/fedorajam.conf | cut -d "=" -f 2 | cut -d "/" -f 1 | cut -c 2-)
     pwUserFreq=$(grep "node.latency" $HOME/.config/pipewire/jack.conf.d/fedorajam.conf | cut -d "=" -f 2 | cut -d "/" -f 2)
+    if [ -e /usr/share/plasma/plasmoids/com.github.magillos.pipewiresettings ]; then
+    zenity --width=600 \
+    --title "Ubuntu Studio Audio Configuration" \
+    --window-icon=/usr/share/icons/hicolor/scalable/apps/ubuntustudio-audio-config.svg \
+    --info \
+    --text="You have the PipeWire Settings Plasma Widget installed.\n\
+Use that to change the PipeWire Quantum &amp; Sample Rate.\n\
+(This is recommended if you are using KDE Plasma Desktop)\n\
+You can find it in your system tray or add it to your panel."
+    else
     pwSetStr=$(zenity \
     --title "Fedora Jam Audio Configuration" \
     --icon=/usr/share/icons/hicolor/scalable/apps/start-here.svg \
@@ -60,6 +70,7 @@ changeConfigFn() {
       fi
     else
       return
+    fi
     fi
     # Parse JACK configuration
     declare -a jackConfig=(
