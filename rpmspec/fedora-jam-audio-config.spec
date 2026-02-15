@@ -9,7 +9,11 @@ License:        GPL-2.0-or-later
 URL:            https://pagure.io/fedora-jam-audio-configuration
 Source0:        https://pagure.io/fedora-jam-audio-configuration/archive/%{version}/fedora-jam-audio-configuration-%{version}.tar.gz
 BuildRequires:  systemd-rpm-macros
+BuildRequires:  gettext
+BuildRequires:  python3
 Requires:       grub2-common bash zenity polkit systemd pipewire pipewire-utils pulseaudio-utils
+Requires:       python3 >= 3.9
+Requires:       (python3-gobject or python3-PyQt6)
 
 %description
 A lightweight set of GUI scripts for manipulating a user's
@@ -22,6 +26,9 @@ to optimize for low-latency audio performance on Fedora Jam.
 %check
 bash -n usr/bin/fedorajam-audio-config
 bash -n usr/sbin/fedorajam-pwjack-config
+python3 -m py_compile usr/share/fedorajam-audio-config/backend/audio_config.py
+python3 -m py_compile usr/share/fedorajam-audio-config/main.py
+python3 -m py_compile usr/share/fedorajam-audio-config/i18n.py
 
 %install
 rm -rf %{buildroot}
@@ -42,6 +49,15 @@ install -m 0644 ${src}/usr/share/applications/fedorajam-audio-config.desktop %{b
 install -d %{buildroot}%{_mandir}/man1
 install -m 0644 ${src}/usr/share/man/man1/fedorajam-audio-config.1 %{buildroot}%{_mandir}/man1/fedorajam-audio-config.1
 install -m 0644 ${src}/usr/share/man/man1/fedorajam-pwjack-config.1 %{buildroot}%{_mandir}/man1/fedorajam-pwjack-config.1
+
+# Install Python application
+install -m 0755 ${src}/usr/bin/fedorajam-audio-config-py %{buildroot}%{_bindir}/fedorajam-audio-config-py
+install -d %{buildroot}%{_datadir}/fedorajam-audio-config
+cp -a ${src}/usr/share/fedorajam-audio-config/* %{buildroot}%{_datadir}/fedorajam-audio-config/
+
+# Build and install translations
+make -C ${src}/po all
+make -C ${src}/po install DESTDIR=%{buildroot}
 
 %post
 %systemd_user_post fedorajam-dummy-audio.service fedorajam-pwconfig-start.service
@@ -67,7 +83,10 @@ fi
 %files
 %license COPYING
 %{_bindir}/fedorajam-audio-config
+%{_bindir}/fedorajam-audio-config-py
 %{_sbindir}/fedorajam-pwjack-config
+%{_datadir}/fedorajam-audio-config/
+%{_datadir}/locale/*/LC_MESSAGES/fedorajam-audio-config.mo
 %{_userunitdir}/fedorajam-dummy-audio.service
 %{_userunitdir}/fedorajam-pwconfig-start.service
 %{_userpresetdir}/90_fedorajam-pwconfig-start.preset

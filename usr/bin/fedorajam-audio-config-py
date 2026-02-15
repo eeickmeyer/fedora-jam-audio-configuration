@@ -1,0 +1,16 @@
+#!/usr/bin/python3
+"""Thin launcher for the Fedora Jam Audio Configuration Python app."""
+
+import sys
+from pathlib import Path
+
+pkg = Path("/usr/share/fedorajam-audio-config")
+if pkg.is_dir():
+    sys.path.insert(0, str(pkg))
+else:
+    # Development fallback — run from source tree
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "share" / "fedorajam-audio-config"))
+
+from main import main  # noqa: E402
+
+main()

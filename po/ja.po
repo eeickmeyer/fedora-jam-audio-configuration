@@ -1,0 +1,280 @@
+# Japanese translation for fedorajam-audio-config
+# Copyright (C) 2026 Fedora Jam
+# This file is distributed under the same license as the fedorajam-audio-config package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fedorajam-audio-config 1.0\n"
+"Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
+"POT-Creation-Date: 2026-02-15 15:30-0800\n"
+"PO-Revision-Date: 2026-02-15 16:00-0800\n"
+"Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
+"Language-Team: Japanese <trans-ja@lists.fedoraproject.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:40
+msgid "Don't restrict self connect requests (default)"
+msgstr "自己接続リクエストを制限しない（デフォルト）"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:41
+msgid "Fail self connect requests to external ports only"
+msgstr "外部ポートへの自己接続リクエストのみ拒否する"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:42
+msgid "Ignore self connect requests to external ports only"
+msgstr "外部ポートへの自己接続リクエストのみ無視する"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:43
+msgid "Fail all self connect requests"
+msgstr "すべての自己接続リクエストを拒否する"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:44
+msgid "Ignore all self connect requests"
+msgstr "すべての自己接続リクエストを無視する"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:48
+msgid "Show the Monitor client and its ports."
+msgstr "モニタークライアントとそのポートを表示します。"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:50
+msgid ""
+"Exposes the capture ports and monitor ports on the same JACK device client."
+msgstr ""
+"キャプチャポートとモニターポートを同じJACKデバイスクライアント上に公開します。"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:52
+msgid "Show the MIDI clients and their ports."
+msgstr "MIDIクライアントとそのポートを表示します。"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:53
+msgid "Use shorter names for the device client name."
+msgstr "デバイスクライアント名に短い名前を使用します。"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:58
+#: usr/share/fedorajam-audio-config/ui/qt_ui.py:46
+msgid "Fedora Jam Audio Configuration"
+msgstr "Fedora Jam オーディオ設定"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:117
+msgid "Makes the kernel fully-preemptible, best for lowlatency workloads"
+msgstr "カーネルを完全にプリエンプティブにし、低レイテンシのワークロードに最適です"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:120
+msgid ""
+"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
+msgstr ""
+"割り込みハンドラーをスレッドコンテキストで実行させ、バッファーxrunを削減します"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:124
+msgid ""
+"Offloads Read-Copy-Update (RCU) callbacks from all CPUs to dedicated kernel "
+"threads, improves real-time performance."
+msgstr ""
+"Read-Copy-Update (RCU) コールバックをすべてのCPUから専用のカーネル"
+"スレッドにオフロードし、リアルタイム性能を向上させます。"
+
+#: usr/share/fedorajam-audio-config/backend/audio_config.py:128
+msgid "Reduces noise in latency critical applications such as virtualization"
+msgstr "仮想化などのレイテンシに敏感なアプリケーションのノイズを低減します"
+
+#: usr/share/fedorajam-audio-config/ui/gtk_ui.py:80
+msgid "OK"
+msgstr "OK"
+
+#: usr/share/fedorajam-audio-config/main.py:94
+msgid ""
+"ERROR: Neither GTK 4 (python3-gi + gir1.2-adw-1) nor PyQt6 (python3-pyqt6) "
+"is available."
+msgstr ""
+"エラー: GTK 4 (python3-gi + gir1.2-adw-1) も PyQt6 (python3-pyqt6) も"
+"利用できません。"
+
+#: usr/share/fedorajam-audio-config/main.py:113
+msgid ""
+"You have the PipeWire Settings Plasma Widget installed.\n"
+"Use that to change the PipeWire Quantum & Sample Rate.\n"
+"(This is recommended if you are using KDE Plasma Desktop)\n"
+"You can find it in your system tray or add it to your panel."
+msgstr ""
+"PipeWire Settings Plasma ウィジェットがインストールされています。\n"
+"それを使用して PipeWire のQuantumとサンプルレートを変更してください。\n"
+"（KDE Plasma デスクトップを使用している場合に推奨されます）\n"
+"システムトレイで見つけるか、パネルに追加できます。"
+
+#: usr/share/fedorajam-audio-config/main.py:123
+msgid ""
+"You have the PipeWire Settings GNOME Shell Extension installed.\n"
+"Use that to change the PipeWire Quantum & Sample Rate.\n"
+"(This is recommended if you are using GNOME Shell)\n"
+"You can find it in Extension Manager if it's not already\n"
+"on your panel."
+msgstr ""
+"PipeWire Settings GNOME Shell 拡張機能がインストールされています。\n"
+"それを使用して PipeWire のQuantumとサンプルレートを変更してください。\n"
+"（GNOME Shell を使用している場合に推奨されます）\n"
+"パネルにまだ表示されていない場合は、拡張機能マネージャーで\n"
+"見つけることができます。"
+
+#: usr/share/fedorajam-audio-config/main.py:137
+msgid ""
+"Select the Buffer Size and Sample Rate for PipeWire\n"
+"Quantum configuration.\n"
+"\n"
+"If you're not sure what to do here, it's best to leave\n"
+"the current settings in place.\n"
+"\n"
+"Note: Defaults are controlled via the\n"
+"fedorajam-pwjack-config terminal command"
+msgstr ""
+"PipeWire Quantum 設定のバッファサイズと\n"
+"サンプルレートを選択してください。\n"
+"\n"
+"ここで何をすべきか分からない場合は、現在の設定を\n"
+"そのままにしておくのが最善です。\n"
+"\n"
+"注意: デフォルト値はターミナルコマンド\n"
+"fedorajam-pwjack-config で制御されます"
+
+#: usr/share/fedorajam-audio-config/main.py:145
+msgid "Buffer Size"
+msgstr "バッファサイズ"
+
+#: usr/share/fedorajam-audio-config/main.py:150
+msgid "Sample Rate (Hz)"
+msgstr "サンプルレート (Hz)"
+
+#: usr/share/fedorajam-audio-config/main.py:155
+#: usr/share/fedorajam-audio-config/main.py:180
+msgid "Next"
+msgstr "次へ"
+
+#: usr/share/fedorajam-audio-config/main.py:156
+#: usr/share/fedorajam-audio-config/main.py:181
+#: usr/share/fedorajam-audio-config/main.py:205
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: usr/share/fedorajam-audio-config/main.py:178
+msgid "Select which JACK plugin options you would like"
+msgstr "必要な JACK プラグインオプションを選択してください"
+
+#: usr/share/fedorajam-audio-config/main.py:201
+msgid ""
+"Select the self-connect mode. If you don't know what this is, leave it alone."
+msgstr ""
+"自己接続モードを選択してください。これが何か分からない場合は、変更しないでください。"
+
+#: usr/share/fedorajam-audio-config/main.py:204
+msgid "Apply"
+msgstr "適用"
+
+#: usr/share/fedorajam-audio-config/main.py:231
+#, python-brace-format
+msgid ""
+"PipeWire Quantum set to {buf} Buffer and {rate} Hz Sample Rate.\n"
+"\n"
+"jack.show-monitor   = {show_monitor}\n"
+"jack.merge-monitor  = {merge_monitor}\n"
+"jack.show-midi      = {show_midi}\n"
+"jack.short-name     = {short_name}\n"
+"jack.self-connect-mode = {self_connect}"
+msgstr ""
+"PipeWire Quantum をバッファ {buf}、サンプルレート {rate} Hz に設定しました。\n"
+"\n"
+"jack.show-monitor   = {show_monitor}\n"
+"jack.merge-monitor  = {merge_monitor}\n"
+"jack.show-midi      = {show_midi}\n"
+"jack.short-name     = {short_name}\n"
+"jack.self-connect-mode = {self_connect}"
+
+#: usr/share/fedorajam-audio-config/main.py:280
+msgid ""
+"Select which kernel boot parameters you would like. Default is first three."
+msgstr ""
+"必要なカーネル起動パラメーターを選択してください。デフォルトは最初の3つです。"
+
+#: usr/share/fedorajam-audio-config/main.py:283
+msgid "Apply (Password Required)"
+msgstr "適用（パスワードが必要）"
+
+#: usr/share/fedorajam-audio-config/main.py:284
+msgid "Back"
+msgstr "戻る"
+
+#: usr/share/fedorajam-audio-config/main.py:298
+msgid "Applying boot parameters…"
+msgstr "起動パラメーターを適用中…"
+
+#: usr/share/fedorajam-audio-config/main.py:304
+msgid "You must restart your computer for these changes to take effect."
+msgstr "これらの変更を有効にするには、コンピューターを再起動する必要があります。"
+
+#: usr/share/fedorajam-audio-config/main.py:310
+msgid "An error has occurred or action was cancelled."
+msgstr "エラーが発生したか、操作がキャンセルされました。"
+
+#: usr/share/fedorajam-audio-config/main.py:320
+msgid ""
+"Sometimes, you may wish to enable a dummy audio device for your system audio "
+"or an audio application so that you don't inadvertently feed that to your "
+"main output or draw from your main input. This can be useful when you wish "
+"to send a music application to your DAW or other mixer without sending to "
+"your main system output. There may be other workflow reasons as well.\n"
+"\n"
+"Do you wish to start a stereo dummy audio device?"
+msgstr ""
+"システムオーディオやオーディオアプリケーション用にダミーオーディオデバイスを有効にして、"
+"誤ってメイン出力に送信したりメイン入力から取得したりしないようにしたい場合があります。"
+"これは、音楽アプリケーションをメインシステム出力に送信せずにDAWや他のミキサーに"
+"送信したい場合に便利です。他のワークフロー上の理由もあるかもしれません。\n"
+"\n"
+"ステレオダミーオーディオデバイスを開始しますか？"
+
+#: usr/share/fedorajam-audio-config/main.py:330
+msgid "Yes"
+msgstr "はい"
+
+#: usr/share/fedorajam-audio-config/main.py:331
+msgid "Go Back"
+msgstr "戻る"
+
+#: usr/share/fedorajam-audio-config/main.py:336
+#: usr/share/fedorajam-audio-config/main.py:350
+msgid "Would you like the dummy audio device to start at login?"
+msgstr "ログイン時にダミーオーディオデバイスを起動しますか？"
+
+#: usr/share/fedorajam-audio-config/main.py:345
+msgid "Would you like to stop the dummy audio device?"
+msgstr "ダミーオーディオデバイスを停止しますか？"
+
+#: usr/share/fedorajam-audio-config/main.py:369
+msgid "STOP Dummy Audio Device"
+msgstr "ダミーオーディオデバイスを停止"
+
+#: usr/share/fedorajam-audio-config/main.py:370
+msgid "START Dummy Audio Device"
+msgstr "ダミーオーディオデバイスを開始"
+
+#: usr/share/fedorajam-audio-config/main.py:376
+msgid "Configure Current Audio Configuration"
+msgstr "現在のオーディオ設定を構成"
+
+#: usr/share/fedorajam-audio-config/main.py:381
+msgid "Change Kernel Boot Parameters"
+msgstr "カーネル起動パラメーターを変更"
+
+#: usr/share/fedorajam-audio-config/main.py:393
+msgid "What would you like to do?"
+msgstr "何をしますか？"
+
+#: usr/share/fedorajam-audio-config/main.py:395
+msgid "Continue"
+msgstr "続行"
+
+#: usr/share/fedorajam-audio-config/main.py:396
+msgid "Close"
+msgstr "閉じる"
