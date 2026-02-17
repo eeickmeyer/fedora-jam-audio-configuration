@@ -1,15 +1,4 @@
-"""Internationalisation (i18n) setup for Fedora Jam Audio Configuration.
-
-Usage in any module::
-
-    from i18n import _
-
-Then wrap every user-visible string with ``_("…")``.
-
-At runtime ``gettext`` will look for compiled ``.mo`` files under
-``/usr/share/locale/`` (system-wide) or the ``locale/`` directory next
-to this file (for development).
-"""
+"""Gettext setup for Fedora Jam Audio Configuration."""
 
 from __future__ import annotations
 
@@ -19,7 +8,6 @@ from pathlib import Path
 
 DOMAIN = "fedorajam-audio-config"
 
-# Standard system locale directory; development fallback beside this file.
 _LOCALE_DIRS = [
     "/usr/share/locale",
     str(Path(__file__).resolve().parent / "locale"),

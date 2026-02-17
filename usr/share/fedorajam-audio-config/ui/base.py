@@ -1,9 +1,4 @@
-"""Abstract UI interface for Fedora Jam Audio Configuration.
-
-Both the GTK and Qt implementations inherit from :class:`AudioConfigUI`
-and provide concrete versions of every dialog method.  The application
-controller (:mod:`main`) only ever talks to this interface.
-"""
+"""Abstract UI interface for Fedora Jam Audio Configuration."""
 
 from __future__ import annotations
 
@@ -32,7 +27,6 @@ class ComboItem:
 
 
 class AudioConfigUI(ABC):
-    """Toolkit-agnostic interface for every dialog the app needs."""
 
     # ------------------------------------------------------------------
     # Simple message dialogs

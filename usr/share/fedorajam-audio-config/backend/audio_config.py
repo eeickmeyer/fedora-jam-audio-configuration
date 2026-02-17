@@ -1,8 +1,4 @@
-"""Audio configuration backend — config file and PipeWire management.
-
-Fedora Jam variant.  All system interaction (file I/O, subprocess calls,
-service management) lives here so the UI layer stays toolkit-agnostic.
-"""
+"""Audio configuration backend for Fedora Jam."""
 
 from __future__ import annotations
 

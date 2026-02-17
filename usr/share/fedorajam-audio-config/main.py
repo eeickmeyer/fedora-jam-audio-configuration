@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Fedora Jam Audio Configuration — main entry point.
-
-This replaces the original Zenity-based bash script with a Python
-application that uses GTK 4 (libadwaita) or Qt 6 (PyQt6) depending
-on the running desktop environment.
-"""
+"""Fedora Jam Audio Configuration — main entry point."""
 
 from __future__ import annotations
 
