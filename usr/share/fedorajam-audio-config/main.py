@@ -107,7 +107,10 @@ def _configure_audio(ui: AudioConfigUI) -> None:
     """The 'Configure Current Audio Configuration' flow."""
 
     # --- Check for desktop-specific PipeWire widgets ---
-    if has_plasma_pw_widget():
+    has_pw_widget = has_plasma_pw_widget()
+    has_gnome_ext = has_gnome_pw_extension()
+
+    if has_pw_widget:
         ui.show_info(
             APP_TITLE,
             _("You have the PipeWire Settings Plasma Widget installed.\n"
@@ -115,9 +118,8 @@ def _configure_audio(ui: AudioConfigUI) -> None:
               "(This is recommended if you are using KDE Plasma Desktop)\n"
               "You can find it in your system tray or add it to your panel."),
         )
-        return
 
-    if has_gnome_pw_extension():
+    elif has_gnome_ext:
         ui.show_info(
             APP_TITLE,
             _("You have the PipeWire Settings GNOME Shell Extension installed.\n"
@@ -126,40 +128,43 @@ def _configure_audio(ui: AudioConfigUI) -> None:
               "You can find it in Extension Manager if it's not already\n"
               "on your panel."),
         )
-        return
 
     # --- Buffer / sample rate dropdowns ---
     default_buf, default_rate = get_default_quantum()
     user_buf, user_rate = get_user_quantum()
 
-    combo_result = ui.show_combo_dialog(
-        APP_TITLE,
-        _("Select the Buffer Size and Sample Rate for PipeWire\n"
-          "Quantum configuration.\n\n"
-          "If you're not sure what to do here, it's best to leave\n"
-          "the current settings in place.\n\n"
-          "Note: Defaults are controlled via the\n"
-          "fedorajam-pwjack-config terminal command"),
-        combos=[
-            ComboItem(
-                label=_("Buffer Size"),
-                options=[str(s) for s in VALID_BUFFER_SIZES],
-                default=str(user_buf),
-            ),
-            ComboItem(
-                label=_("Sample Rate (Hz)"),
-                options=[str(r) for r in VALID_SAMPLE_RATES],
-                default=str(user_rate),
-            ),
-        ],
-        ok_label=_("Next"),
-        cancel_label=_("Cancel"),
-    )
+    if has_pw_widget or has_gnome_ext:
+        # Widget / extension handles quantum; keep current values.
+        buf, rate = user_buf, user_rate
+    else:
+        combo_result = ui.show_combo_dialog(
+            APP_TITLE,
+            _("Select the Buffer Size and Sample Rate for PipeWire\n"
+              "Quantum configuration.\n\n"
+              "If you're not sure what to do here, it's best to leave\n"
+              "the current settings in place.\n\n"
+              "Note: Defaults are controlled via the\n"
+              "fedorajam-pwjack-config terminal command"),
+            combos=[
+                ComboItem(
+                    label=_("Buffer Size"),
+                    options=[str(s) for s in VALID_BUFFER_SIZES],
+                    default=str(user_buf),
+                ),
+                ComboItem(
+                    label=_("Sample Rate (Hz)"),
+                    options=[str(r) for r in VALID_SAMPLE_RATES],
+                    default=str(user_rate),
+                ),
+            ],
+            ok_label=_("Next"),
+            cancel_label=_("Cancel"),
+        )
 
-    if combo_result is None:
-        return  # user cancelled
+        if combo_result is None:
+            return  # user cancelled
 
-    buf, rate = int(combo_result[0]), int(combo_result[1])
+        buf, rate = int(combo_result[0]), int(combo_result[1])
 
     # --- JACK boolean parameters ---
     cfg = read_jack_config()
@@ -217,7 +222,8 @@ def _configure_audio(ui: AudioConfigUI) -> None:
         short_name=new_bool_params["jack.short-name"],
         self_connect_mode=sc_mode,
     )
-    write_jack_config(new_cfg)
+    widget_manages_quantum = has_pw_widget or has_gnome_ext
+    write_jack_config(new_cfg, set_quantum=not widget_manages_quantum)
 
     # Restart dummy if active
     if dummy_device_active():
@@ -226,22 +232,20 @@ def _configure_audio(ui: AudioConfigUI) -> None:
              "fedorajam-dummy-audio.service"]
         )
 
-    ui.show_info(
-        APP_TITLE,
-        _("PipeWire Quantum set to {buf} Buffer and {rate} Hz Sample Rate.\n\n"
-          "jack.show-monitor   = {show_monitor}\n"
-          "jack.merge-monitor  = {merge_monitor}\n"
-          "jack.show-midi      = {show_midi}\n"
-          "jack.short-name     = {short_name}\n"
-          "jack.self-connect-mode = {self_connect}").format(
-              buf=buf,
-              rate=rate,
-              show_monitor=str(new_cfg.show_monitor).lower(),
-              merge_monitor=str(new_cfg.merge_monitor).lower(),
-              show_midi=str(new_cfg.show_midi).lower(),
-              short_name=str(new_cfg.short_name).lower(),
-              self_connect=sc_mode),
-    )
+    if widget_manages_quantum:
+        ui.show_info(
+            APP_TITLE,
+            _("JACK configuration applied.\n\n"
+              "Buffer and Sample Rate are managed by your\n"
+              "desktop widget / extension."),
+        )
+    else:
+        ui.show_info(
+            APP_TITLE,
+            _("Configuration applied.\n\n"
+              "Buffer Size: {buf}\n"
+              "Sample Rate: {rate} Hz").format(buf=buf, rate=rate),
+        )
 
 
 def _change_boot_params(ui: AudioConfigUI) -> None:
@@ -394,8 +398,6 @@ def _main_loop(ui: AudioConfigUI) -> None:
             items,
             ok_label=_("Continue"),
             cancel_label=_("Close"),
-            width=600,
-            height=450,
         )
 
         if choice is None:

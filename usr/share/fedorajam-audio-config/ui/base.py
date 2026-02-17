@@ -105,8 +105,8 @@ class AudioConfigUI(ABC):
         items: list[ChecklistItem],
         ok_label: str = "OK",
         cancel_label: str = "Cancel",
-        width: int = 850,
-        height: int = 350,
+        width: int = 0,
+        height: int = 0,
     ) -> list[str] | None:
         """Show a checklist dialog.  Return a list of selected *keys*, or
         *None* if the user cancelled."""
@@ -119,8 +119,8 @@ class AudioConfigUI(ABC):
         items: list[ChecklistItem],
         ok_label: str = "OK",
         cancel_label: str = "Cancel",
-        width: int = 850,
-        height: int = 350,
+        width: int = 0,
+        height: int = 0,
     ) -> str | None:
         """Show a radio-list dialog.  Return the selected *key*, or *None*
         if the user cancelled."""

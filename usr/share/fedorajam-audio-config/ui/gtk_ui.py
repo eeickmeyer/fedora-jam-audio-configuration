@@ -250,8 +250,8 @@ class GtkUI(AudioConfigUI):
         items: list[ChecklistItem],
         ok_label: str = "OK",
         cancel_label: str = "Cancel",
-        width: int = 850,
-        height: int = 350,
+        width: int = 0,
+        height: int = 0,
     ) -> list[str] | None:
         dlg = Adw.MessageDialog(
             heading=title,
@@ -272,7 +272,8 @@ class GtkUI(AudioConfigUI):
         for item in items:
             row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
             cb = Gtk.CheckButton(active=item.checked)
-            lbl = Gtk.Label(label=f"<b>{item.label}</b>  —  {item.description}", use_markup=True)
+            lbl_text = f"<b>{item.label}</b>  \u2014  {item.description}" if item.description else f"<b>{item.label}</b>"
+            lbl = Gtk.Label(label=lbl_text, use_markup=True)
             lbl.set_xalign(0)
             lbl.set_wrap(True)
             row.append(cb)
@@ -281,7 +282,7 @@ class GtkUI(AudioConfigUI):
             checks.append((item.key, cb))
 
         scroll = Gtk.ScrolledWindow(hscrollbar_policy=Gtk.PolicyType.NEVER)
-        scroll.set_min_content_width(max(width - 80, 400))
+        scroll.set_min_content_width(max(width - 80, 850))
         scroll.set_min_content_height(max(height - 120, 200))
         scroll.set_child(box)
 
@@ -307,8 +308,8 @@ class GtkUI(AudioConfigUI):
         items: list[ChecklistItem],
         ok_label: str = "OK",
         cancel_label: str = "Cancel",
-        width: int = 850,
-        height: int = 350,
+        width: int = 0,
+        height: int = 0,
     ) -> str | None:
         dlg = Adw.MessageDialog(
             heading=title,
@@ -334,7 +335,8 @@ class GtkUI(AudioConfigUI):
                 rb.set_group(group)
             else:
                 group = rb
-            lbl = Gtk.Label(label=f"<b>{item.label}</b>  —  {item.description}", use_markup=True)
+            lbl_text = f"<b>{item.label}</b>  \u2014  {item.description}" if item.description else f"<b>{item.label}</b>"
+            lbl = Gtk.Label(label=lbl_text, use_markup=True)
             lbl.set_xalign(0)
             lbl.set_wrap(True)
             row.append(rb)
@@ -343,7 +345,7 @@ class GtkUI(AudioConfigUI):
             radios.append((item.key, rb))
 
         scroll = Gtk.ScrolledWindow(hscrollbar_policy=Gtk.PolicyType.NEVER)
-        scroll.set_min_content_width(max(width - 80, 400))
+        scroll.set_min_content_width(max(width - 80, 850))
         scroll.set_min_content_height(max(height - 120, 200))
         scroll.set_child(box)
 
