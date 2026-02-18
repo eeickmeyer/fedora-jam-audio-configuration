@@ -6,7 +6,7 @@ import threading
 from collections.abc import Callable
 
 from PyQt6.QtCore import Qt, QTimer
-from PyQt6.QtGui import QFontMetrics, QIcon, QScreen
+from PyQt6.QtGui import QFontMetrics, QIcon
 from PyQt6.QtWidgets import (
     QApplication,
     QButtonGroup,
@@ -251,7 +251,7 @@ class QtUI(AudioConfigUI):
         layout.addWidget(scroll)
 
         buttons = QDialogButtonBox()
-        btn_ok = buttons.addButton(ok_label, QDialogButtonBox.ButtonRole.AcceptRole)
+        buttons.addButton(ok_label, QDialogButtonBox.ButtonRole.AcceptRole)
         buttons.addButton(cancel_label, QDialogButtonBox.ButtonRole.RejectRole)
         buttons.accepted.connect(dlg.accept)
         buttons.rejected.connect(dlg.reject)

@@ -69,6 +69,7 @@ Exec=fedorajam-audio-config
 Terminal=false
 Type=Application
 StartupNotify=true
+StartupWMClass=org.fedorajam.AudioConfig
 Icon=start-here
 Categories=System;
 Keywords=Audio;Config;Apps;

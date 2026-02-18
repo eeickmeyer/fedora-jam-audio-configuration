@@ -48,7 +48,8 @@ class GtkUI(AudioConfigUI):
     # ------------------------------------------------------------------
 
     def init(self) -> None:
-        pass  # no global init needed; dialogs are standalone
+        self._app = Adw.Application(application_id="org.fedorajam.AudioConfig")
+        self._app.register()
 
     def quit(self) -> None:
         pass
@@ -84,8 +85,7 @@ class GtkUI(AudioConfigUI):
                 dlg.add_response(str(resp_id), label)
         return dlg
 
-    @staticmethod
-    def _run_adw_dialog(dlg: Adw.MessageDialog) -> str:
+    def _run_adw_dialog(self, dlg: Adw.MessageDialog) -> str:
         """Run an Adw.MessageDialog and return the response id string."""
         loop = GLib.MainLoop()
         result = {"response": "cancel"}
@@ -95,6 +95,8 @@ class GtkUI(AudioConfigUI):
             loop.quit()
 
         dlg.connect("response", on_response)
+        if self._app:
+            dlg.set_application(self._app)
         dlg.present()
         loop.run()
         return result["response"]
@@ -158,6 +160,8 @@ class GtkUI(AudioConfigUI):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
         box.set_margin_start(12)
         box.set_margin_end(12)
+        box.set_margin_top(12)
+        box.set_margin_bottom(12)
 
         label = Gtk.Label(label=text, wrap=True, use_markup=True)
         label.set_xalign(0)
@@ -200,6 +204,8 @@ class GtkUI(AudioConfigUI):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
         box.set_margin_start(12)
         box.set_margin_end(12)
+        box.set_margin_top(12)
+        box.set_margin_bottom(12)
 
         label = Gtk.Label(label=text, wrap=True, use_markup=True)
         label.set_xalign(0)
@@ -263,6 +269,8 @@ class GtkUI(AudioConfigUI):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         box.set_margin_start(12)
         box.set_margin_end(12)
+        box.set_margin_top(12)
+        box.set_margin_bottom(12)
 
         info_label = Gtk.Label(label=text, wrap=True, use_markup=True)
         info_label.set_xalign(0)
@@ -321,6 +329,8 @@ class GtkUI(AudioConfigUI):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         box.set_margin_start(12)
         box.set_margin_end(12)
+        box.set_margin_top(12)
+        box.set_margin_bottom(12)
 
         info_label = Gtk.Label(label=text, wrap=True, use_markup=True)
         info_label.set_xalign(0)
@@ -402,6 +412,8 @@ class GtkUI(AudioConfigUI):
             return False
 
         threading.Thread(target=worker, daemon=True).start()
+        if self._app:
+            dlg.set_application(self._app)
         dlg.present()
         loop.run()
         return success["value"]
