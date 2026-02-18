@@ -52,10 +52,25 @@ from i18n import _  # noqa: E402
 
 
 def _detect_toolkit() -> str:
-    """Return ``"qt"`` or ``"gtk"`` based on the running DE."""
+    """Return ``"qt"`` or ``"gtk"`` based on the running DE.
+
+    Qt desktops:  KDE Plasma (Fedora KDE Spin, Fedora Jam,
+                  Fedora Astronomy, Fedora Scientific),
+                  LXQt (Fedora LXQt Spin)
+    GTK desktops: GNOME (Fedora Workstation, Fedora Design Suite,
+                  Fedora Games, Fedora Python Classroom),
+                  Xfce (Fedora Xfce Spin, Fedora Security Lab),
+                  MATE (Fedora MATE-Compiz Spin),
+                  Budgie (Fedora Budgie Spin),
+                  Cinnamon (Fedora Cinnamon Spin),
+                  LXDE (Fedora LXDE Spin),
+                  Sway (Fedora Sway Spin), i3 (Fedora i3 Spin)
+    """
     desktop = os.environ.get("XDG_CURRENT_DESKTOP", "").lower()
     session = os.environ.get("DESKTOP_SESSION", "").lower()
-    if "kde" in desktop or "plasma" in desktop or "plasma" in session:
+    if any(tok in desktop for tok in ("kde", "plasma", "lxqt")):
+        return "qt"
+    if "plasma" in session or "lxqt" in session:
         return "qt"
     return "gtk"
 
