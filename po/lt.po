@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
-"Report-Msgid-Bugs-To: noreply@example.com\n"
-"POT-Creation-Date: 2026-02-17 14:45-0800\n"
+"Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
+"POT-Creation-Date: 2026-02-21 15:00-0800\n"
 "PO-Revision-Date: 2026-02-17 08:00-0800\n"
 "Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
 "Language-Team: Lithuanian\n"
@@ -16,64 +16,65 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:36
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:36
 msgid "Don't restrict self connect requests (default)"
 msgstr "Neriboti savijungos užklausų (numatytasis)"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:37
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:37
 msgid "Fail self connect requests to external ports only"
 msgstr "Atmesti savijungos užklausas tik į išorinius prievadus"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:38
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:38
 msgid "Ignore self connect requests to external ports only"
 msgstr "Ignoruoti savijungos užklausas tik į išorinius prievadus"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:39
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:39
 msgid "Fail all self connect requests"
 msgstr "Atmesti visas savijungos užklausas"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:40
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:40
 msgid "Ignore all self connect requests"
 msgstr "Ignoruoti visas savijungos užklausas"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:44
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:44
 msgid "Show the Monitor client and its ports."
 msgstr "Rodyti monitoriaus klientą ir jo prievadus."
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:46
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:46
 msgid ""
 "Exposes the capture ports and monitor ports on the same JACK device client."
 msgstr ""
 "Atskleidžia įrašymo ir monitoriaus prievadus tame pačiame JACK įrenginio "
 "kliente."
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:48
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:48
 msgid "Show the MIDI clients and their ports."
 msgstr "Rodyti MIDI klientus ir jų prievadus."
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:49
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:49
 msgid "Use shorter names for the device client name."
 msgstr "Naudoti trumpesnius įrenginio kliento pavadinimus."
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: usr/share/fedorajam-audio-config/ui/qt_ui.py:119
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
 msgid "Fedora Jam Audio Configuration"
 msgstr "„Fedora Jam“ garso konfigūracija"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:113
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:113
 msgid "Makes the kernel fully-preemptible, best for lowlatency workloads"
 msgstr ""
-"Padaro branduolį visiškai pertraukiamą, geriausiai tinka mažo vėlinimo "
-"darbo krūviams"
+"Padaro branduolį visiškai pertraukiamą, geriausiai tinka mažo vėlinimo darbo"
+" krūviams"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:116
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
+"Forces interrupt handlers to run in a threaded context, reducing buffer "
+"xruns"
 msgstr ""
 "Priverčia pertraukimų tvarkykles veikti gijų kontekste, sumažinant buferio "
 "xruns"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:120
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:120
 msgid ""
 "Offloads Read-Copy-Update (RCU) callbacks from all CPUs to dedicated kernel "
 "threads, improves real-time performance."
@@ -81,11 +82,17 @@ msgstr ""
 "Perkelia Read-Copy-Update (RCU) atgalinius iškvietimus iš visų procesorių į "
 "tam skirtas branduolio gijas, pagerina realaus laiko našumą."
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:124
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:124
 msgid "Reduces noise in latency critical applications such as virtualization"
-msgstr "Sumažina triukšmą vėlinimui jautriose programose, tokiose kaip virtualizacija"
+msgstr ""
+"Sumažina triukšmą vėlinimui jautriose programose, tokiose kaip "
+"virtualizacija"
 
-#: usr/share/fedorajam-audio-config/main.py:89
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+msgid "OK"
+msgstr "Gerai"
+
+#: ../usr/share/fedorajam-audio-config/main.py:111
 msgid ""
 "ERROR: Neither GTK 4 (python3-gi + gir1.2-adw-1) nor PyQt6 (python3-pyqt6) "
 "is available."
@@ -93,7 +100,7 @@ msgstr ""
 "KLAIDA: Nei GTK 4 (python3-gi + gir1.2-adw-1), nei PyQt6 (python3-pyqt6) "
 "nėra prieinami."
 
-#: usr/share/fedorajam-audio-config/main.py:111
+#: ../usr/share/fedorajam-audio-config/main.py:133
 msgid ""
 "You have the PipeWire Settings Plasma Widget installed.\n"
 "Use that to change the PipeWire Quantum & Sample Rate.\n"
@@ -105,7 +112,7 @@ msgstr ""
 "(Tai rekomenduojama, jei naudojate KDE Plasma darbalaukį)\n"
 "Jį rasite sistemos dėkle arba galite pridėti prie savo skydelio."
 
-#: usr/share/fedorajam-audio-config/main.py:120
+#: ../usr/share/fedorajam-audio-config/main.py:142
 msgid ""
 "You have the PipeWire Settings GNOME Shell Extension installed.\n"
 "Use that to change the PipeWire Quantum & Sample Rate.\n"
@@ -119,7 +126,7 @@ msgstr ""
 "Jį rasite plėtinių tvarkytuvėje, jei jo dar nėra\n"
 "jūsų skydelyje."
 
-#: usr/share/fedorajam-audio-config/main.py:137
+#: ../usr/share/fedorajam-audio-config/main.py:159
 msgid ""
 "Select the Buffer Size and Sample Rate for PipeWire\n"
 "Quantum configuration.\n"
@@ -139,40 +146,49 @@ msgstr ""
 "Pastaba: numatytosios reikšmės valdomos per terminalo\n"
 "komandą fedorajam-pwjack-config"
 
-#: usr/share/fedorajam-audio-config/main.py:145
+#: ../usr/share/fedorajam-audio-config/main.py:167
+#: ../usr/share/fedorajam-audio-config/main.py:467
 msgid "Buffer Size"
 msgstr "Buferio dydis"
 
-#: usr/share/fedorajam-audio-config/main.py:150
+#: ../usr/share/fedorajam-audio-config/main.py:172
+#: ../usr/share/fedorajam-audio-config/main.py:472
 msgid "Sample Rate (Hz)"
 msgstr "Diskretizavimo dažnis (Hz)"
 
-#: usr/share/fedorajam-audio-config/main.py:155
-#: usr/share/fedorajam-audio-config/main.py:180
+#: ../usr/share/fedorajam-audio-config/main.py:177
+#: ../usr/share/fedorajam-audio-config/main.py:202
+#: ../usr/share/fedorajam-audio-config/main.py:453
 msgid "Next"
 msgstr "Toliau"
 
-#: usr/share/fedorajam-audio-config/main.py:156
-#: usr/share/fedorajam-audio-config/main.py:181
-#: usr/share/fedorajam-audio-config/main.py:205
+#: ../usr/share/fedorajam-audio-config/main.py:178
+#: ../usr/share/fedorajam-audio-config/main.py:203
+#: ../usr/share/fedorajam-audio-config/main.py:227
+#: ../usr/share/fedorajam-audio-config/main.py:409
+#: ../usr/share/fedorajam-audio-config/main.py:454
+#: ../usr/share/fedorajam-audio-config/main.py:478
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: usr/share/fedorajam-audio-config/main.py:178
+#: ../usr/share/fedorajam-audio-config/main.py:200
 msgid "Select which JACK plugin options you would like"
 msgstr "Pasirinkite norimas JACK papildinio parinktis"
 
-#: usr/share/fedorajam-audio-config/main.py:201
+#: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it alone."
+"Select the self-connect mode. If you don't know what this is, leave it "
+"alone."
 msgstr ""
-"Pasirinkite savijungos režimą. Jei nežinote, kas tai yra, palikite nepakeistą."
+"Pasirinkite savijungos režimą. Jei nežinote, kas tai yra, palikite "
+"nepakeistą."
 
-#: usr/share/fedorajam-audio-config/main.py:204
+#: ../usr/share/fedorajam-audio-config/main.py:226
+#: ../usr/share/fedorajam-audio-config/main.py:477
 msgid "Apply"
 msgstr "Taikyti"
 
-#: usr/share/fedorajam-audio-config/main.py:233
+#: ../usr/share/fedorajam-audio-config/main.py:255
 msgid ""
 "JACK configuration applied.\n"
 "\n"
@@ -184,7 +200,7 @@ msgstr ""
 "Buferio dydį ir diskretizavimo dažnį valdo jūsų\n"
 "darbalaukio valdiklis / plėtinys."
 
-#: usr/share/fedorajam-audio-config/main.py:240
+#: ../usr/share/fedorajam-audio-config/main.py:262
 #, python-brace-format
 msgid ""
 "Configuration applied.\n"
@@ -197,97 +213,190 @@ msgstr ""
 "Buferio dydis: {buf}\n"
 "Diskretizavimo dažnis: {rate} Hz"
 
-#: usr/share/fedorajam-audio-config/main.py:279
+#: ../usr/share/fedorajam-audio-config/main.py:301
 msgid ""
 "Select which kernel boot parameters you would like. Default is first three."
 msgstr ""
 "Pasirinkite norimus branduolio paleidimo parametrus. Numatytieji yra pirmi "
 "trys."
 
-#: usr/share/fedorajam-audio-config/main.py:282
+#: ../usr/share/fedorajam-audio-config/main.py:304
 msgid "Apply (Password Required)"
 msgstr "Taikyti (reikalingas slaptažodis)"
 
-#: usr/share/fedorajam-audio-config/main.py:283
+#: ../usr/share/fedorajam-audio-config/main.py:305
 msgid "Back"
 msgstr "Atgal"
 
-#: usr/share/fedorajam-audio-config/main.py:297
+#: ../usr/share/fedorajam-audio-config/main.py:319
 msgid "Applying boot parameters…"
 msgstr "Taikomi paleidimo parametrai…"
 
-#: usr/share/fedorajam-audio-config/main.py:303
+#: ../usr/share/fedorajam-audio-config/main.py:325
 msgid "You must restart your computer for these changes to take effect."
-msgstr ""
-"Turite iš naujo paleisti kompiuterį, kad šie pakeitimai įsigaliotų."
+msgstr "Turite iš naujo paleisti kompiuterį, kad šie pakeitimai įsigaliotų."
 
-#: usr/share/fedorajam-audio-config/main.py:309
+#: ../usr/share/fedorajam-audio-config/main.py:331
 msgid "An error has occurred or action was cancelled."
 msgstr "Įvyko klaida arba veiksmas buvo atšauktas."
 
-#: usr/share/fedorajam-audio-config/main.py:319
+#: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio "
-"or an audio application so that you don't inadvertently feed that to your "
-"main output or draw from your main input. This can be useful when you wish "
-"to send a music application to your DAW or other mixer without sending to "
-"your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"Kartais gali prireikti įjungti fiktyvų garso įrenginį sistemos garsui ar "
-"garso programai, kad netyčia nesiųstumėte garso į pagrindinę išvestį arba "
-"neimtumėte iš pagrindinės įvesties. Tai gali būti naudinga, kai norite "
-"siųsti muzikos programą į savo DAW ar kitą mikserį nesiunčiant į pagrindinę "
-"sistemos išvestį. Gali būti ir kitų darbo eigos priežasčių.\n"
+"Kartais gali prireikti įjungti fiktyvų garso įrenginį sistemos garsui ar garso programai, kad netyčia nesiųstumėte garso į pagrindinę išvestį arba neimtumėte iš pagrindinės įvesties. Tai gali būti naudinga, kai norite siųsti muzikos programą į savo DAW ar kitą mikserį nesiunčiant į pagrindinę sistemos išvestį. Gali būti ir kitų darbo eigos priežasčių.\n"
 "\n"
 "Ar norite paleisti stereofoninį fiktyvų garso įrenginį?"
 
-#: usr/share/fedorajam-audio-config/main.py:329
+#: ../usr/share/fedorajam-audio-config/main.py:351
 msgid "Yes"
 msgstr "Taip"
 
-#: usr/share/fedorajam-audio-config/main.py:330
+#: ../usr/share/fedorajam-audio-config/main.py:352
 msgid "Go Back"
 msgstr "Grįžti atgal"
 
-#: usr/share/fedorajam-audio-config/main.py:335
-#: usr/share/fedorajam-audio-config/main.py:349
+#: ../usr/share/fedorajam-audio-config/main.py:357
+#: ../usr/share/fedorajam-audio-config/main.py:371
 msgid "Would you like the dummy audio device to start at login?"
 msgstr "Ar norite, kad fiktyvus garso įrenginys būtų paleistas prisijungiant?"
 
-#: usr/share/fedorajam-audio-config/main.py:344
+#: ../usr/share/fedorajam-audio-config/main.py:366
 msgid "Would you like to stop the dummy audio device?"
 msgstr "Ar norite sustabdyti fiktyvų garso įrenginį?"
 
-#: usr/share/fedorajam-audio-config/main.py:368
+#: ../usr/share/fedorajam-audio-config/main.py:386
+msgid ""
+"A FireWire (FFADO) PipeWire configuration already exists.\n"
+"\n"
+"Would you like to reconfigure it?\n"
+"(Choose 'No' to remove the existing configuration)"
+msgstr ""
+"FireWire (FFADO) PipeWire konfigūracija jau egzistuoja.\n"
+"\n"
+"Ar norite ją iš naujo sukonfigūruoti?\n"
+"(Pasirinkite 'Ne', kad pašalintumėte esamą konfigūraciją)"
+
+#: ../usr/share/fedorajam-audio-config/main.py:389
+msgid "Reconfigure"
+msgstr "Konfigūruoti iš naujo"
+
+#: ../usr/share/fedorajam-audio-config/main.py:390
+msgid "Remove"
+msgstr "Pašalinti"
+
+#: ../usr/share/fedorajam-audio-config/main.py:396
+msgid ""
+"FireWire (FFADO) PipeWire configuration removed.\n"
+"PipeWire has been restarted."
+msgstr ""
+"FireWire (FFADO) PipeWire konfigūracija pašalinta.\n"
+"PipeWire paleistas iš naujo."
+
+#: ../usr/share/fedorajam-audio-config/main.py:405
+msgid ""
+"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"\n"
+"Would you like to install it now?"
+msgstr ""
+"FireWire (FFADO) garso palaikymui reikia įdiegti paketą 'ffado'.\n"
+"\n"
+"Ar norite jį įdiegti dabar?"
+
+#: ../usr/share/fedorajam-audio-config/main.py:408
+msgid "Install"
+msgstr "Įdiegti"
+
+#: ../usr/share/fedorajam-audio-config/main.py:415
+msgid "Installing ffado…"
+msgstr "Diegiamas ffado…"
+
+#: ../usr/share/fedorajam-audio-config/main.py:421
+msgid "Failed to install ffado."
+msgstr "Nepavyko įdiegti ffado."
+
+#: ../usr/share/fedorajam-audio-config/main.py:429
+msgid ""
+"No FireWire audio devices were detected.\n"
+"\n"
+"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+msgstr ""
+"Nerasta jokių FireWire garso įrenginių.\n"
+"\n"
+"Įsitikinkite, kad jūsų FireWire įrenginys yra prijungtas ir įjungtas, o branduolio moduliai firewire_ohci ir firewire_core yra įkelti."
+
+#: ../usr/share/fedorajam-audio-config/main.py:444
+#, python-brace-format
+msgid "GUID: {guid}"
+msgstr "GUID: {guid}"
+
+#: ../usr/share/fedorajam-audio-config/main.py:451
+msgid "Select the FireWire audio device to use with PipeWire:"
+msgstr "Pasirinkite FireWire garso įrenginį naudojimui su PipeWire:"
+
+#: ../usr/share/fedorajam-audio-config/main.py:463
+msgid ""
+"Select the Buffer Size and Sample Rate for the FireWire device.\n"
+"\n"
+"Note: Many FireWire devices require a buffer size of 256 or larger."
+msgstr ""
+"Pasirinkite buferio dydį ir diskretizavimo dažnį FireWire įrenginiui.\n"
+"\n"
+"Pastaba: Daugeliui FireWire įrenginių reikia buferio dydžio 256 arba didesnio."
+
+#: ../usr/share/fedorajam-audio-config/main.py:489
+#, python-brace-format
+msgid ""
+"FireWire audio configured.\n"
+"\n"
+"Device:      {device}\n"
+"Buffer Size: {buf}\n"
+"Sample Rate: {rate} Hz\n"
+"\n"
+"PipeWire has been restarted."
+msgstr ""
+"FireWire garsas sukonfigūruotas.\n"
+"\n"
+"Įrenginys:      {device}\n"
+"Buferio dydis: {buf}\n"
+"Diskretizavimo dažnis: {rate} Hz\n"
+"\n"
+"PipeWire paleistas iš naujo."
+
+#: ../usr/share/fedorajam-audio-config/main.py:512
 msgid "STOP Dummy Audio Device"
 msgstr "SUSTABDYTI fiktyvų garso įrenginį"
 
-#: usr/share/fedorajam-audio-config/main.py:369
+#: ../usr/share/fedorajam-audio-config/main.py:513
 msgid "START Dummy Audio Device"
 msgstr "PALEISTI fiktyvų garso įrenginį"
 
-#: usr/share/fedorajam-audio-config/main.py:375
+#: ../usr/share/fedorajam-audio-config/main.py:518
+msgid "Reconfigure / Remove FireWire (FFADO) Audio Device"
+msgstr "Konfigūruoti iš naujo / Pašalinti FireWire (FFADO) garso įrenginį"
+
+#: ../usr/share/fedorajam-audio-config/main.py:520
+msgid "Configure FireWire (FFADO) Audio Device"
+msgstr "Konfigūruoti FireWire (FFADO) garso įrenginį"
+
+#: ../usr/share/fedorajam-audio-config/main.py:526
 msgid "Configure Current Audio Configuration"
 msgstr "Konfigūruoti dabartinę garso konfigūraciją"
 
-#: usr/share/fedorajam-audio-config/main.py:380
+#: ../usr/share/fedorajam-audio-config/main.py:531
 msgid "Change Kernel Boot Parameters"
 msgstr "Keisti branduolio paleidimo parametrus"
 
-#: usr/share/fedorajam-audio-config/main.py:392
+#: ../usr/share/fedorajam-audio-config/main.py:552
 msgid "What would you like to do?"
 msgstr "Ką norėtumėte padaryti?"
 
-#: usr/share/fedorajam-audio-config/main.py:394
+#: ../usr/share/fedorajam-audio-config/main.py:554
 msgid "Continue"
 msgstr "Tęsti"
 
-#: usr/share/fedorajam-audio-config/main.py:395
+#: ../usr/share/fedorajam-audio-config/main.py:555
 msgid "Close"
 msgstr "Uždaryti"
-
-#: usr/share/fedorajam-audio-config/ui/gtk_ui.py:80
-msgid "OK"
-msgstr "Gerai"

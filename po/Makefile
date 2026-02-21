@@ -23,20 +23,22 @@ all: $(MOFILES)
 %.mo: %.po
 	msgfmt --check --statistics -o $@ $<
 
-update: $(POTFILE)
-
-$(POTFILE):
+update:
 	xgettext --language=Python --keyword=_ \
 		--package-name=$(DOMAIN) \
 		--package-version=1.0 \
 		--msgid-bugs-address=erich@ericheickmeyer.com \
-		--output=$@ \
+		--output=$(POTFILE) \
 		$(SRCDIR)/i18n.py \
 		$(SRCDIR)/backend/audio_config.py \
 		$(SRCDIR)/ui/base.py \
 		$(SRCDIR)/ui/gtk_ui.py \
 		$(SRCDIR)/ui/qt_ui.py \
 		$(SRCDIR)/main.py
+	@for po in $(POFILES); do \
+		echo "Merging $$po..."; \
+		msgmerge --update --backup=none $$po $(POTFILE); \
+	done
 
 install: $(MOFILES)
 	@for lang in $(LANGS); do \

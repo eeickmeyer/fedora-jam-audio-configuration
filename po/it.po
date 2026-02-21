@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
-"Report-Msgid-Bugs-To: noreply@example.com\n"
-"POT-Creation-Date: 2026-02-17 14:45-0800\n"
+"Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
+"POT-Creation-Date: 2026-02-21 15:00-0800\n"
 "PO-Revision-Date: 2026-02-15 16:00-0800\n"
 "Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -16,64 +16,65 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:36
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:36
 msgid "Don't restrict self connect requests (default)"
 msgstr "Non limitare le richieste di autoconnessione (predefinito)"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:37
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:37
 msgid "Fail self connect requests to external ports only"
 msgstr "Rifiutare le richieste di autoconnessione solo alle porte esterne"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:38
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:38
 msgid "Ignore self connect requests to external ports only"
 msgstr "Ignorare le richieste di autoconnessione solo alle porte esterne"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:39
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:39
 msgid "Fail all self connect requests"
 msgstr "Rifiutare tutte le richieste di autoconnessione"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:40
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:40
 msgid "Ignore all self connect requests"
 msgstr "Ignorare tutte le richieste di autoconnessione"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:44
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:44
 msgid "Show the Monitor client and its ports."
 msgstr "Mostra il client Monitor e le sue porte."
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:46
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:46
 msgid ""
 "Exposes the capture ports and monitor ports on the same JACK device client."
 msgstr ""
 "Espone le porte di cattura e le porte di monitoraggio sullo stesso client "
 "del dispositivo JACK."
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:48
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:48
 msgid "Show the MIDI clients and their ports."
 msgstr "Mostra i client MIDI e le loro porte."
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:49
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:49
 msgid "Use shorter names for the device client name."
 msgstr "Usa nomi più brevi per il nome del client del dispositivo."
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: usr/share/fedorajam-audio-config/ui/qt_ui.py:119
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
 msgid "Fedora Jam Audio Configuration"
 msgstr "Configurazione audio di Fedora Jam"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:113
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:113
 msgid "Makes the kernel fully-preemptible, best for lowlatency workloads"
 msgstr ""
 "Rende il kernel completamente preemptivo, ideale per carichi di lavoro a "
 "bassa latenza"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:116
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
+"Forces interrupt handlers to run in a threaded context, reducing buffer "
+"xruns"
 msgstr ""
-"Forza i gestori di interrupt a funzionare in un contesto a thread, riducendo "
-"gli xrun del buffer"
+"Forza i gestori di interrupt a funzionare in un contesto a thread, riducendo"
+" gli xrun del buffer"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:120
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:120
 msgid ""
 "Offloads Read-Copy-Update (RCU) callbacks from all CPUs to dedicated kernel "
 "threads, improves real-time performance."
@@ -81,13 +82,17 @@ msgstr ""
 "Scarica i callback Read-Copy-Update (RCU) da tutte le CPU su thread del "
 "kernel dedicati, migliora le prestazioni in tempo reale."
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:124
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:124
 msgid "Reduces noise in latency critical applications such as virtualization"
 msgstr ""
 "Riduce il rumore nelle applicazioni critiche per la latenza come la "
 "virtualizzazione"
 
-#: usr/share/fedorajam-audio-config/main.py:89
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+msgid "OK"
+msgstr "OK"
+
+#: ../usr/share/fedorajam-audio-config/main.py:111
 msgid ""
 "ERROR: Neither GTK 4 (python3-gi + gir1.2-adw-1) nor PyQt6 (python3-pyqt6) "
 "is available."
@@ -95,7 +100,7 @@ msgstr ""
 "ERRORE: Né GTK 4 (python3-gi + gir1.2-adw-1) né PyQt6 (python3-pyqt6) è "
 "disponibile."
 
-#: usr/share/fedorajam-audio-config/main.py:111
+#: ../usr/share/fedorajam-audio-config/main.py:133
 msgid ""
 "You have the PipeWire Settings Plasma Widget installed.\n"
 "Use that to change the PipeWire Quantum & Sample Rate.\n"
@@ -103,12 +108,11 @@ msgid ""
 "You can find it in your system tray or add it to your panel."
 msgstr ""
 "Il widget Plasma PipeWire Settings è installato.\n"
-"Usalo per modificare il Quantum e la frequenza di campionamento di "
-"PipeWire.\n"
+"Usalo per modificare il Quantum e la frequenza di campionamento di PipeWire.\n"
 "(Questo è consigliato se stai usando il desktop KDE Plasma)\n"
 "Puoi trovarlo nella barra di sistema o aggiungerlo al tuo pannello."
 
-#: usr/share/fedorajam-audio-config/main.py:120
+#: ../usr/share/fedorajam-audio-config/main.py:142
 msgid ""
 "You have the PipeWire Settings GNOME Shell Extension installed.\n"
 "Use that to change the PipeWire Quantum & Sample Rate.\n"
@@ -117,13 +121,12 @@ msgid ""
 "on your panel."
 msgstr ""
 "L'estensione GNOME Shell PipeWire Settings è installata.\n"
-"Usala per modificare il Quantum e la frequenza di campionamento di "
-"PipeWire.\n"
+"Usala per modificare il Quantum e la frequenza di campionamento di PipeWire.\n"
 "(Questo è consigliato se stai usando GNOME Shell)\n"
 "Puoi trovarla nel Gestore estensioni se non è già\n"
 "sul tuo pannello."
 
-#: usr/share/fedorajam-audio-config/main.py:137
+#: ../usr/share/fedorajam-audio-config/main.py:159
 msgid ""
 "Select the Buffer Size and Sample Rate for PipeWire\n"
 "Quantum configuration.\n"
@@ -143,41 +146,49 @@ msgstr ""
 "Nota: I valori predefiniti sono controllati tramite il comando\n"
 "del terminale fedorajam-pwjack-config"
 
-#: usr/share/fedorajam-audio-config/main.py:145
+#: ../usr/share/fedorajam-audio-config/main.py:167
+#: ../usr/share/fedorajam-audio-config/main.py:467
 msgid "Buffer Size"
 msgstr "Dimensione del buffer"
 
-#: usr/share/fedorajam-audio-config/main.py:150
+#: ../usr/share/fedorajam-audio-config/main.py:172
+#: ../usr/share/fedorajam-audio-config/main.py:472
 msgid "Sample Rate (Hz)"
 msgstr "Frequenza di campionamento (Hz)"
 
-#: usr/share/fedorajam-audio-config/main.py:155
-#: usr/share/fedorajam-audio-config/main.py:180
+#: ../usr/share/fedorajam-audio-config/main.py:177
+#: ../usr/share/fedorajam-audio-config/main.py:202
+#: ../usr/share/fedorajam-audio-config/main.py:453
 msgid "Next"
 msgstr "Avanti"
 
-#: usr/share/fedorajam-audio-config/main.py:156
-#: usr/share/fedorajam-audio-config/main.py:181
-#: usr/share/fedorajam-audio-config/main.py:205
+#: ../usr/share/fedorajam-audio-config/main.py:178
+#: ../usr/share/fedorajam-audio-config/main.py:203
+#: ../usr/share/fedorajam-audio-config/main.py:227
+#: ../usr/share/fedorajam-audio-config/main.py:409
+#: ../usr/share/fedorajam-audio-config/main.py:454
+#: ../usr/share/fedorajam-audio-config/main.py:478
 msgid "Cancel"
 msgstr "Annulla"
 
-#: usr/share/fedorajam-audio-config/main.py:178
+#: ../usr/share/fedorajam-audio-config/main.py:200
 msgid "Select which JACK plugin options you would like"
 msgstr "Seleziona le opzioni del plugin JACK desiderate"
 
-#: usr/share/fedorajam-audio-config/main.py:201
+#: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it alone."
+"Select the self-connect mode. If you don't know what this is, leave it "
+"alone."
 msgstr ""
 "Seleziona la modalità di autoconnessione. Se non sai cosa sia, lasciala "
 "com'è."
 
-#: usr/share/fedorajam-audio-config/main.py:204
+#: ../usr/share/fedorajam-audio-config/main.py:226
+#: ../usr/share/fedorajam-audio-config/main.py:477
 msgid "Apply"
 msgstr "Applica"
 
-#: usr/share/fedorajam-audio-config/main.py:233
+#: ../usr/share/fedorajam-audio-config/main.py:255
 msgid ""
 "JACK configuration applied.\n"
 "\n"
@@ -189,7 +200,7 @@ msgstr ""
 "La dimensione del buffer e la frequenza di campionamento sono gestite\n"
 "dal widget / estensione del desktop."
 
-#: usr/share/fedorajam-audio-config/main.py:240
+#: ../usr/share/fedorajam-audio-config/main.py:262
 #, python-brace-format
 msgid ""
 "Configuration applied.\n"
@@ -202,101 +213,194 @@ msgstr ""
 "Dimensione buffer: {buf}\n"
 "Frequenza di campionamento: {rate} Hz"
 
-#: usr/share/fedorajam-audio-config/main.py:279
+#: ../usr/share/fedorajam-audio-config/main.py:301
 msgid ""
 "Select which kernel boot parameters you would like. Default is first three."
 msgstr ""
 "Seleziona i parametri di avvio del kernel desiderati. I predefiniti sono i "
 "primi tre."
 
-#: usr/share/fedorajam-audio-config/main.py:282
+#: ../usr/share/fedorajam-audio-config/main.py:304
 msgid "Apply (Password Required)"
 msgstr "Applica (password richiesta)"
 
-#: usr/share/fedorajam-audio-config/main.py:283
+#: ../usr/share/fedorajam-audio-config/main.py:305
 msgid "Back"
 msgstr "Indietro"
 
-#: usr/share/fedorajam-audio-config/main.py:297
+#: ../usr/share/fedorajam-audio-config/main.py:319
 msgid "Applying boot parameters…"
 msgstr "Applicazione dei parametri di avvio…"
 
-#: usr/share/fedorajam-audio-config/main.py:303
+#: ../usr/share/fedorajam-audio-config/main.py:325
 msgid "You must restart your computer for these changes to take effect."
 msgstr ""
 "È necessario riavviare il computer affinché le modifiche abbiano effetto."
 
-#: usr/share/fedorajam-audio-config/main.py:309
+#: ../usr/share/fedorajam-audio-config/main.py:331
 msgid "An error has occurred or action was cancelled."
 msgstr "Si è verificato un errore o l'azione è stata annullata."
 
-#: usr/share/fedorajam-audio-config/main.py:319
+#: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio "
-"or an audio application so that you don't inadvertently feed that to your "
-"main output or draw from your main input. This can be useful when you wish "
-"to send a music application to your DAW or other mixer without sending to "
-"your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"A volte, potresti voler abilitare un dispositivo audio fittizio per l'audio "
-"del sistema o un'applicazione audio in modo da non inviare inavvertitamente "
-"il segnale all'uscita principale o prelevare dall'ingresso principale. "
-"Questo può essere utile quando desideri inviare un'applicazione musicale "
-"alla tua DAW o ad un altro mixer senza inviare all'uscita principale del "
-"sistema. Potrebbero esserci anche altri motivi legati al flusso di lavoro.\n"
+"A volte, potresti voler abilitare un dispositivo audio fittizio per l'audio del sistema o un'applicazione audio in modo da non inviare inavvertitamente il segnale all'uscita principale o prelevare dall'ingresso principale. Questo può essere utile quando desideri inviare un'applicazione musicale alla tua DAW o ad un altro mixer senza inviare all'uscita principale del sistema. Potrebbero esserci anche altri motivi legati al flusso di lavoro.\n"
 "\n"
 "Desideri avviare un dispositivo audio fittizio stereo?"
 
-#: usr/share/fedorajam-audio-config/main.py:329
+#: ../usr/share/fedorajam-audio-config/main.py:351
 msgid "Yes"
 msgstr "Sì"
 
-#: usr/share/fedorajam-audio-config/main.py:330
+#: ../usr/share/fedorajam-audio-config/main.py:352
 msgid "Go Back"
 msgstr "Torna indietro"
 
-#: usr/share/fedorajam-audio-config/main.py:335
-#: usr/share/fedorajam-audio-config/main.py:349
+#: ../usr/share/fedorajam-audio-config/main.py:357
+#: ../usr/share/fedorajam-audio-config/main.py:371
 msgid "Would you like the dummy audio device to start at login?"
 msgstr "Vuoi che il dispositivo audio fittizio si avvii all'accesso?"
 
-#: usr/share/fedorajam-audio-config/main.py:344
+#: ../usr/share/fedorajam-audio-config/main.py:366
 msgid "Would you like to stop the dummy audio device?"
 msgstr "Vuoi arrestare il dispositivo audio fittizio?"
 
-#: usr/share/fedorajam-audio-config/main.py:368
+#: ../usr/share/fedorajam-audio-config/main.py:386
+msgid ""
+"A FireWire (FFADO) PipeWire configuration already exists.\n"
+"\n"
+"Would you like to reconfigure it?\n"
+"(Choose 'No' to remove the existing configuration)"
+msgstr ""
+"Esiste già una configurazione FireWire (FFADO) per PipeWire.\n"
+"\n"
+"Desideri riconfigurarla?\n"
+"(Scegli 'No' per rimuovere la configurazione esistente)"
+
+#: ../usr/share/fedorajam-audio-config/main.py:389
+msgid "Reconfigure"
+msgstr "Riconfigura"
+
+#: ../usr/share/fedorajam-audio-config/main.py:390
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: ../usr/share/fedorajam-audio-config/main.py:396
+msgid ""
+"FireWire (FFADO) PipeWire configuration removed.\n"
+"PipeWire has been restarted."
+msgstr ""
+"La configurazione FireWire (FFADO) per PipeWire è stata rimossa.\n"
+"PipeWire è stato riavviato."
+
+#: ../usr/share/fedorajam-audio-config/main.py:405
+msgid ""
+"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"\n"
+"Would you like to install it now?"
+msgstr ""
+"Il supporto audio FireWire (FFADO) richiede l'installazione del pacchetto 'ffado'.\n"
+"\n"
+"Desideri installarlo ora?"
+
+#: ../usr/share/fedorajam-audio-config/main.py:408
+msgid "Install"
+msgstr "Installa"
+
+#: ../usr/share/fedorajam-audio-config/main.py:415
+msgid "Installing ffado…"
+msgstr "Installazione di ffado…"
+
+#: ../usr/share/fedorajam-audio-config/main.py:421
+msgid "Failed to install ffado."
+msgstr "Installazione di ffado non riuscita."
+
+#: ../usr/share/fedorajam-audio-config/main.py:429
+msgid ""
+"No FireWire audio devices were detected.\n"
+"\n"
+"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+msgstr ""
+"Non sono stati rilevati dispositivi audio FireWire.\n"
+"\n"
+"Assicurarsi che il dispositivo FireWire sia collegato e acceso e che i moduli del kernel firewire_ohci e firewire_core siano caricati."
+
+#: ../usr/share/fedorajam-audio-config/main.py:444
+#, python-brace-format
+msgid "GUID: {guid}"
+msgstr "GUID: {guid}"
+
+#: ../usr/share/fedorajam-audio-config/main.py:451
+msgid "Select the FireWire audio device to use with PipeWire:"
+msgstr "Seleziona il dispositivo audio FireWire da usare con PipeWire:"
+
+#: ../usr/share/fedorajam-audio-config/main.py:463
+msgid ""
+"Select the Buffer Size and Sample Rate for the FireWire device.\n"
+"\n"
+"Note: Many FireWire devices require a buffer size of 256 or larger."
+msgstr ""
+"Seleziona la dimensione del buffer e la frequenza di campionamento per il dispositivo FireWire.\n"
+"\n"
+"Nota: Molti dispositivi FireWire richiedono una dimensione del buffer di 256 o superiore."
+
+#: ../usr/share/fedorajam-audio-config/main.py:489
+#, python-brace-format
+msgid ""
+"FireWire audio configured.\n"
+"\n"
+"Device:      {device}\n"
+"Buffer Size: {buf}\n"
+"Sample Rate: {rate} Hz\n"
+"\n"
+"PipeWire has been restarted."
+msgstr ""
+"Audio FireWire configurato.\n"
+"\n"
+"Dispositivo:      {device}\n"
+"Dimensione buffer: {buf}\n"
+"Frequenza di campionamento: {rate} Hz\n"
+"\n"
+"PipeWire è stato riavviato."
+
+#: ../usr/share/fedorajam-audio-config/main.py:512
 msgid "STOP Dummy Audio Device"
 msgstr "ARRESTA dispositivo audio fittizio"
 
-#: usr/share/fedorajam-audio-config/main.py:369
+#: ../usr/share/fedorajam-audio-config/main.py:513
 msgid "START Dummy Audio Device"
 msgstr "AVVIA dispositivo audio fittizio"
 
-#: usr/share/fedorajam-audio-config/main.py:375
+#: ../usr/share/fedorajam-audio-config/main.py:518
+msgid "Reconfigure / Remove FireWire (FFADO) Audio Device"
+msgstr "Riconfigura / Rimuovi dispositivo audio FireWire (FFADO)"
+
+#: ../usr/share/fedorajam-audio-config/main.py:520
+msgid "Configure FireWire (FFADO) Audio Device"
+msgstr "Configura dispositivo audio FireWire (FFADO)"
+
+#: ../usr/share/fedorajam-audio-config/main.py:526
 msgid "Configure Current Audio Configuration"
 msgstr "Configura la configurazione audio attuale"
 
-#: usr/share/fedorajam-audio-config/main.py:380
+#: ../usr/share/fedorajam-audio-config/main.py:531
 msgid "Change Kernel Boot Parameters"
 msgstr "Modifica i parametri di avvio del kernel"
 
-#: usr/share/fedorajam-audio-config/main.py:392
+#: ../usr/share/fedorajam-audio-config/main.py:552
 msgid "What would you like to do?"
 msgstr "Cosa desideri fare?"
 
-#: usr/share/fedorajam-audio-config/main.py:394
+#: ../usr/share/fedorajam-audio-config/main.py:554
 msgid "Continue"
 msgstr "Continua"
 
-#: usr/share/fedorajam-audio-config/main.py:395
+#: ../usr/share/fedorajam-audio-config/main.py:555
 msgid "Close"
 msgstr "Chiudi"
-
-#: usr/share/fedorajam-audio-config/ui/gtk_ui.py:80
-msgid "OK"
-msgstr "OK"
 
 #, python-brace-format
 #~ msgid ""
@@ -319,8 +423,7 @@ msgstr "OK"
 #~ "jack.short-name     = {short_name}\n"
 #~ "jack.self-connect-mode = {self_connect}\n"
 #~ "\n"
-#~ "La dimensione del buffer e la frequenza di campionamento sono gestite "
-#~ "dal\n"
+#~ "La dimensione del buffer e la frequenza di campionamento sono gestite dal\n"
 #~ "widget / estensione del desktop."
 
 #, python-brace-format
@@ -333,8 +436,7 @@ msgstr "OK"
 #~ "jack.short-name     = {short_name}\n"
 #~ "jack.self-connect-mode = {self_connect}"
 #~ msgstr ""
-#~ "Quantum di PipeWire impostato su buffer {buf} e frequenza di "
-#~ "campionamento {rate} Hz.\n"
+#~ "Quantum di PipeWire impostato su buffer {buf} e frequenza di campionamento {rate} Hz.\n"
 #~ "\n"
 #~ "jack.show-monitor   = {show_monitor}\n"
 #~ "jack.merge-monitor  = {merge_monitor}\n"

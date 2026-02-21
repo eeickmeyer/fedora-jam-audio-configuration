@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
-"Report-Msgid-Bugs-To: noreply@example.com\n"
-"POT-Creation-Date: 2026-02-17 14:45-0800\n"
+"Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
+"POT-Creation-Date: 2026-02-21 15:00-0800\n"
 "PO-Revision-Date: 2026-02-17 16:00-0800\n"
 "Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
 "Language-Team: Hindi <hindi@li.org>\n"
@@ -16,63 +16,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:36
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:36
 msgid "Don't restrict self connect requests (default)"
 msgstr "स्व-कनेक्ट अनुरोधों को प्रतिबंधित न करें (डिफ़ॉल्ट)"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:37
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:37
 msgid "Fail self connect requests to external ports only"
 msgstr "केवल बाहरी पोर्ट के लिए स्व-कनेक्ट अनुरोधों को विफल करें"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:38
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:38
 msgid "Ignore self connect requests to external ports only"
 msgstr "केवल बाहरी पोर्ट के लिए स्व-कनेक्ट अनुरोधों को अनदेखा करें"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:39
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:39
 msgid "Fail all self connect requests"
 msgstr "सभी स्व-कनेक्ट अनुरोधों को विफल करें"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:40
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:40
 msgid "Ignore all self connect requests"
 msgstr "सभी स्व-कनेक्ट अनुरोधों को अनदेखा करें"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:44
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:44
 msgid "Show the Monitor client and its ports."
 msgstr "Monitor क्लाइंट और उसके पोर्ट दिखाएँ।"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:46
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:46
 msgid ""
 "Exposes the capture ports and monitor ports on the same JACK device client."
 msgstr ""
 "एक ही JACK डिवाइस क्लाइंट पर कैप्चर पोर्ट और मॉनिटर पोर्ट को उजागर करता है।"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:48
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:48
 msgid "Show the MIDI clients and their ports."
 msgstr "MIDI क्लाइंट और उनके पोर्ट दिखाएँ।"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:49
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:49
 msgid "Use shorter names for the device client name."
 msgstr "डिवाइस क्लाइंट नाम के लिए छोटे नामों का उपयोग करें।"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: usr/share/fedorajam-audio-config/ui/qt_ui.py:119
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
 msgid "Fedora Jam Audio Configuration"
 msgstr "Fedora Jam ऑडियो कॉन्फ़िगरेशन"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:113
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:113
 msgid "Makes the kernel fully-preemptible, best for lowlatency workloads"
 msgstr ""
-"कर्नेल को पूर्ण रूप से प्रीएम्प्टिबल बनाता है, कम विलंबता वाले कार्यभार "
-"के लिए सर्वोत्तम"
+"कर्नेल को पूर्ण रूप से प्रीएम्प्टिबल बनाता है, कम विलंबता वाले कार्यभार के "
+"लिए सर्वोत्तम"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:116
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
+"Forces interrupt handlers to run in a threaded context, reducing buffer "
+"xruns"
 msgstr ""
-"इंटरप्ट हैंडलर्स को थ्रेडेड संदर्भ में चलने के लिए बाध्य करता है, जिससे "
-"बफ़र xrun कम होते हैं"
+"इंटरप्ट हैंडलर्स को थ्रेडेड संदर्भ में चलने के लिए बाध्य करता है, जिससे बफ़र"
+" xrun कम होते हैं"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:120
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:120
 msgid ""
 "Offloads Read-Copy-Update (RCU) callbacks from all CPUs to dedicated kernel "
 "threads, improves real-time performance."
@@ -80,19 +81,23 @@ msgstr ""
 "सभी CPU से Read-Copy-Update (RCU) कॉलबैक को समर्पित कर्नेल थ्रेड्स में "
 "स्थानांतरित करता है, रीयल-टाइम प्रदर्शन में सुधार करता है।"
 
-#: usr/share/fedorajam-audio-config/backend/audio_config.py:124
+#: ../usr/share/fedorajam-audio-config/backend/audio_config.py:124
 msgid "Reduces noise in latency critical applications such as virtualization"
 msgstr "वर्चुअलाइज़ेशन जैसे विलंबता-संवेदनशील अनुप्रयोगों में शोर कम करता है"
 
-#: usr/share/fedorajam-audio-config/main.py:89
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+msgid "OK"
+msgstr "ठीक है"
+
+#: ../usr/share/fedorajam-audio-config/main.py:111
 msgid ""
 "ERROR: Neither GTK 4 (python3-gi + gir1.2-adw-1) nor PyQt6 (python3-pyqt6) "
 "is available."
 msgstr ""
-"त्रुटि: न तो GTK 4 (python3-gi + gir1.2-adw-1) और न ही PyQt6 (python3-pyqt6) "
-"उपलब्ध है।"
+"त्रुटि: न तो GTK 4 (python3-gi + gir1.2-adw-1) और न ही PyQt6 (python3-pyqt6)"
+" उपलब्ध है।"
 
-#: usr/share/fedorajam-audio-config/main.py:111
+#: ../usr/share/fedorajam-audio-config/main.py:133
 msgid ""
 "You have the PipeWire Settings Plasma Widget installed.\n"
 "Use that to change the PipeWire Quantum & Sample Rate.\n"
@@ -104,7 +109,7 @@ msgstr ""
 "(यदि आप KDE Plasma Desktop उपयोग कर रहे हैं तो यह अनुशंसित है)\n"
 "आप इसे अपने सिस्टम ट्रे में पा सकते हैं या अपने पैनल में जोड़ सकते हैं।"
 
-#: usr/share/fedorajam-audio-config/main.py:120
+#: ../usr/share/fedorajam-audio-config/main.py:142
 msgid ""
 "You have the PipeWire Settings GNOME Shell Extension installed.\n"
 "Use that to change the PipeWire Quantum & Sample Rate.\n"
@@ -118,7 +123,7 @@ msgstr ""
 "यदि यह पहले से आपके पैनल पर नहीं है तो आप इसे\n"
 "Extension Manager में पा सकते हैं।"
 
-#: usr/share/fedorajam-audio-config/main.py:137
+#: ../usr/share/fedorajam-audio-config/main.py:159
 msgid ""
 "Select the Buffer Size and Sample Rate for PipeWire\n"
 "Quantum configuration.\n"
@@ -138,41 +143,49 @@ msgstr ""
 "नोट: डिफ़ॉल्ट मान टर्मिनल कमांड\n"
 "fedorajam-pwjack-config द्वारा नियंत्रित होते हैं"
 
-#: usr/share/fedorajam-audio-config/main.py:145
+#: ../usr/share/fedorajam-audio-config/main.py:167
+#: ../usr/share/fedorajam-audio-config/main.py:467
 msgid "Buffer Size"
 msgstr "बफ़र आकार"
 
-#: usr/share/fedorajam-audio-config/main.py:150
+#: ../usr/share/fedorajam-audio-config/main.py:172
+#: ../usr/share/fedorajam-audio-config/main.py:472
 msgid "Sample Rate (Hz)"
 msgstr "सैंपल रेट (Hz)"
 
-#: usr/share/fedorajam-audio-config/main.py:155
-#: usr/share/fedorajam-audio-config/main.py:180
+#: ../usr/share/fedorajam-audio-config/main.py:177
+#: ../usr/share/fedorajam-audio-config/main.py:202
+#: ../usr/share/fedorajam-audio-config/main.py:453
 msgid "Next"
 msgstr "अगला"
 
-#: usr/share/fedorajam-audio-config/main.py:156
-#: usr/share/fedorajam-audio-config/main.py:181
-#: usr/share/fedorajam-audio-config/main.py:205
+#: ../usr/share/fedorajam-audio-config/main.py:178
+#: ../usr/share/fedorajam-audio-config/main.py:203
+#: ../usr/share/fedorajam-audio-config/main.py:227
+#: ../usr/share/fedorajam-audio-config/main.py:409
+#: ../usr/share/fedorajam-audio-config/main.py:454
+#: ../usr/share/fedorajam-audio-config/main.py:478
 msgid "Cancel"
 msgstr "रद्द करें"
 
-#: usr/share/fedorajam-audio-config/main.py:178
+#: ../usr/share/fedorajam-audio-config/main.py:200
 msgid "Select which JACK plugin options you would like"
 msgstr "अपने इच्छित JACK प्लगइन विकल्प चुनें"
 
-#: usr/share/fedorajam-audio-config/main.py:201
+#: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it alone."
+"Select the self-connect mode. If you don't know what this is, leave it "
+"alone."
 msgstr ""
-"स्व-कनेक्ट मोड चुनें। यदि आप नहीं जानते कि यह क्या है, तो इसे वैसा ही "
-"छोड़ दें।"
+"स्व-कनेक्ट मोड चुनें। यदि आप नहीं जानते कि यह क्या है, तो इसे वैसा ही छोड़ "
+"दें।"
 
-#: usr/share/fedorajam-audio-config/main.py:204
+#: ../usr/share/fedorajam-audio-config/main.py:226
+#: ../usr/share/fedorajam-audio-config/main.py:477
 msgid "Apply"
 msgstr "लागू करें"
 
-#: usr/share/fedorajam-audio-config/main.py:233
+#: ../usr/share/fedorajam-audio-config/main.py:255
 msgid ""
 "JACK configuration applied.\n"
 "\n"
@@ -184,7 +197,7 @@ msgstr ""
 "बफ़र और सैंपल रेट आपके डेस्कटॉप\n"
 "विजेट / एक्सटेंशन द्वारा प्रबंधित होते हैं।"
 
-#: usr/share/fedorajam-audio-config/main.py:240
+#: ../usr/share/fedorajam-audio-config/main.py:262
 #, python-brace-format
 msgid ""
 "Configuration applied.\n"
@@ -197,95 +210,189 @@ msgstr ""
 "बफ़र आकार: {buf}\n"
 "सैंपल रेट: {rate} Hz"
 
-#: usr/share/fedorajam-audio-config/main.py:279
+#: ../usr/share/fedorajam-audio-config/main.py:301
 msgid ""
 "Select which kernel boot parameters you would like. Default is first three."
-msgstr ""
-"अपने इच्छित कर्नेल बूट पैरामीटर चुनें। डिफ़ॉल्ट पहले तीन हैं।"
+msgstr "अपने इच्छित कर्नेल बूट पैरामीटर चुनें। डिफ़ॉल्ट पहले तीन हैं।"
 
-#: usr/share/fedorajam-audio-config/main.py:282
+#: ../usr/share/fedorajam-audio-config/main.py:304
 msgid "Apply (Password Required)"
 msgstr "लागू करें (पासवर्ड आवश्यक)"
 
-#: usr/share/fedorajam-audio-config/main.py:283
+#: ../usr/share/fedorajam-audio-config/main.py:305
 msgid "Back"
 msgstr "वापस"
 
-#: usr/share/fedorajam-audio-config/main.py:297
+#: ../usr/share/fedorajam-audio-config/main.py:319
 msgid "Applying boot parameters…"
 msgstr "बूट पैरामीटर लागू किए जा रहे हैं…"
 
-#: usr/share/fedorajam-audio-config/main.py:303
+#: ../usr/share/fedorajam-audio-config/main.py:325
 msgid "You must restart your computer for these changes to take effect."
-msgstr "इन परिवर्तनों को प्रभावी करने के लिए आपको अपना कंप्यूटर पुनः आरंभ करना होगा।"
+msgstr ""
+"इन परिवर्तनों को प्रभावी करने के लिए आपको अपना कंप्यूटर पुनः आरंभ करना होगा।"
 
-#: usr/share/fedorajam-audio-config/main.py:309
+#: ../usr/share/fedorajam-audio-config/main.py:331
 msgid "An error has occurred or action was cancelled."
 msgstr "कोई त्रुटि हुई है या कार्रवाई रद्द कर दी गई।"
 
-#: usr/share/fedorajam-audio-config/main.py:319
+#: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio "
-"or an audio application so that you don't inadvertently feed that to your "
-"main output or draw from your main input. This can be useful when you wish "
-"to send a music application to your DAW or other mixer without sending to "
-"your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"कभी-कभी, आप अपने सिस्टम ऑडियो या किसी ऑडियो एप्लिकेशन के लिए एक डमी "
-"ऑडियो डिवाइस सक्षम करना चाह सकते हैं ताकि आप गलती से उसे अपने मुख्य आउटपुट "
-"में न भेजें या अपने मुख्य इनपुट से न लें। यह तब उपयोगी हो सकता है जब आप "
-"किसी संगीत एप्लिकेशन को अपने मुख्य सिस्टम आउटपुट पर भेजे बिना अपने DAW या "
-"अन्य मिक्सर को भेजना चाहते हैं। अन्य कार्यप्रवाह संबंधी कारण भी हो सकते हैं।\n"
+"कभी-कभी, आप अपने सिस्टम ऑडियो या किसी ऑडियो एप्लिकेशन के लिए एक डमी ऑडियो डिवाइस सक्षम करना चाह सकते हैं ताकि आप गलती से उसे अपने मुख्य आउटपुट में न भेजें या अपने मुख्य इनपुट से न लें। यह तब उपयोगी हो सकता है जब आप किसी संगीत एप्लिकेशन को अपने मुख्य सिस्टम आउटपुट पर भेजे बिना अपने DAW या अन्य मिक्सर को भेजना चाहते हैं। अन्य कार्यप्रवाह संबंधी कारण भी हो सकते हैं।\n"
 "\n"
 "क्या आप एक स्टीरियो डमी ऑडियो डिवाइस शुरू करना चाहते हैं?"
 
-#: usr/share/fedorajam-audio-config/main.py:329
+#: ../usr/share/fedorajam-audio-config/main.py:351
 msgid "Yes"
 msgstr "हाँ"
 
-#: usr/share/fedorajam-audio-config/main.py:330
+#: ../usr/share/fedorajam-audio-config/main.py:352
 msgid "Go Back"
 msgstr "वापस जाएँ"
 
-#: usr/share/fedorajam-audio-config/main.py:335
-#: usr/share/fedorajam-audio-config/main.py:349
+#: ../usr/share/fedorajam-audio-config/main.py:357
+#: ../usr/share/fedorajam-audio-config/main.py:371
 msgid "Would you like the dummy audio device to start at login?"
 msgstr "क्या आप चाहते हैं कि डमी ऑडियो डिवाइस लॉगिन पर शुरू हो?"
 
-#: usr/share/fedorajam-audio-config/main.py:344
+#: ../usr/share/fedorajam-audio-config/main.py:366
 msgid "Would you like to stop the dummy audio device?"
 msgstr "क्या आप डमी ऑडियो डिवाइस बंद करना चाहते हैं?"
 
-#: usr/share/fedorajam-audio-config/main.py:368
+#: ../usr/share/fedorajam-audio-config/main.py:386
+msgid ""
+"A FireWire (FFADO) PipeWire configuration already exists.\n"
+"\n"
+"Would you like to reconfigure it?\n"
+"(Choose 'No' to remove the existing configuration)"
+msgstr ""
+"FireWire (FFADO) PipeWire विन्यास पहले से मौजूद है।\n"
+"\n"
+"क्या आप इसे पुनः विन्यस्त करना चाहते हैं?\n"
+"(मौजूदा विन्यास हटाने के लिए 'नहीं' चुनें)"
+
+#: ../usr/share/fedorajam-audio-config/main.py:389
+msgid "Reconfigure"
+msgstr "पुनः विन्यस्त करें"
+
+#: ../usr/share/fedorajam-audio-config/main.py:390
+msgid "Remove"
+msgstr "हटाएँ"
+
+#: ../usr/share/fedorajam-audio-config/main.py:396
+msgid ""
+"FireWire (FFADO) PipeWire configuration removed.\n"
+"PipeWire has been restarted."
+msgstr ""
+"FireWire (FFADO) PipeWire विन्यास हटा दिया गया।\n"
+"PipeWire पुनः आरंभ किया गया।"
+
+#: ../usr/share/fedorajam-audio-config/main.py:405
+msgid ""
+"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"\n"
+"Would you like to install it now?"
+msgstr ""
+"FireWire (FFADO) ऑडियो समर्थन के लिए 'ffado' पैकेज की स्थापना आवश्यक है।\n"
+"\n"
+"क्या आप इसे अभी स्थापित करना चाहते हैं?"
+
+#: ../usr/share/fedorajam-audio-config/main.py:408
+msgid "Install"
+msgstr "स्थापित करें"
+
+#: ../usr/share/fedorajam-audio-config/main.py:415
+msgid "Installing ffado…"
+msgstr "ffado स्थापित हो रहा है…"
+
+#: ../usr/share/fedorajam-audio-config/main.py:421
+msgid "Failed to install ffado."
+msgstr "ffado स्थापित करने में विफल।"
+
+#: ../usr/share/fedorajam-audio-config/main.py:429
+msgid ""
+"No FireWire audio devices were detected.\n"
+"\n"
+"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+msgstr ""
+"कोई FireWire ऑडियो उपकरण नहीं मिला।\n"
+"\n"
+"सुनिश्चित करें कि आपका FireWire उपकरण जुड़ा और चालू है, तथा firewire_ohci और firewire_core कर्नेल मॉड्यूल लोड हैं।"
+
+#: ../usr/share/fedorajam-audio-config/main.py:444
+#, python-brace-format
+msgid "GUID: {guid}"
+msgstr "GUID: {guid}"
+
+#: ../usr/share/fedorajam-audio-config/main.py:451
+msgid "Select the FireWire audio device to use with PipeWire:"
+msgstr "PipeWire के साथ उपयोग के लिए FireWire ऑडियो उपकरण चुनें:"
+
+#: ../usr/share/fedorajam-audio-config/main.py:463
+msgid ""
+"Select the Buffer Size and Sample Rate for the FireWire device.\n"
+"\n"
+"Note: Many FireWire devices require a buffer size of 256 or larger."
+msgstr ""
+"FireWire उपकरण के लिए बफ़र आकार और सैम्पल दर चुनें।\n"
+"\n"
+"नोट: कई FireWire उपकरणों को 256 या अधिक बफ़र आकार की आवश्यकता होती है।"
+
+#: ../usr/share/fedorajam-audio-config/main.py:489
+#, python-brace-format
+msgid ""
+"FireWire audio configured.\n"
+"\n"
+"Device:      {device}\n"
+"Buffer Size: {buf}\n"
+"Sample Rate: {rate} Hz\n"
+"\n"
+"PipeWire has been restarted."
+msgstr ""
+"FireWire ऑडियो विन्यस्त किया गया।\n"
+"\n"
+"उपकरण:      {device}\n"
+"बफ़र आकार: {buf}\n"
+"सैम्पल दर: {rate} Hz\n"
+"\n"
+"PipeWire पुनः आरंभ किया गया।"
+
+#: ../usr/share/fedorajam-audio-config/main.py:512
 msgid "STOP Dummy Audio Device"
 msgstr "डमी ऑडियो डिवाइस बंद करें"
 
-#: usr/share/fedorajam-audio-config/main.py:369
+#: ../usr/share/fedorajam-audio-config/main.py:513
 msgid "START Dummy Audio Device"
 msgstr "डमी ऑडियो डिवाइस शुरू करें"
 
-#: usr/share/fedorajam-audio-config/main.py:375
+#: ../usr/share/fedorajam-audio-config/main.py:518
+msgid "Reconfigure / Remove FireWire (FFADO) Audio Device"
+msgstr "FireWire (FFADO) ऑडियो उपकरण पुनः विन्यस्त / हटाएँ"
+
+#: ../usr/share/fedorajam-audio-config/main.py:520
+msgid "Configure FireWire (FFADO) Audio Device"
+msgstr "FireWire (FFADO) ऑडियो उपकरण विन्यस्त करें"
+
+#: ../usr/share/fedorajam-audio-config/main.py:526
 msgid "Configure Current Audio Configuration"
 msgstr "वर्तमान ऑडियो कॉन्फ़िगरेशन सेट करें"
 
-#: usr/share/fedorajam-audio-config/main.py:380
+#: ../usr/share/fedorajam-audio-config/main.py:531
 msgid "Change Kernel Boot Parameters"
 msgstr "कर्नेल बूट पैरामीटर बदलें"
 
-#: usr/share/fedorajam-audio-config/main.py:392
+#: ../usr/share/fedorajam-audio-config/main.py:552
 msgid "What would you like to do?"
 msgstr "आप क्या करना चाहेंगे?"
 
-#: usr/share/fedorajam-audio-config/main.py:394
+#: ../usr/share/fedorajam-audio-config/main.py:554
 msgid "Continue"
 msgstr "जारी रखें"
 
-#: usr/share/fedorajam-audio-config/main.py:395
+#: ../usr/share/fedorajam-audio-config/main.py:555
 msgid "Close"
 msgstr "बंद करें"
-
-#: usr/share/fedorajam-audio-config/ui/gtk_ui.py:80
-msgid "OK"
-msgstr "ठीक है"

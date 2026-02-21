@@ -22,6 +22,7 @@ from backend.audio_config import (  # noqa: E402
     SELF_CONNECT_DESCRIPTIONS,
     SELF_CONNECT_MODES,
     BootParams,
+    FFADODevice,
     JackConfig,
     cli_dummy_start,
     cli_dummy_stop,
@@ -32,14 +33,20 @@ from backend.audio_config import (  # noqa: E402
     dummy_device_enable,
     dummy_device_start,
     dummy_device_stop,
+    ffado_pw_configured,
+    ffado_tools_installed,
+    firewire_controller_present,
     get_default_quantum,
     get_user_quantum,
     has_gnome_pw_extension,
     has_plasma_pw_widget,
+    list_ffado_devices,
     read_boot_params,
     read_jack_config,
+    remove_ffado_pw_config,
     validate_quantum,
     write_boot_params,
+    write_ffado_pw_config,
     write_jack_config,
 )
 from ui.base import AudioConfigUI, ChecklistItem, ComboItem  # noqa: E402
@@ -369,6 +376,128 @@ def _toggle_dummy(ui: AudioConfigUI) -> None:
                 dummy_device_disable()
 
 
+def _configure_firewire(ui: AudioConfigUI) -> None:
+    """Configure or remove FireWire (FFADO) audio support in PipeWire."""
+
+    # If already configured, offer to reconfigure or remove
+    if ffado_pw_configured():
+        keep = ui.show_question(
+            APP_TITLE,
+            _("A FireWire (FFADO) PipeWire configuration already exists.\n\n"
+              "Would you like to reconfigure it?\n"
+              "(Choose 'No' to remove the existing configuration)"),
+            ok_label=_("Reconfigure"),
+            cancel_label=_("Remove"),
+        )
+        if not keep:
+            remove_ffado_pw_config()
+            ui.show_info(
+                APP_TITLE,
+                _("FireWire (FFADO) PipeWire configuration removed.\n"
+                  "PipeWire has been restarted."),
+            )
+            return
+
+    # Ensure ffado package is installed
+    if not ffado_tools_installed():
+        install = ui.show_question(
+            APP_TITLE,
+            _("FireWire (FFADO) audio support requires the 'ffado' "
+              "package to be installed.\n\n"
+              "Would you like to install it now?"),
+            ok_label=_("Install"),
+            cancel_label=_("Cancel"),
+        )
+        if not install:
+            return
+        ok = ui.show_progress(
+            APP_TITLE,
+            _("Installing ffado\u2026"),
+            lambda: subprocess.run(
+                ["pkexec", "dnf", "install", "-y", "ffado", "libffado"]
+            ),
+        )
+        if not ok:
+            ui.show_error(APP_TITLE, _("Failed to install ffado."))
+            return
+
+    # Enumerate connected devices
+    devices = list_ffado_devices()
+    if not devices:
+        ui.show_warning(
+            APP_TITLE,
+            _("No FireWire audio devices were detected.\n\n"
+              "Make sure your FireWire device is connected and powered on, "
+              "and that the firewire_ohci and firewire_core kernel modules "
+              "are loaded."),
+        )
+        return
+
+    # Device selection (skip radio if only one device)
+    if len(devices) == 1:
+        device_index = 0
+    else:
+        device_items = [
+            ChecklistItem(
+                key=str(dev.index),
+                label=dev.display_name,
+                description=_("GUID: {guid}").format(guid=dev.guid),
+                checked=(dev.index == 0),
+            )
+            for dev in devices
+        ]
+        selected_key = ui.show_radiolist(
+            APP_TITLE,
+            _("Select the FireWire audio device to use with PipeWire:"),
+            device_items,
+            ok_label=_("Next"),
+            cancel_label=_("Cancel"),
+        )
+        if selected_key is None:
+            return
+        device_index = int(selected_key)
+
+    # Buffer size / sample rate
+    combo_result = ui.show_combo_dialog(
+        APP_TITLE,
+        _("Select the Buffer Size and Sample Rate for the FireWire device.\n\n"
+          "Note: Many FireWire devices require a buffer size of 256 or larger."),
+        combos=[
+            ComboItem(
+                label=_("Buffer Size"),
+                options=[str(s) for s in VALID_BUFFER_SIZES],
+                default="256",
+            ),
+            ComboItem(
+                label=_("Sample Rate (Hz)"),
+                options=[str(r) for r in VALID_SAMPLE_RATES],
+                default="48000",
+            ),
+        ],
+        ok_label=_("Apply"),
+        cancel_label=_("Cancel"),
+    )
+    if combo_result is None:
+        return
+
+    buf, rate = int(combo_result[0]), int(combo_result[1])
+
+    write_ffado_pw_config(buf, rate, device_index)
+
+    ui.show_info(
+        APP_TITLE,
+        _("FireWire audio configured.\n\n"
+          "Device:      {device}\n"
+          "Buffer Size: {buf}\n"
+          "Sample Rate: {rate} Hz\n\n"
+          "PipeWire has been restarted.").format(
+            device=devices[device_index].display_name,
+            buf=buf,
+            rate=rate,
+        ),
+    )
+
+
 # ======================================================================
 # Main menu loop
 # ======================================================================
@@ -382,6 +511,13 @@ def _main_loop(ui: AudioConfigUI) -> None:
         dummy_label = (
             _("STOP Dummy Audio Device") if active
             else _("START Dummy Audio Device")
+        )
+
+        fw_present = firewire_controller_present() or ffado_pw_configured()
+        fw_label = (
+            _("Reconfigure / Remove FireWire (FFADO) Audio Device")
+            if ffado_pw_configured()
+            else _("Configure FireWire (FFADO) Audio Device")
         )
 
         items = [
@@ -402,6 +538,15 @@ def _main_loop(ui: AudioConfigUI) -> None:
             ),
         ]
 
+        if fw_present:
+            items.append(
+                ChecklistItem(
+                    key="firewire",
+                    label=fw_label,
+                    description="",
+                )
+            )
+
         choice = ui.show_radiolist(
             APP_TITLE,
             _("What would you like to do?"),
@@ -419,6 +564,8 @@ def _main_loop(ui: AudioConfigUI) -> None:
             _change_boot_params(ui)
         elif choice == "dummy":
             _toggle_dummy(ui)
+        elif choice == "firewire":
+            _configure_firewire(ui)
 
 
 # ======================================================================
