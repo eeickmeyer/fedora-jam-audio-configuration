@@ -14,11 +14,12 @@ from PyQt6.QtWidgets import (
     QComboBox,
     QDialog,
     QDialogButtonBox,
+    QFrame,
     QHBoxLayout,
     QInputDialog,
     QLabel,
     QMessageBox,
-    QProgressDialog,
+    QProgressBar,
     QRadioButton,
     QScrollArea,
     QVBoxLayout,
@@ -60,7 +61,7 @@ def _wrapping_row(button: QCheckBox | QRadioButton, text: str) -> QWidget:
     label.mousePressEvent = lambda _ev: button.toggle()
     row = QWidget()
     h = QHBoxLayout(row)
-    h.setContentsMargins(0, 0, 0, 0)
+    h.setContentsMargins(4, 3, 4, 3)
     h.addWidget(button)
     h.addWidget(label, 1)
     return row
@@ -184,6 +185,8 @@ class QtUI(AudioConfigUI):
         dlg.setWindowIcon(QIcon(ICON_PATH))
 
         layout = QVBoxLayout(dlg)
+        layout.setSpacing(10)
+        layout.setContentsMargins(12, 12, 12, 12)
         info = QLabel(text)
         info.setWordWrap(True)
         layout.addWidget(info)
@@ -231,14 +234,19 @@ class QtUI(AudioConfigUI):
         dlg.setWindowIcon(QIcon(ICON_PATH))
 
         layout = QVBoxLayout(dlg)
+        layout.setSpacing(10)
+        layout.setContentsMargins(12, 12, 12, 12)
         info = QLabel(text)
         info.setWordWrap(True)
         layout.addWidget(info)
 
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QFrame.Shape.NoFrame)
         container = QWidget()
         vbox = QVBoxLayout(container)
+        vbox.setSpacing(2)
+        vbox.setContentsMargins(4, 4, 4, 4)
 
         checks: list[tuple[str, QCheckBox]] = []
         for item in items:
@@ -282,14 +290,19 @@ class QtUI(AudioConfigUI):
         dlg.setWindowIcon(QIcon(ICON_PATH))
 
         layout = QVBoxLayout(dlg)
+        layout.setSpacing(10)
+        layout.setContentsMargins(12, 12, 12, 12)
         info = QLabel(text)
         info.setWordWrap(True)
         layout.addWidget(info)
 
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QFrame.Shape.NoFrame)
         container = QWidget()
         vbox = QVBoxLayout(container)
+        vbox.setSpacing(2)
+        vbox.setContentsMargins(4, 4, 4, 4)
 
         group = QButtonGroup(dlg)
         radios: list[tuple[str, QRadioButton]] = []
@@ -328,12 +341,23 @@ class QtUI(AudioConfigUI):
         text: str,
         callback: Callable[[], None],
     ) -> bool:
-        dlg = QProgressDialog(text, None, 0, 0)
+        dlg = QDialog()
         dlg.setWindowTitle(title)
         dlg.setWindowIcon(QIcon(ICON_PATH))
         dlg.setWindowModality(Qt.WindowModality.ApplicationModal)
-        dlg.setCancelButton(None)
-        dlg.setMinimumDuration(0)
+        dlg.setMinimumWidth(400)
+
+        layout = QVBoxLayout(dlg)
+        layout.setSpacing(10)
+        layout.setContentsMargins(12, 12, 12, 12)
+
+        label = QLabel(text)
+        label.setWordWrap(True)
+        layout.addWidget(label)
+
+        bar = QProgressBar()
+        bar.setRange(0, 0)  # indeterminate / pulsating
+        layout.addWidget(bar)
 
         success = {"value": False}
 
