@@ -1,7 +1,7 @@
 Name:           fedora-jam-audio-config
 Version:        1.2
 Release:        1%{?dist}
-Summary:        PipeWire-JACK audio configuration scripts for Fedora Jam
+Summary:        PipeWire-JACK audio configuration tool for Fedora Jam
 
 BuildArch:      noarch
 
@@ -16,9 +16,11 @@ Requires:       python3 >= 3.9
 Requires:       (python3-gobject or python3-PyQt6)
 
 %description
-A lightweight set of GUI scripts for manipulating a user's
-PipeWire-JACK configuration as well as a system's GRUB configuration
-to optimize for low-latency audio performance on Fedora Jam.
+A Python application providing a graphical interface for configuring
+PipeWire-JACK settings and GRUB kernel parameters to optimize a system
+for low-latency audio performance on Fedora Jam. The GUI supports both
+GTK (via PyGObject) and Qt (via PyQt6) backends, and includes systemd
+user services to apply audio configuration automatically at login.
 
 %prep
 %autosetup -C
