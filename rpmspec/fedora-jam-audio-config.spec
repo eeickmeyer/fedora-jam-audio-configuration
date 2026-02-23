@@ -1,5 +1,5 @@
 Name:           fedora-jam-audio-config
-Version:        2.0.1
+Version:        2.0.2
 Release:        1%{?dist}
 Summary:        PipeWire-JACK audio configuration tool for Fedora Jam
 
@@ -103,7 +103,7 @@ fi
 %doc README.md
 
 %changelog
-* Sun Feb 22 2026 Erich Eickmeyer <erich@ericheickmeyer.com> 2.0.1-1
+* Sun Feb 22 2026 Erich Eickmeyer <erich@ericheickmeyer.com> 2.0.2-1
 - Complete rewrite in Python
 
 * Sat Jan 24 2026 Erich Eickmeyer <erich@ericheickmeyer.com> 1.2-1
