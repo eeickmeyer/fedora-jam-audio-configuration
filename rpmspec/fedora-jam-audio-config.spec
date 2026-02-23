@@ -28,9 +28,15 @@ user services to apply audio configuration automatically at login.
 %check
 python3 -c "import py_compile; py_compile.compile('usr/bin/fedorajam-audio-config', doraise=True)"
 bash -n usr/sbin/fedorajam-pwjack-config
-python3 -m py_compile usr/share/fedorajam-audio-config/backend/audio_config.py
+python3 -m py_compile usr/share/fedorajam-audio-config/__init__.py
 python3 -m py_compile usr/share/fedorajam-audio-config/main.py
 python3 -m py_compile usr/share/fedorajam-audio-config/i18n.py
+python3 -m py_compile usr/share/fedorajam-audio-config/backend/__init__.py
+python3 -m py_compile usr/share/fedorajam-audio-config/backend/audio_config.py
+python3 -m py_compile usr/share/fedorajam-audio-config/ui/__init__.py
+python3 -m py_compile usr/share/fedorajam-audio-config/ui/base.py
+python3 -m py_compile usr/share/fedorajam-audio-config/ui/gtk_ui.py
+python3 -m py_compile usr/share/fedorajam-audio-config/ui/qt_ui.py
 
 %install
 rm -rf %{buildroot}
