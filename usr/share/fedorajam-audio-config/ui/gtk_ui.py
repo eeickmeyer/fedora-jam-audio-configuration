@@ -171,7 +171,9 @@ class GtkUI(AudioConfigUI):
         entry.set_activates_default(True)
         box.append(entry)
 
+        box.set_size_request(520, -1)
         dlg.set_extra_child(box)
+        dlg.set_default_size(560, -1)
         dlg.add_response("cancel", cancel_label)
         dlg.add_response("ok", ok_label)
         dlg.set_default_response("ok")
@@ -230,7 +232,9 @@ class GtkUI(AudioConfigUI):
             box.append(row)
             dropdowns.append(dd)
 
+        box.set_size_request(580, -1)
         dlg.set_extra_child(box)
+        dlg.set_default_size(660, -1)
         dlg.add_response("cancel", cancel_label)
         dlg.add_response("ok", ok_label)
         dlg.set_default_response("ok")
@@ -290,11 +294,13 @@ class GtkUI(AudioConfigUI):
             checks.append((item.key, cb))
 
         scroll = Gtk.ScrolledWindow(hscrollbar_policy=Gtk.PolicyType.NEVER)
-        scroll.set_min_content_width(max(width - 80, 850))
-        scroll.set_min_content_height(max(height - 120, 200))
+        scroll.set_min_content_width(max(width - 80, 580))
+        scroll.set_min_content_height(max(height - 120, 380))
+        scroll.set_propagate_natural_height(True)
         scroll.set_child(box)
 
         dlg.set_extra_child(scroll)
+        dlg.set_default_size(max(width, 680), max(height, 600))
         dlg.add_response("cancel", cancel_label)
         dlg.add_response("ok", ok_label)
         dlg.set_default_response("ok")
@@ -355,11 +361,13 @@ class GtkUI(AudioConfigUI):
             radios.append((item.key, rb))
 
         scroll = Gtk.ScrolledWindow(hscrollbar_policy=Gtk.PolicyType.NEVER)
-        scroll.set_min_content_width(max(width - 80, 850))
-        scroll.set_min_content_height(max(height - 120, 200))
+        scroll.set_min_content_width(max(width - 80, 580))
+        scroll.set_min_content_height(max(height - 120, 380))
+        scroll.set_propagate_natural_height(True)
         scroll.set_child(box)
 
         dlg.set_extra_child(scroll)
+        dlg.set_default_size(max(width, 680), max(height, 600))
         dlg.add_response("cancel", cancel_label)
         dlg.add_response("ok", ok_label)
         dlg.set_default_response("ok")
