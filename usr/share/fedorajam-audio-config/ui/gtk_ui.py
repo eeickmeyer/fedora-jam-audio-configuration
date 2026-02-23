@@ -101,74 +101,6 @@ class GtkUI(AudioConfigUI):
         loop.run()
         return result["response"]
 
-    def _make_content_window(
-        self,
-        title: str,
-        width: int = 700,
-        height: int = 560,
-    ) -> tuple["Adw.Window", "Adw.ToolbarView"]:
-        """Create a resizable modal Adw.Window with a ToolbarView and HeaderBar.
-
-        Returns (window, toolbar_view). Callers should set the content on
-        toolbar_view and attach a bottom action bar before running the loop.
-        """
-        win = Adw.Window(
-            transient_for=self._transient(),
-            modal=True,
-            default_width=width,
-            default_height=height,
-            title=title,
-            resizable=True,
-        )
-        toolbar_view = Adw.ToolbarView()
-        toolbar_view.add_top_bar(Adw.HeaderBar())
-        win.set_content(toolbar_view)
-        return win, toolbar_view
-
-    def _run_content_window(
-        self,
-        win: "Adw.Window",
-        ok_label: str,
-        cancel_label: str,
-        action_bar: "Gtk.ActionBar",
-    ) -> tuple[str, GLib.MainLoop]:
-        """Wire OK / Cancel buttons onto *action_bar*, run the event loop.
-
-        Returns the response string ``"ok"`` or ``"cancel"``.
-        """
-        loop = GLib.MainLoop()
-        result = {"response": "cancel"}
-
-        def _respond(r: str) -> None:
-            result["response"] = r
-            win.close()
-            loop.quit()
-
-        cancel_btn = Gtk.Button(label=cancel_label)
-        cancel_btn.connect("clicked", lambda _: _respond("cancel"))
-
-        ok_btn = Gtk.Button(label=ok_label)
-        ok_btn.add_css_class("suggested-action")
-        ok_btn.connect("clicked", lambda _: _respond("ok"))
-
-        action_bar.pack_start(cancel_btn)
-        action_bar.pack_end(ok_btn)
-
-        # Treat window-close (× button) as cancel without quitting the loop twice
-        def _on_close_request(_w):
-            if loop.is_running():
-                result["response"] = "cancel"
-                loop.quit()
-            return False
-
-        win.connect("close-request", _on_close_request)
-
-        if self._app:
-            win.set_application(self._app)
-        win.present()
-        loop.run()
-        return result["response"]
-
     # ------------------------------------------------------------------
     # Simple message dialogs
     # ------------------------------------------------------------------
@@ -218,11 +150,16 @@ class GtkUI(AudioConfigUI):
         ok_label: str = "OK",
         cancel_label: str = "Cancel",
     ) -> str | None:
-        win, toolbar_view = self._make_content_window(title, width=560, height=-1)
+        dlg = Adw.MessageDialog(
+            heading=title,
+            transient_for=self._transient(),
+            modal=True,
+        )
+        dlg.set_body_use_markup(True)
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
-        box.set_margin_start(18)
-        box.set_margin_end(18)
+        box.set_margin_start(12)
+        box.set_margin_end(12)
         box.set_margin_top(12)
         box.set_margin_bottom(12)
 
@@ -231,15 +168,18 @@ class GtkUI(AudioConfigUI):
         box.append(label)
 
         entry = Gtk.Entry(text=default)
+        entry.set_activates_default(True)
         box.append(entry)
 
-        toolbar_view.set_content(box)
+        box.set_size_request(520, -1)
+        dlg.set_extra_child(box)
+        dlg.set_default_size(560, -1)
+        dlg.add_response("cancel", cancel_label)
+        dlg.add_response("ok", ok_label)
+        dlg.set_default_response("ok")
+        dlg.set_close_response("cancel")
 
-        action_bar = Gtk.ActionBar()
-        toolbar_view.add_bottom_bar(action_bar)
-
-        resp = self._run_content_window(win, ok_label, cancel_label, action_bar)
-        # entry.get_text() is still valid after window close
+        resp = self._run_adw_dialog(dlg)
         if resp == "ok":
             return entry.get_text()
         return None
@@ -256,11 +196,16 @@ class GtkUI(AudioConfigUI):
         ok_label: str = "OK",
         cancel_label: str = "Cancel",
     ) -> list[str] | None:
-        win, toolbar_view = self._make_content_window(title, width=660, height=-1)
+        dlg = Adw.MessageDialog(
+            heading=title,
+            transient_for=self._transient(),
+            modal=True,
+        )
+        dlg.set_body_use_markup(True)
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
-        box.set_margin_start(18)
-        box.set_margin_end(18)
+        box.set_margin_start(12)
+        box.set_margin_end(12)
         box.set_margin_top(12)
         box.set_margin_bottom(12)
 
@@ -287,12 +232,15 @@ class GtkUI(AudioConfigUI):
             box.append(row)
             dropdowns.append(dd)
 
-        toolbar_view.set_content(box)
+        box.set_size_request(580, -1)
+        dlg.set_extra_child(box)
+        dlg.set_default_size(660, -1)
+        dlg.add_response("cancel", cancel_label)
+        dlg.add_response("ok", ok_label)
+        dlg.set_default_response("ok")
+        dlg.set_close_response("cancel")
 
-        action_bar = Gtk.ActionBar()
-        toolbar_view.add_bottom_bar(action_bar)
-
-        resp = self._run_content_window(win, ok_label, cancel_label, action_bar)
+        resp = self._run_adw_dialog(dlg)
         if resp == "ok":
             results = []
             for dd, combo in zip(dropdowns, combos):
@@ -315,27 +263,22 @@ class GtkUI(AudioConfigUI):
         width: int = 0,
         height: int = 0,
     ) -> list[str] | None:
-        win, toolbar_view = self._make_content_window(
-            title,
-            width=max(width, 700),
-            height=max(height, 560),
+        dlg = Adw.MessageDialog(
+            heading=title,
+            transient_for=self._transient(),
+            modal=True,
         )
+        dlg.set_body_use_markup(True)
 
-        outer = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        box.set_margin_start(12)
+        box.set_margin_end(12)
+        box.set_margin_top(12)
+        box.set_margin_bottom(12)
 
         info_label = Gtk.Label(label=text, wrap=True, use_markup=True)
         info_label.set_xalign(0)
-        info_label.set_margin_start(18)
-        info_label.set_margin_end(18)
-        info_label.set_margin_top(12)
-        info_label.set_margin_bottom(8)
-        outer.append(info_label)
-
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
-        box.set_margin_start(18)
-        box.set_margin_end(18)
-        box.set_margin_top(4)
-        box.set_margin_bottom(12)
+        box.append(info_label)
 
         checks: list[tuple[str, Gtk.CheckButton]] = []
         for item in items:
@@ -345,26 +288,25 @@ class GtkUI(AudioConfigUI):
             lbl = Gtk.Label(label=lbl_text, use_markup=True)
             lbl.set_xalign(0)
             lbl.set_wrap(True)
-            lbl.set_hexpand(True)
             row.append(cb)
             row.append(lbl)
             box.append(row)
             checks.append((item.key, cb))
 
-        scroll = Gtk.ScrolledWindow(
-            hscrollbar_policy=Gtk.PolicyType.NEVER,
-            vscrollbar_policy=Gtk.PolicyType.AUTOMATIC,
-        )
-        scroll.set_vexpand(True)
+        scroll = Gtk.ScrolledWindow(hscrollbar_policy=Gtk.PolicyType.NEVER)
+        scroll.set_min_content_width(max(width - 80, 580))
+        scroll.set_min_content_height(max(height - 120, 380))
+        scroll.set_propagate_natural_height(True)
         scroll.set_child(box)
-        outer.append(scroll)
 
-        toolbar_view.set_content(outer)
+        dlg.set_extra_child(scroll)
+        dlg.set_default_size(max(width, 680), max(height, 600))
+        dlg.add_response("cancel", cancel_label)
+        dlg.add_response("ok", ok_label)
+        dlg.set_default_response("ok")
+        dlg.set_close_response("cancel")
 
-        action_bar = Gtk.ActionBar()
-        toolbar_view.add_bottom_bar(action_bar)
-
-        resp = self._run_content_window(win, ok_label, cancel_label, action_bar)
+        resp = self._run_adw_dialog(dlg)
         if resp == "ok":
             return [key for key, cb in checks if cb.get_active()]
         return None
@@ -383,27 +325,22 @@ class GtkUI(AudioConfigUI):
         width: int = 0,
         height: int = 0,
     ) -> str | None:
-        win, toolbar_view = self._make_content_window(
-            title,
-            width=max(width, 700),
-            height=max(height, 560),
+        dlg = Adw.MessageDialog(
+            heading=title,
+            transient_for=self._transient(),
+            modal=True,
         )
+        dlg.set_body_use_markup(True)
 
-        outer = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        box.set_margin_start(12)
+        box.set_margin_end(12)
+        box.set_margin_top(12)
+        box.set_margin_bottom(12)
 
         info_label = Gtk.Label(label=text, wrap=True, use_markup=True)
         info_label.set_xalign(0)
-        info_label.set_margin_start(18)
-        info_label.set_margin_end(18)
-        info_label.set_margin_top(12)
-        info_label.set_margin_bottom(8)
-        outer.append(info_label)
-
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
-        box.set_margin_start(18)
-        box.set_margin_end(18)
-        box.set_margin_top(4)
-        box.set_margin_bottom(12)
+        box.append(info_label)
 
         group: Gtk.CheckButton | None = None
         radios: list[tuple[str, Gtk.CheckButton]] = []
@@ -418,26 +355,25 @@ class GtkUI(AudioConfigUI):
             lbl = Gtk.Label(label=lbl_text, use_markup=True)
             lbl.set_xalign(0)
             lbl.set_wrap(True)
-            lbl.set_hexpand(True)
             row.append(rb)
             row.append(lbl)
             box.append(row)
             radios.append((item.key, rb))
 
-        scroll = Gtk.ScrolledWindow(
-            hscrollbar_policy=Gtk.PolicyType.NEVER,
-            vscrollbar_policy=Gtk.PolicyType.AUTOMATIC,
-        )
-        scroll.set_vexpand(True)
+        scroll = Gtk.ScrolledWindow(hscrollbar_policy=Gtk.PolicyType.NEVER)
+        scroll.set_min_content_width(max(width - 80, 580))
+        scroll.set_min_content_height(max(height - 120, 380))
+        scroll.set_propagate_natural_height(True)
         scroll.set_child(box)
-        outer.append(scroll)
 
-        toolbar_view.set_content(outer)
+        dlg.set_extra_child(scroll)
+        dlg.set_default_size(max(width, 680), max(height, 600))
+        dlg.add_response("cancel", cancel_label)
+        dlg.add_response("ok", ok_label)
+        dlg.set_default_response("ok")
+        dlg.set_close_response("cancel")
 
-        action_bar = Gtk.ActionBar()
-        toolbar_view.add_bottom_bar(action_bar)
-
-        resp = self._run_content_window(win, ok_label, cancel_label, action_bar)
+        resp = self._run_adw_dialog(dlg)
         if resp == "ok":
             for key, rb in radios:
                 if rb.get_active():
