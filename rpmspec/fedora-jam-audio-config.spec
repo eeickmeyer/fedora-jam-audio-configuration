@@ -10,6 +10,7 @@ URL:            https://pagure.io/fedora-jam-audio-configuration
 Source0:        https://pagure.io/fedora-jam-audio-configuration/archive/%{version}/fedora-jam-audio-configuration-%{version}.tar.gz
 BuildRequires:  systemd-rpm-macros
 BuildRequires:  gettext
+BuildRequires:  make
 BuildRequires:  python3
 Requires:       grub2-common bash polkit systemd pipewire pipewire-utils pulseaudio-utils
 Requires:       python3 >= 3.9
