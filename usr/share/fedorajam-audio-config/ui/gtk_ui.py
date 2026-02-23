@@ -77,6 +77,7 @@ class GtkUI(AudioConfigUI):
             modal=True,
         )
         dlg.set_body_use_markup(True)
+        dlg.set_default_size(520, -1)
         if buttons is None:
             dlg.add_response("ok", _("OK"))
             dlg.set_default_response("ok")
