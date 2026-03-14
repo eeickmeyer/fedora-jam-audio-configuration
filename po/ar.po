@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
 "Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
-"POT-Creation-Date: 2026-02-21 15:00-0800\n"
+"POT-Creation-Date: 2026-03-13 19:15-0700\n"
 "PO-Revision-Date: 2026-02-17 12:00+0300\n"
 "Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -14,7 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:36
 msgid "Don't restrict self connect requests (default)"
@@ -54,7 +55,7 @@ msgid "Use shorter names for the device client name."
 msgstr "استخدام أسماء أقصر لاسم عميل الجهاز."
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:129
 msgid "Fedora Jam Audio Configuration"
 msgstr "Fedora Jam Audio Configuration"
 
@@ -66,26 +67,24 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer "
-"xruns"
+"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
 msgstr ""
-"يفرض تشغيل معالجات المقاطعة في سياق مترابط، مما يقلل من تجاوزات المخزن "
-"المؤقت"
+"يفرض تشغيل معالجات المقاطعة في سياق مترابط، مما يقلل من تجاوزات المخزن المؤقت"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:120
 msgid ""
 "Offloads Read-Copy-Update (RCU) callbacks from all CPUs to dedicated kernel "
 "threads, improves real-time performance."
 msgstr ""
-"ينقل استدعاءات Read-Copy-Update (RCU) من جميع المعالجات إلى خيوط نواة مخصصة،"
-" مما يحسّن أداء الوقت الحقيقي."
+"ينقل استدعاءات Read-Copy-Update (RCU) من جميع المعالجات إلى خيوط نواة مخصصة، "
+"مما يحسّن أداء الوقت الحقيقي."
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:124
 msgid "Reduces noise in latency critical applications such as virtualization"
 msgstr ""
 "يقلل التشويش في التطبيقات الحساسة لزمن الاستجابة مثل المحاكاة الافتراضية"
 
-#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:82
 msgid "OK"
 msgstr "حسنًا"
 
@@ -173,8 +172,7 @@ msgstr "اختر خيارات إضافات JACK التي تريدها"
 
 #: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it "
-"alone."
+"Select the self-connect mode. If you don't know what this is, leave it alone."
 msgstr "اختر وضع الاتصال الذاتي. إذا كنت لا تعرف ما هذا، اتركه كما هو."
 
 #: ../usr/share/fedorajam-audio-config/main.py:226
@@ -234,11 +232,19 @@ msgstr "حدث خطأ أو تم إلغاء الإجراء."
 
 #: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio "
+"or an audio application so that you don't inadvertently feed that to your "
+"main output or draw from your main input. This can be useful when you wish "
+"to send a music application to your DAW or other mixer without sending to "
+"your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"في بعض الأحيان، قد ترغب في تفعيل جهاز صوتي وهمي لصوت النظام أو لتطبيق صوتي حتى لا ترسل الصوت عن غير قصد إلى المخرج الرئيسي أو تسحب من المدخل الرئيسي. يمكن أن يكون هذا مفيدًا عندما ترغب في إرسال تطبيق موسيقي إلى DAW أو خلاط آخر دون الإرسال إلى مخرج النظام الرئيسي. قد تكون هناك أسباب أخرى تتعلق بسير العمل أيضًا.\n"
+"في بعض الأحيان، قد ترغب في تفعيل جهاز صوتي وهمي لصوت النظام أو لتطبيق صوتي "
+"حتى لا ترسل الصوت عن غير قصد إلى المخرج الرئيسي أو تسحب من المدخل الرئيسي. "
+"يمكن أن يكون هذا مفيدًا عندما ترغب في إرسال تطبيق موسيقي إلى DAW أو خلاط آخر "
+"دون الإرسال إلى مخرج النظام الرئيسي. قد تكون هناك أسباب أخرى تتعلق بسير "
+"العمل أيضًا.\n"
 "\n"
 "هل تريد تشغيل جهاز صوتي وهمي ستيريو؟"
 
@@ -289,7 +295,8 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/main.py:405
 msgid ""
-"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"FireWire (FFADO) audio support requires the 'ffado' package to be "
+"installed.\n"
 "\n"
 "Would you like to install it now?"
 msgstr ""
@@ -313,11 +320,13 @@ msgstr "فشل تثبيت ffado."
 msgid ""
 "No FireWire audio devices were detected.\n"
 "\n"
-"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+"Make sure your FireWire device is connected and powered on, and that the "
+"firewire_ohci and firewire_core kernel modules are loaded."
 msgstr ""
 "لم يتم اكتشاف أي أجهزة صوت FireWire.\n"
 "\n"
-"تأكد من أن جهاز FireWire متصل وقيد التشغيل، وأن وحدات النواة firewire_ohci و firewire_core محمّلة."
+"تأكد من أن جهاز FireWire متصل وقيد التشغيل، وأن وحدات النواة firewire_ohci و "
+"firewire_core محمّلة."
 
 #: ../usr/share/fedorajam-audio-config/main.py:444
 #, python-brace-format

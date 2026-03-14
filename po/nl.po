@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
 "Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
-"POT-Creation-Date: 2026-02-21 15:00-0800\n"
+"POT-Creation-Date: 2026-03-13 19:15-0700\n"
 "PO-Revision-Date: 2026-02-17 16:00-0800\n"
 "Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -56,20 +56,18 @@ msgid "Use shorter names for the device client name."
 msgstr "Kortere namen gebruiken voor de apparaatclientnaam."
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:129
 msgid "Fedora Jam Audio Configuration"
 msgstr "Fedora Jam Audioconfiguratie"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:113
 msgid "Makes the kernel fully-preemptible, best for lowlatency workloads"
 msgstr ""
-"Maakt de kernel volledig preëmptief, ideaal voor werklasten met lage "
-"latentie"
+"Maakt de kernel volledig preëmptief, ideaal voor werklasten met lage latentie"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer "
-"xruns"
+"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
 msgstr ""
 "Dwingt interrupt-handlers om in een thread-context te draaien, waardoor "
 "buffer-xruns worden verminderd"
@@ -86,7 +84,7 @@ msgstr ""
 msgid "Reduces noise in latency critical applications such as virtualization"
 msgstr "Vermindert ruis in latentiekritieke toepassingen zoals virtualisatie"
 
-#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:82
 msgid "OK"
 msgstr "OK"
 
@@ -175,8 +173,7 @@ msgstr "Selecteer de gewenste JACK-pluginopties"
 
 #: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it "
-"alone."
+"Select the self-connect mode. If you don't know what this is, leave it alone."
 msgstr ""
 "Selecteer de zelfverbindingsmodus. Als u niet weet wat dit is, laat het dan "
 "ongewijzigd."
@@ -241,11 +238,20 @@ msgstr "Er is een fout opgetreden of de actie is geannuleerd."
 
 #: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio "
+"or an audio application so that you don't inadvertently feed that to your "
+"main output or draw from your main input. This can be useful when you wish "
+"to send a music application to your DAW or other mixer without sending to "
+"your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"Soms wilt u misschien een virtueel audioapparaat inschakelen voor uw systeemaudio of een audiotoepassing, zodat u dit niet per ongeluk naar uw hoofduitvoer stuurt of van uw hoofdinvoer opneemt. Dit kan handig zijn als u een muziektoepassing naar uw DAW of andere mixer wilt sturen zonder deze naar uw hoofdsysteemuitvoer te sturen. Er kunnen ook andere workflowredenen zijn.\n"
+"Soms wilt u misschien een virtueel audioapparaat inschakelen voor uw "
+"systeemaudio of een audiotoepassing, zodat u dit niet per ongeluk naar uw "
+"hoofduitvoer stuurt of van uw hoofdinvoer opneemt. Dit kan handig zijn als u "
+"een muziektoepassing naar uw DAW of andere mixer wilt sturen zonder deze "
+"naar uw hoofdsysteemuitvoer te sturen. Er kunnen ook andere workflowredenen "
+"zijn.\n"
 "\n"
 "Wilt u een virtueel stereo-audioapparaat starten?"
 
@@ -296,11 +302,13 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/main.py:405
 msgid ""
-"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"FireWire (FFADO) audio support requires the 'ffado' package to be "
+"installed.\n"
 "\n"
 "Would you like to install it now?"
 msgstr ""
-"FireWire (FFADO) audio-ondersteuning vereist installatie van het pakket 'ffado'.\n"
+"FireWire (FFADO) audio-ondersteuning vereist installatie van het pakket "
+"'ffado'.\n"
 "\n"
 "Wilt u het nu installeren?"
 
@@ -320,11 +328,13 @@ msgstr "Installatie van ffado mislukt."
 msgid ""
 "No FireWire audio devices were detected.\n"
 "\n"
-"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+"Make sure your FireWire device is connected and powered on, and that the "
+"firewire_ohci and firewire_core kernel modules are loaded."
 msgstr ""
 "Er zijn geen FireWire audioapparaten gedetecteerd.\n"
 "\n"
-"Controleer of uw FireWire-apparaat is aangesloten en ingeschakeld en of de kernelmodules firewire_ohci en firewire_core geladen zijn."
+"Controleer of uw FireWire-apparaat is aangesloten en ingeschakeld en of de "
+"kernelmodules firewire_ohci en firewire_core geladen zijn."
 
 #: ../usr/share/fedorajam-audio-config/main.py:444
 #, python-brace-format
@@ -343,7 +353,8 @@ msgid ""
 msgstr ""
 "Selecteer de buffergrootte en samplefrequentie voor het FireWire-apparaat.\n"
 "\n"
-"Opmerking: Veel FireWire-apparaten vereisen een buffergrootte van 256 of groter."
+"Opmerking: Veel FireWire-apparaten vereisen een buffergrootte van 256 of "
+"groter."
 
 #: ../usr/share/fedorajam-audio-config/main.py:489
 #, python-brace-format

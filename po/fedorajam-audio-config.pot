@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fedorajam-audio-config 1.0\n"
 "Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
-"POT-Creation-Date: 2026-02-21 15:00-0800\n"
+"POT-Creation-Date: 2026-03-13 19:15-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgid "Use shorter names for the device client name."
 msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:129
 msgid "Fedora Jam Audio Configuration"
 msgstr ""
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Reduces noise in latency critical applications such as virtualization"
 msgstr ""
 
-#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:82
 msgid "OK"
 msgstr ""
 

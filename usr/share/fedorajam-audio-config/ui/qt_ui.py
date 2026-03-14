@@ -49,6 +49,15 @@ def _msgbox(icon: QMessageBox.Icon, title: str, text: str) -> QMessageBox:
     for lbl in box.findChildren(QLabel):
         lbl.setWordWrap(True)
         lbl.setMaximumWidth(_MAX_DLG_WIDTH - 80)
+    # Centre the dialog on the primary screen
+    screen = QApplication.primaryScreen()
+    if screen:
+        geo = screen.availableGeometry()
+        hint = box.sizeHint()
+        box.move(
+            geo.x() + (geo.width() - hint.width()) // 2,
+            geo.y() + (geo.height() - hint.height()) // 2,
+        )
     return box
 
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
 "Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
-"POT-Creation-Date: 2026-02-21 15:00-0800\n"
+"POT-Creation-Date: 2026-03-13 19:15-0700\n"
 "PO-Revision-Date: 2026-02-17 16:00-0800\n"
 "Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
 "Language-Team: Chinese (Simplified) <i18n-zh@googlegroups.com>\n"
@@ -54,7 +54,7 @@ msgid "Use shorter names for the device client name."
 msgstr "为设备客户端名称使用较短的名称。"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:129
 msgid "Fedora Jam Audio Configuration"
 msgstr "Fedora Jam 音频配置"
 
@@ -64,21 +64,21 @@ msgstr "使内核完全可抢占，最适合低延迟工作负载"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer "
-"xruns"
+"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
 msgstr "强制中断处理程序在线程上下文中运行，减少缓冲区溢出"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:120
 msgid ""
 "Offloads Read-Copy-Update (RCU) callbacks from all CPUs to dedicated kernel "
 "threads, improves real-time performance."
-msgstr "将 Read-Copy-Update (RCU) 回调从所有 CPU 卸载到专用内核线程，提升实时性能。"
+msgstr ""
+"将 Read-Copy-Update (RCU) 回调从所有 CPU 卸载到专用内核线程，提升实时性能。"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:124
 msgid "Reduces noise in latency critical applications such as virtualization"
 msgstr "减少延迟敏感型应用（如虚拟化）中的噪声"
 
-#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:82
 msgid "OK"
 msgstr "确定"
 
@@ -86,7 +86,8 @@ msgstr "确定"
 msgid ""
 "ERROR: Neither GTK 4 (python3-gi + gir1.2-adw-1) nor PyQt6 (python3-pyqt6) "
 "is available."
-msgstr "错误：GTK 4 (python3-gi + gir1.2-adw-1) 和 PyQt6 (python3-pyqt6) 均不可用。"
+msgstr ""
+"错误：GTK 4 (python3-gi + gir1.2-adw-1) 和 PyQt6 (python3-pyqt6) 均不可用。"
 
 #: ../usr/share/fedorajam-audio-config/main.py:133
 msgid ""
@@ -165,8 +166,7 @@ msgstr "选择您需要的 JACK 插件选项"
 
 #: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it "
-"alone."
+"Select the self-connect mode. If you don't know what this is, leave it alone."
 msgstr "选择自连接模式。如果您不了解此选项，请保持默认设置。"
 
 #: ../usr/share/fedorajam-audio-config/main.py:226
@@ -226,11 +226,17 @@ msgstr "发生错误或操作已取消。"
 
 #: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio "
+"or an audio application so that you don't inadvertently feed that to your "
+"main output or draw from your main input. This can be useful when you wish "
+"to send a music application to your DAW or other mixer without sending to "
+"your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"有时，您可能希望为系统音频或音频应用程序启用一个虚拟音频设备，以避免将其意外地发送到主输出或从主输入获取。当您希望将音乐应用程序发送到 DAW 或其他混音器而不发送到主系统输出时，这会非常有用。此外还可能有其他工作流方面的原因。\n"
+"有时，您可能希望为系统音频或音频应用程序启用一个虚拟音频设备，以避免将其意外"
+"地发送到主输出或从主输入获取。当您希望将音乐应用程序发送到 DAW 或其他混音器而"
+"不发送到主系统输出时，这会非常有用。此外还可能有其他工作流方面的原因。\n"
 "\n"
 "您是否要启动一个立体声虚拟音频设备？"
 
@@ -281,7 +287,8 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/main.py:405
 msgid ""
-"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"FireWire (FFADO) audio support requires the 'ffado' package to be "
+"installed.\n"
 "\n"
 "Would you like to install it now?"
 msgstr ""
@@ -305,11 +312,13 @@ msgstr "安装 ffado 失败。"
 msgid ""
 "No FireWire audio devices were detected.\n"
 "\n"
-"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+"Make sure your FireWire device is connected and powered on, and that the "
+"firewire_ohci and firewire_core kernel modules are loaded."
 msgstr ""
 "未检测到 FireWire 音频设备。\n"
 "\n"
-"请确保您的 FireWire 设备已连接并已通电，且内核模块 firewire_ohci 和 firewire_core 已加载。"
+"请确保您的 FireWire 设备已连接并已通电，且内核模块 firewire_ohci 和 "
+"firewire_core 已加载。"
 
 #: ../usr/share/fedorajam-audio-config/main.py:444
 #, python-brace-format

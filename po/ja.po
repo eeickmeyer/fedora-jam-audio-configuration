@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
 "Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
-"POT-Creation-Date: 2026-02-21 15:00-0800\n"
+"POT-Creation-Date: 2026-03-13 19:15-0700\n"
 "PO-Revision-Date: 2026-02-15 16:00-0800\n"
 "Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
 "Language-Team: Japanese <trans-ja@lists.fedoraproject.org>\n"
@@ -43,7 +43,9 @@ msgstr "モニタークライアントとそのポートを表示します。"
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:46
 msgid ""
 "Exposes the capture ports and monitor ports on the same JACK device client."
-msgstr "キャプチャポートとモニターポートを同じJACKデバイスクライアント上に公開します。"
+msgstr ""
+"キャプチャポートとモニターポートを同じJACKデバイスクライアント上に公開しま"
+"す。"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:48
 msgid "Show the MIDI clients and their ports."
@@ -54,32 +56,35 @@ msgid "Use shorter names for the device client name."
 msgstr "デバイスクライアント名に短い名前を使用します。"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:129
 msgid "Fedora Jam Audio Configuration"
 msgstr "Fedora Jam オーディオ設定"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:113
 msgid "Makes the kernel fully-preemptible, best for lowlatency workloads"
-msgstr "カーネルを完全にプリエンプティブにし、低レイテンシのワークロードに最適です"
+msgstr ""
+"カーネルを完全にプリエンプティブにし、低レイテンシのワークロードに最適です"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer "
-"xruns"
-msgstr "割り込みハンドラーをスレッドコンテキストで実行させ、バッファーxrunを削減します"
+"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
+msgstr ""
+"割り込みハンドラーをスレッドコンテキストで実行させ、バッファーxrunを削減しま"
+"す"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:120
 msgid ""
 "Offloads Read-Copy-Update (RCU) callbacks from all CPUs to dedicated kernel "
 "threads, improves real-time performance."
 msgstr ""
-"Read-Copy-Update (RCU) コールバックをすべてのCPUから専用のカーネルスレッドにオフロードし、リアルタイム性能を向上させます。"
+"Read-Copy-Update (RCU) コールバックをすべてのCPUから専用のカーネルスレッドに"
+"オフロードし、リアルタイム性能を向上させます。"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:124
 msgid "Reduces noise in latency critical applications such as virtualization"
 msgstr "仮想化などのレイテンシに敏感なアプリケーションのノイズを低減します"
 
-#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:82
 msgid "OK"
 msgstr "OK"
 
@@ -88,7 +93,8 @@ msgid ""
 "ERROR: Neither GTK 4 (python3-gi + gir1.2-adw-1) nor PyQt6 (python3-pyqt6) "
 "is available."
 msgstr ""
-"エラー: GTK 4 (python3-gi + gir1.2-adw-1) も PyQt6 (python3-pyqt6) も利用できません。"
+"エラー: GTK 4 (python3-gi + gir1.2-adw-1) も PyQt6 (python3-pyqt6) も利用でき"
+"ません。"
 
 #: ../usr/share/fedorajam-audio-config/main.py:133
 msgid ""
@@ -167,9 +173,10 @@ msgstr "必要な JACK プラグインオプションを選択してください
 
 #: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it "
-"alone."
-msgstr "自己接続モードを選択してください。これが何か分からない場合は、変更しないでください。"
+"Select the self-connect mode. If you don't know what this is, leave it alone."
+msgstr ""
+"自己接続モードを選択してください。これが何か分からない場合は、変更しないでく"
+"ださい。"
 
 #: ../usr/share/fedorajam-audio-config/main.py:226
 #: ../usr/share/fedorajam-audio-config/main.py:477
@@ -204,7 +211,8 @@ msgstr ""
 #: ../usr/share/fedorajam-audio-config/main.py:301
 msgid ""
 "Select which kernel boot parameters you would like. Default is first three."
-msgstr "必要なカーネル起動パラメーターを選択してください。デフォルトは最初の3つです。"
+msgstr ""
+"必要なカーネル起動パラメーターを選択してください。デフォルトは最初の3つです。"
 
 #: ../usr/share/fedorajam-audio-config/main.py:304
 msgid "Apply (Password Required)"
@@ -220,7 +228,8 @@ msgstr "起動パラメーターを適用中…"
 
 #: ../usr/share/fedorajam-audio-config/main.py:325
 msgid "You must restart your computer for these changes to take effect."
-msgstr "これらの変更を有効にするには、コンピューターを再起動する必要があります。"
+msgstr ""
+"これらの変更を有効にするには、コンピューターを再起動する必要があります。"
 
 #: ../usr/share/fedorajam-audio-config/main.py:331
 msgid "An error has occurred or action was cancelled."
@@ -228,11 +237,19 @@ msgstr "エラーが発生したか、操作がキャンセルされました。
 
 #: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio "
+"or an audio application so that you don't inadvertently feed that to your "
+"main output or draw from your main input. This can be useful when you wish "
+"to send a music application to your DAW or other mixer without sending to "
+"your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"システムオーディオやオーディオアプリケーション用にダミーオーディオデバイスを有効にして、誤ってメイン出力に送信したりメイン入力から取得したりしないようにしたい場合があります。これは、音楽アプリケーションをメインシステム出力に送信せずにDAWや他のミキサーに送信したい場合に便利です。他のワークフロー上の理由もあるかもしれません。\n"
+"システムオーディオやオーディオアプリケーション用にダミーオーディオデバイスを"
+"有効にして、誤ってメイン出力に送信したりメイン入力から取得したりしないように"
+"したい場合があります。これは、音楽アプリケーションをメインシステム出力に送信"
+"せずにDAWや他のミキサーに送信したい場合に便利です。他のワークフロー上の理由も"
+"あるかもしれません。\n"
 "\n"
 "ステレオダミーオーディオデバイスを開始しますか？"
 
@@ -283,11 +300,13 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/main.py:405
 msgid ""
-"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"FireWire (FFADO) audio support requires the 'ffado' package to be "
+"installed.\n"
 "\n"
 "Would you like to install it now?"
 msgstr ""
-"FireWire (FFADO) オーディオサポートには 'ffado' パッケージのインストールが必要です。\n"
+"FireWire (FFADO) オーディオサポートには 'ffado' パッケージのインストールが必"
+"要です。\n"
 "\n"
 "今すぐインストールしますか？"
 
@@ -307,11 +326,13 @@ msgstr "ffado のインストールに失敗しました。"
 msgid ""
 "No FireWire audio devices were detected.\n"
 "\n"
-"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+"Make sure your FireWire device is connected and powered on, and that the "
+"firewire_ohci and firewire_core kernel modules are loaded."
 msgstr ""
 "FireWire オーディオデバイスが検出されませんでした。\n"
 "\n"
-"FireWire デバイスが接続され電源が入っていること、カーネルモジュール firewire_ohci と firewire_core がロードされていることを確認してください。"
+"FireWire デバイスが接続され電源が入っていること、カーネルモジュール "
+"firewire_ohci と firewire_core がロードされていることを確認してください。"
 
 #: ../usr/share/fedorajam-audio-config/main.py:444
 #, python-brace-format
@@ -421,7 +442,8 @@ msgstr "閉じる"
 #~ "jack.short-name     = {short_name}\n"
 #~ "jack.self-connect-mode = {self_connect}"
 #~ msgstr ""
-#~ "PipeWire Quantum をバッファ {buf}、サンプルレート {rate} Hz に設定しました。\n"
+#~ "PipeWire Quantum をバッファ {buf}、サンプルレート {rate} Hz に設定しまし"
+#~ "た。\n"
 #~ "\n"
 #~ "jack.show-monitor   = {show_monitor}\n"
 #~ "jack.merge-monitor  = {merge_monitor}\n"

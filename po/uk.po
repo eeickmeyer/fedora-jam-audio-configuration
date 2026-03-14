@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
 "Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
-"POT-Creation-Date: 2026-02-21 15:00-0800\n"
+"POT-Creation-Date: 2026-03-13 19:15-0700\n"
 "PO-Revision-Date: 2026-02-17 12:00+0200\n"
 "Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -14,7 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:36
 msgid "Don't restrict self connect requests (default)"
@@ -44,8 +45,8 @@ msgstr "Показати клієнт Monitor та його порти."
 msgid ""
 "Exposes the capture ports and monitor ports on the same JACK device client."
 msgstr ""
-"Відкриває порти захоплення та порти монітора на тому самому клієнті пристрою"
-" JACK."
+"Відкриває порти захоплення та порти монітора на тому самому клієнті пристрою "
+"JACK."
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:48
 msgid "Show the MIDI clients and their ports."
@@ -56,7 +57,7 @@ msgid "Use shorter names for the device client name."
 msgstr "Використовувати коротші назви для імені клієнта пристрою."
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:129
 msgid "Fedora Jam Audio Configuration"
 msgstr "Налаштування аудіо Fedora Jam"
 
@@ -68,8 +69,7 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer "
-"xruns"
+"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
 msgstr ""
 "Примушує обробники переривань працювати у потоковому контексті, зменшуючи "
 "випадання буфера"
@@ -87,7 +87,7 @@ msgid "Reduces noise in latency critical applications such as virtualization"
 msgstr ""
 "Зменшує шум у застосунках, критичних до затримки, таких як віртуалізація"
 
-#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:82
 msgid "OK"
 msgstr "OK"
 
@@ -176,8 +176,7 @@ msgstr "Оберіть бажані параметри плагіна JACK"
 
 #: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it "
-"alone."
+"Select the self-connect mode. If you don't know what this is, leave it alone."
 msgstr ""
 "Оберіть режим самопідключення. Якщо ви не знаєте, що це таке, залиште без "
 "змін."
@@ -239,11 +238,20 @@ msgstr "Сталася помилка або дію було скасовано.
 
 #: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio "
+"or an audio application so that you don't inadvertently feed that to your "
+"main output or draw from your main input. This can be useful when you wish "
+"to send a music application to your DAW or other mixer without sending to "
+"your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"Іноді вам може знадобитися увімкнути фіктивний аудіопристрій для системного аудіо або аудіозастосунку, щоб ви випадково не направили це на основний вихід або не забирали сигнал з основного входу. Це може бути корисно, коли ви хочете направити музичний застосунок у свою DAW або інший мікшер, не надсилаючи на основний системний вихід. Можуть бути й інші причини для робочого процесу.\n"
+"Іноді вам може знадобитися увімкнути фіктивний аудіопристрій для системного "
+"аудіо або аудіозастосунку, щоб ви випадково не направили це на основний "
+"вихід або не забирали сигнал з основного входу. Це може бути корисно, коли "
+"ви хочете направити музичний застосунок у свою DAW або інший мікшер, не "
+"надсилаючи на основний системний вихід. Можуть бути й інші причини для "
+"робочого процесу.\n"
 "\n"
 "Бажаєте запустити стерео фіктивний аудіопристрій?"
 
@@ -294,7 +302,8 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/main.py:405
 msgid ""
-"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"FireWire (FFADO) audio support requires the 'ffado' package to be "
+"installed.\n"
 "\n"
 "Would you like to install it now?"
 msgstr ""
@@ -318,11 +327,13 @@ msgstr "Не вдалося встановити ffado."
 msgid ""
 "No FireWire audio devices were detected.\n"
 "\n"
-"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+"Make sure your FireWire device is connected and powered on, and that the "
+"firewire_ohci and firewire_core kernel modules are loaded."
 msgstr ""
 "Аудіопристрої FireWire не виявлено.\n"
 "\n"
-"Переконайтеся, що пристрій FireWire під'єднано та увімкнено, а модулі ядра firewire_ohci і firewire_core завантажено."
+"Переконайтеся, що пристрій FireWire під'єднано та увімкнено, а модулі ядра "
+"firewire_ohci і firewire_core завантажено."
 
 #: ../usr/share/fedorajam-audio-config/main.py:444
 #, python-brace-format

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
 "Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
-"POT-Creation-Date: 2026-02-21 15:00-0800\n"
+"POT-Creation-Date: 2026-03-13 19:15-0700\n"
 "PO-Revision-Date: 2026-02-17 08:00-0800\n"
 "Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
 "Language-Team: Lithuanian\n"
@@ -14,7 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:36
 msgid "Don't restrict self connect requests (default)"
@@ -56,20 +57,19 @@ msgid "Use shorter names for the device client name."
 msgstr "Naudoti trumpesnius įrenginio kliento pavadinimus."
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:129
 msgid "Fedora Jam Audio Configuration"
 msgstr "„Fedora Jam“ garso konfigūracija"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:113
 msgid "Makes the kernel fully-preemptible, best for lowlatency workloads"
 msgstr ""
-"Padaro branduolį visiškai pertraukiamą, geriausiai tinka mažo vėlinimo darbo"
-" krūviams"
+"Padaro branduolį visiškai pertraukiamą, geriausiai tinka mažo vėlinimo darbo "
+"krūviams"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer "
-"xruns"
+"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
 msgstr ""
 "Priverčia pertraukimų tvarkykles veikti gijų kontekste, sumažinant buferio "
 "xruns"
@@ -85,10 +85,9 @@ msgstr ""
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:124
 msgid "Reduces noise in latency critical applications such as virtualization"
 msgstr ""
-"Sumažina triukšmą vėlinimui jautriose programose, tokiose kaip "
-"virtualizacija"
+"Sumažina triukšmą vėlinimui jautriose programose, tokiose kaip virtualizacija"
 
-#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:82
 msgid "OK"
 msgstr "Gerai"
 
@@ -177,8 +176,7 @@ msgstr "Pasirinkite norimas JACK papildinio parinktis"
 
 #: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it "
-"alone."
+"Select the self-connect mode. If you don't know what this is, leave it alone."
 msgstr ""
 "Pasirinkite savijungos režimą. Jei nežinote, kas tai yra, palikite "
 "nepakeistą."
@@ -242,11 +240,19 @@ msgstr "Įvyko klaida arba veiksmas buvo atšauktas."
 
 #: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio "
+"or an audio application so that you don't inadvertently feed that to your "
+"main output or draw from your main input. This can be useful when you wish "
+"to send a music application to your DAW or other mixer without sending to "
+"your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"Kartais gali prireikti įjungti fiktyvų garso įrenginį sistemos garsui ar garso programai, kad netyčia nesiųstumėte garso į pagrindinę išvestį arba neimtumėte iš pagrindinės įvesties. Tai gali būti naudinga, kai norite siųsti muzikos programą į savo DAW ar kitą mikserį nesiunčiant į pagrindinę sistemos išvestį. Gali būti ir kitų darbo eigos priežasčių.\n"
+"Kartais gali prireikti įjungti fiktyvų garso įrenginį sistemos garsui ar "
+"garso programai, kad netyčia nesiųstumėte garso į pagrindinę išvestį arba "
+"neimtumėte iš pagrindinės įvesties. Tai gali būti naudinga, kai norite "
+"siųsti muzikos programą į savo DAW ar kitą mikserį nesiunčiant į pagrindinę "
+"sistemos išvestį. Gali būti ir kitų darbo eigos priežasčių.\n"
 "\n"
 "Ar norite paleisti stereofoninį fiktyvų garso įrenginį?"
 
@@ -297,7 +303,8 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/main.py:405
 msgid ""
-"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"FireWire (FFADO) audio support requires the 'ffado' package to be "
+"installed.\n"
 "\n"
 "Would you like to install it now?"
 msgstr ""
@@ -321,11 +328,13 @@ msgstr "Nepavyko įdiegti ffado."
 msgid ""
 "No FireWire audio devices were detected.\n"
 "\n"
-"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+"Make sure your FireWire device is connected and powered on, and that the "
+"firewire_ohci and firewire_core kernel modules are loaded."
 msgstr ""
 "Nerasta jokių FireWire garso įrenginių.\n"
 "\n"
-"Įsitikinkite, kad jūsų FireWire įrenginys yra prijungtas ir įjungtas, o branduolio moduliai firewire_ohci ir firewire_core yra įkelti."
+"Įsitikinkite, kad jūsų FireWire įrenginys yra prijungtas ir įjungtas, o "
+"branduolio moduliai firewire_ohci ir firewire_core yra įkelti."
 
 #: ../usr/share/fedorajam-audio-config/main.py:444
 #, python-brace-format
@@ -344,7 +353,8 @@ msgid ""
 msgstr ""
 "Pasirinkite buferio dydį ir diskretizavimo dažnį FireWire įrenginiui.\n"
 "\n"
-"Pastaba: Daugeliui FireWire įrenginių reikia buferio dydžio 256 arba didesnio."
+"Pastaba: Daugeliui FireWire įrenginių reikia buferio dydžio 256 arba "
+"didesnio."
 
 #: ../usr/share/fedorajam-audio-config/main.py:489
 #, python-brace-format

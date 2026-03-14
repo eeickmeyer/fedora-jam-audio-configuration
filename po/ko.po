@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
 "Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
-"POT-Creation-Date: 2026-02-21 15:00-0800\n"
+"POT-Creation-Date: 2026-03-13 19:15-0700\n"
 "PO-Revision-Date: 2026-02-17 16:00-0800\n"
 "Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
 "Language-Team: Korean <translation-team-ko@lists.sourceforge.net>\n"
@@ -54,7 +54,7 @@ msgid "Use shorter names for the device client name."
 msgstr "장치 클라이언트 이름에 짧은 이름을 사용합니다."
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:129
 msgid "Fedora Jam Audio Configuration"
 msgstr "Fedora Jam Audio Configuration"
 
@@ -64,21 +64,24 @@ msgstr "커널을 완전히 선점 가능하게 만들어 저지연 작업에 �
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer "
-"xruns"
-msgstr "인터럽트 핸들러를 스레드 컨텍스트에서 실행하도록 강제하여 버퍼 오버런을 줄입니다"
+"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
+msgstr ""
+"인터럽트 핸들러를 스레드 컨텍스트에서 실행하도록 강제하여 버퍼 오버런을 줄입"
+"니다"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:120
 msgid ""
 "Offloads Read-Copy-Update (RCU) callbacks from all CPUs to dedicated kernel "
 "threads, improves real-time performance."
-msgstr "모든 CPU에서 Read-Copy-Update (RCU) 콜백을 전용 커널 스레드로 오프로드하여 실시간 성능을 향상시킵니다."
+msgstr ""
+"모든 CPU에서 Read-Copy-Update (RCU) 콜백을 전용 커널 스레드로 오프로드하여 실"
+"시간 성능을 향상시킵니다."
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:124
 msgid "Reduces noise in latency critical applications such as virtualization"
 msgstr "가상화 등 지연 시간에 민감한 애플리케이션에서 노이즈를 줄입니다"
 
-#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:82
 msgid "OK"
 msgstr "확인"
 
@@ -87,7 +90,8 @@ msgid ""
 "ERROR: Neither GTK 4 (python3-gi + gir1.2-adw-1) nor PyQt6 (python3-pyqt6) "
 "is available."
 msgstr ""
-"오류: GTK 4 (python3-gi + gir1.2-adw-1) 및 PyQt6 (python3-pyqt6) 모두 사용할 수 없습니다."
+"오류: GTK 4 (python3-gi + gir1.2-adw-1) 및 PyQt6 (python3-pyqt6) 모두 사용할 "
+"수 없습니다."
 
 #: ../usr/share/fedorajam-audio-config/main.py:133
 msgid ""
@@ -166,8 +170,7 @@ msgstr "원하는 JACK 플러그인 옵션을 선택하세요"
 
 #: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it "
-"alone."
+"Select the self-connect mode. If you don't know what this is, leave it alone."
 msgstr "자체 연결 모드를 선택하세요. 이것이 무엇인지 모르겠다면 그대로 두세요."
 
 #: ../usr/share/fedorajam-audio-config/main.py:226
@@ -227,11 +230,18 @@ msgstr "오류가 발생했거나 작업이 취소되었습니다."
 
 #: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio "
+"or an audio application so that you don't inadvertently feed that to your "
+"main output or draw from your main input. This can be useful when you wish "
+"to send a music application to your DAW or other mixer without sending to "
+"your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"시스템 오디오나 오디오 애플리케이션을 위해 더미 오디오 장치를 활성화하여 실수로 메인 출력으로 보내거나 메인 입력에서 가져오지 않도록 할 수 있습니다. 이는 음악 애플리케이션을 메인 시스템 출력으로 보내지 않고 DAW나 다른 믹서로 보내고 싶을 때 유용합니다. 다른 워크플로 이유도 있을 수 있습니다.\n"
+"시스템 오디오나 오디오 애플리케이션을 위해 더미 오디오 장치를 활성화하여 실수"
+"로 메인 출력으로 보내거나 메인 입력에서 가져오지 않도록 할 수 있습니다. 이는 "
+"음악 애플리케이션을 메인 시스템 출력으로 보내지 않고 DAW나 다른 믹서로 보내"
+"고 싶을 때 유용합니다. 다른 워크플로 이유도 있을 수 있습니다.\n"
 "\n"
 "스테레오 더미 오디오 장치를 시작하시겠습니까?"
 
@@ -282,7 +292,8 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/main.py:405
 msgid ""
-"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"FireWire (FFADO) audio support requires the 'ffado' package to be "
+"installed.\n"
 "\n"
 "Would you like to install it now?"
 msgstr ""
@@ -306,11 +317,13 @@ msgstr "ffado 설치에 실패했습니다."
 msgid ""
 "No FireWire audio devices were detected.\n"
 "\n"
-"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+"Make sure your FireWire device is connected and powered on, and that the "
+"firewire_ohci and firewire_core kernel modules are loaded."
 msgstr ""
 "FireWire 오디오 장치가 감지되지 않았습니다.\n"
 "\n"
-"FireWire 장치가 연결되어 있고 전원이 켜져 있는지, 커널 모듈 firewire_ohci와 firewire_core가 로드되어 있는지 확인하세요."
+"FireWire 장치가 연결되어 있고 전원이 켜져 있는지, 커널 모듈 firewire_ohci와 "
+"firewire_core가 로드되어 있는지 확인하세요."
 
 #: ../usr/share/fedorajam-audio-config/main.py:444
 #, python-brace-format

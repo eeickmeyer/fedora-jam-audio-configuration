@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
 "Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
-"POT-Creation-Date: 2026-02-21 15:00-0800\n"
+"POT-Creation-Date: 2026-03-13 19:15-0700\n"
 "PO-Revision-Date: 2026-02-17 14:45-0800\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
@@ -57,7 +57,7 @@ msgid "Use shorter names for the device client name."
 msgstr "Použít kratší názvy pro název klienta zařízení."
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:129
 msgid "Fedora Jam Audio Configuration"
 msgstr "Konfigurace zvuku Fedora Jam"
 
@@ -68,8 +68,7 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer "
-"xruns"
+"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
 msgstr ""
 "Vynutí běh obsluh přerušení ve vláknech, čímž se sníží počet výpadků "
 "vyrovnávací paměti (xruns)"
@@ -86,7 +85,7 @@ msgstr ""
 msgid "Reduces noise in latency critical applications such as virtualization"
 msgstr "Snižuje šum v aplikacích kritických na latenci, jako je virtualizace"
 
-#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:82
 msgid "OK"
 msgstr "OK"
 
@@ -175,8 +174,7 @@ msgstr "Vyberte, které volby zásuvného modulu JACK chcete"
 
 #: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it "
-"alone."
+"Select the self-connect mode. If you don't know what this is, leave it alone."
 msgstr ""
 "Vyberte režim vlastního připojení. Pokud nevíte, co to je, ponechte beze "
 "změny."
@@ -239,11 +237,19 @@ msgstr "Došlo k chybě nebo byla akce zrušena."
 
 #: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio "
+"or an audio application so that you don't inadvertently feed that to your "
+"main output or draw from your main input. This can be useful when you wish "
+"to send a music application to your DAW or other mixer without sending to "
+"your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"Někdy můžete chtít povolit fiktivní zvukové zařízení pro systémový zvuk nebo zvukovou aplikaci, abyste neúmyslně nepřivedli zvuk na hlavní výstup nebo neodebírali z hlavního vstupu. To může být užitečné, když chcete odeslat hudební aplikaci do vašeho DAW nebo jiného mixéru bez odesílání na hlavní systémový výstup. Mohou existovat i další důvody pracovního postupu.\n"
+"Někdy můžete chtít povolit fiktivní zvukové zařízení pro systémový zvuk nebo "
+"zvukovou aplikaci, abyste neúmyslně nepřivedli zvuk na hlavní výstup nebo "
+"neodebírali z hlavního vstupu. To může být užitečné, když chcete odeslat "
+"hudební aplikaci do vašeho DAW nebo jiného mixéru bez odesílání na hlavní "
+"systémový výstup. Mohou existovat i další důvody pracovního postupu.\n"
 "\n"
 "Chcete spustit stereofonní fiktivní zvukové zařízení?"
 
@@ -294,7 +300,8 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/main.py:405
 msgid ""
-"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"FireWire (FFADO) audio support requires the 'ffado' package to be "
+"installed.\n"
 "\n"
 "Would you like to install it now?"
 msgstr ""
@@ -318,11 +325,13 @@ msgstr "Instalace ffado se nezdařila."
 msgid ""
 "No FireWire audio devices were detected.\n"
 "\n"
-"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+"Make sure your FireWire device is connected and powered on, and that the "
+"firewire_ohci and firewire_core kernel modules are loaded."
 msgstr ""
 "Nebyla detekována žádná zvuková zařízení FireWire.\n"
 "\n"
-"Ujistěte se, že vaše zařízení FireWire je připojené a zapnuté a že jsou načteny moduly jádra firewire_ohci a firewire_core."
+"Ujistěte se, že vaše zařízení FireWire je připojené a zapnuté a že jsou "
+"načteny moduly jádra firewire_ohci a firewire_core."
 
 #: ../usr/share/fedorajam-audio-config/main.py:444
 #, python-brace-format
@@ -339,9 +348,11 @@ msgid ""
 "\n"
 "Note: Many FireWire devices require a buffer size of 256 or larger."
 msgstr ""
-"Vyberte velikost vyrovnávací paměti a vzorkovací frekvenci pro zařízení FireWire.\n"
+"Vyberte velikost vyrovnávací paměti a vzorkovací frekvenci pro zařízení "
+"FireWire.\n"
 "\n"
-"Poznámka: Mnoho zařízení FireWire vyžaduje velikost vyrovnávací paměti 256 nebo větší."
+"Poznámka: Mnoho zařízení FireWire vyžaduje velikost vyrovnávací paměti 256 "
+"nebo větší."
 
 #: ../usr/share/fedorajam-audio-config/main.py:489
 #, python-brace-format

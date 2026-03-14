@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
 "Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
-"POT-Creation-Date: 2026-02-21 15:00-0800\n"
+"POT-Creation-Date: 2026-03-13 19:15-0700\n"
 "PO-Revision-Date: 2026-02-17 08:00-0800\n"
 "Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
 "Language-Team: Estonian\n"
@@ -54,20 +54,19 @@ msgid "Use shorter names for the device client name."
 msgstr "Kasuta seadmekliendi nime jaoks lühemaid nimesid."
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:129
 msgid "Fedora Jam Audio Configuration"
 msgstr "Fedora Jam heliseadistus"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:113
 msgid "Makes the kernel fully-preemptible, best for lowlatency workloads"
 msgstr ""
-"Muudab kerneli täielikult ennetavaks, parim madala latentsusega töökoormuste"
-" jaoks"
+"Muudab kerneli täielikult ennetavaks, parim madala latentsusega töökoormuste "
+"jaoks"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer "
-"xruns"
+"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
 msgstr ""
 "Sunnib katkestuste töötlejaid töötama lõimestatud kontekstis, vähendades "
 "puhvri ülekandeid"
@@ -85,7 +84,7 @@ msgid "Reduces noise in latency critical applications such as virtualization"
 msgstr ""
 "Vähendab müra latentsuskriitilistes rakendustes, nagu virtualiseerimine"
 
-#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:82
 msgid "OK"
 msgstr "OK"
 
@@ -174,8 +173,7 @@ msgstr "Valige soovitud JACKi pistikprogrammi valikud"
 
 #: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it "
-"alone."
+"Select the self-connect mode. If you don't know what this is, leave it alone."
 msgstr ""
 "Valige iseühendumise režiim. Kui te ei tea, mis see on, jätke see muutmata."
 
@@ -238,11 +236,19 @@ msgstr "Ilmnes viga või toiming tühistati."
 
 #: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio "
+"or an audio application so that you don't inadvertently feed that to your "
+"main output or draw from your main input. This can be useful when you wish "
+"to send a music application to your DAW or other mixer without sending to "
+"your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"Mõnikord võite soovida lubada näiva heliseadme oma süsteemiheli või helirakenduse jaoks, et te ei suunaks seda kogemata oma põhiväljundisse ega võtaks oma põhisisendist. See võib olla kasulik, kui soovite saata muusikarakenduse oma DAW-i või muusse mikserisse ilma süsteemi põhiväljundisse saatmata. Selleks võib olla ka muid töövoo põhjuseid.\n"
+"Mõnikord võite soovida lubada näiva heliseadme oma süsteemiheli või "
+"helirakenduse jaoks, et te ei suunaks seda kogemata oma põhiväljundisse ega "
+"võtaks oma põhisisendist. See võib olla kasulik, kui soovite saata "
+"muusikarakenduse oma DAW-i või muusse mikserisse ilma süsteemi "
+"põhiväljundisse saatmata. Selleks võib olla ka muid töövoo põhjuseid.\n"
 "\n"
 "Kas soovite käivitada stereo näiva heliseadme?"
 
@@ -293,7 +299,8 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/main.py:405
 msgid ""
-"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"FireWire (FFADO) audio support requires the 'ffado' package to be "
+"installed.\n"
 "\n"
 "Would you like to install it now?"
 msgstr ""
@@ -317,11 +324,13 @@ msgstr "ffado paigaldamine ebaõnnestus."
 msgid ""
 "No FireWire audio devices were detected.\n"
 "\n"
-"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+"Make sure your FireWire device is connected and powered on, and that the "
+"firewire_ohci and firewire_core kernel modules are loaded."
 msgstr ""
 "FireWire heliseadmeid ei tuvastatud.\n"
 "\n"
-"Veenduge, et teie FireWire seade on ühendatud ja sisse lülitatud ning et kerneli moodulid firewire_ohci ja firewire_core on laaditud."
+"Veenduge, et teie FireWire seade on ühendatud ja sisse lülitatud ning et "
+"kerneli moodulid firewire_ohci ja firewire_core on laaditud."
 
 #: ../usr/share/fedorajam-audio-config/main.py:444
 #, python-brace-format

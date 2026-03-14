@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fedora-jam-audio-config 1.0\n"
 "Report-Msgid-Bugs-To: erich@ericheickmeyer.com\n"
-"POT-Creation-Date: 2026-02-21 15:00-0800\n"
+"POT-Creation-Date: 2026-03-13 19:15-0700\n"
 "PO-Revision-Date: 2026-02-17 16:00-0800\n"
 "Last-Translator: Fedora Jam Team <erich@ericheickmeyer.com>\n"
 "Language-Team: Portuguese <translation-team-pt@lists.sourceforge.net>\n"
@@ -56,20 +56,19 @@ msgid "Use shorter names for the device client name."
 msgstr "Utilizar nomes mais curtos para o nome do cliente de dispositivo."
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:54
-#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:120
+#: ../usr/share/fedorajam-audio-config/ui/qt_ui.py:129
 msgid "Fedora Jam Audio Configuration"
 msgstr "Configuração de Áudio do Fedora Jam"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:113
 msgid "Makes the kernel fully-preemptible, best for lowlatency workloads"
 msgstr ""
-"Torna o kernel totalmente preemptivo, ideal para cargas de trabalho de baixa"
-" latência"
+"Torna o kernel totalmente preemptivo, ideal para cargas de trabalho de baixa "
+"latência"
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:116
 msgid ""
-"Forces interrupt handlers to run in a threaded context, reducing buffer "
-"xruns"
+"Forces interrupt handlers to run in a threaded context, reducing buffer xruns"
 msgstr ""
 "Força os manipuladores de interrupções a executar num contexto de threads, "
 "reduzindo xruns de buffer"
@@ -84,10 +83,9 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/backend/audio_config.py:124
 msgid "Reduces noise in latency critical applications such as virtualization"
-msgstr ""
-"Reduz o ruído em aplicações críticas de latência, como a virtualização"
+msgstr "Reduz o ruído em aplicações críticas de latência, como a virtualização"
 
-#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:81
+#: ../usr/share/fedorajam-audio-config/ui/gtk_ui.py:82
 msgid "OK"
 msgstr "OK"
 
@@ -108,7 +106,8 @@ msgid ""
 msgstr ""
 "Tem o widget Plasma de definições do PipeWire instalado.\n"
 "Utilize-o para alterar o Quantum e a taxa de amostragem do PipeWire.\n"
-"(Isto é recomendado se estiver a utilizar o ambiente de trabalho KDE Plasma)\n"
+"(Isto é recomendado se estiver a utilizar o ambiente de trabalho KDE "
+"Plasma)\n"
 "Pode encontrá-lo na bandeja do sistema ou adicioná-lo ao seu painel."
 
 #: ../usr/share/fedorajam-audio-config/main.py:142
@@ -176,8 +175,7 @@ msgstr "Selecione as opções de plugin JACK que pretende"
 
 #: ../usr/share/fedorajam-audio-config/main.py:223
 msgid ""
-"Select the self-connect mode. If you don't know what this is, leave it "
-"alone."
+"Select the self-connect mode. If you don't know what this is, leave it alone."
 msgstr ""
 "Selecione o modo de autoligação. Se não sabe o que isto é, deixe como está."
 
@@ -232,8 +230,7 @@ msgstr "A aplicar parâmetros de arranque…"
 
 #: ../usr/share/fedorajam-audio-config/main.py:325
 msgid "You must restart your computer for these changes to take effect."
-msgstr ""
-"Tem de reiniciar o computador para que estas alterações tenham efeito."
+msgstr "Tem de reiniciar o computador para que estas alterações tenham efeito."
 
 #: ../usr/share/fedorajam-audio-config/main.py:331
 msgid "An error has occurred or action was cancelled."
@@ -241,11 +238,20 @@ msgstr "Ocorreu um erro ou a ação foi cancelada."
 
 #: ../usr/share/fedorajam-audio-config/main.py:341
 msgid ""
-"Sometimes, you may wish to enable a dummy audio device for your system audio or an audio application so that you don't inadvertently feed that to your main output or draw from your main input. This can be useful when you wish to send a music application to your DAW or other mixer without sending to your main system output. There may be other workflow reasons as well.\n"
+"Sometimes, you may wish to enable a dummy audio device for your system audio "
+"or an audio application so that you don't inadvertently feed that to your "
+"main output or draw from your main input. This can be useful when you wish "
+"to send a music application to your DAW or other mixer without sending to "
+"your main system output. There may be other workflow reasons as well.\n"
 "\n"
 "Do you wish to start a stereo dummy audio device?"
 msgstr ""
-"Por vezes, pode querer ativar um dispositivo de áudio fictício para o áudio do sistema ou para uma aplicação de áudio, de modo a não enviar inadvertidamente o sinal para a saída principal ou captar da entrada principal. Isto pode ser útil quando pretende enviar uma aplicação musical para a sua DAW ou outro misturador sem enviar para a saída principal do sistema. Podem existir também outros motivos de fluxo de trabalho.\n"
+"Por vezes, pode querer ativar um dispositivo de áudio fictício para o áudio "
+"do sistema ou para uma aplicação de áudio, de modo a não enviar "
+"inadvertidamente o sinal para a saída principal ou captar da entrada "
+"principal. Isto pode ser útil quando pretende enviar uma aplicação musical "
+"para a sua DAW ou outro misturador sem enviar para a saída principal do "
+"sistema. Podem existir também outros motivos de fluxo de trabalho.\n"
 "\n"
 "Deseja iniciar um dispositivo de áudio fictício estéreo?"
 
@@ -297,7 +303,8 @@ msgstr ""
 
 #: ../usr/share/fedorajam-audio-config/main.py:405
 msgid ""
-"FireWire (FFADO) audio support requires the 'ffado' package to be installed.\n"
+"FireWire (FFADO) audio support requires the 'ffado' package to be "
+"installed.\n"
 "\n"
 "Would you like to install it now?"
 msgstr ""
@@ -321,11 +328,13 @@ msgstr "Falha ao instalar ffado."
 msgid ""
 "No FireWire audio devices were detected.\n"
 "\n"
-"Make sure your FireWire device is connected and powered on, and that the firewire_ohci and firewire_core kernel modules are loaded."
+"Make sure your FireWire device is connected and powered on, and that the "
+"firewire_ohci and firewire_core kernel modules are loaded."
 msgstr ""
 "Não foram detetados dispositivos de áudio FireWire.\n"
 "\n"
-"Certifique-se de que o seu dispositivo FireWire está ligado e que os módulos do kernel firewire_ohci e firewire_core estão carregados."
+"Certifique-se de que o seu dispositivo FireWire está ligado e que os módulos "
+"do kernel firewire_ohci e firewire_core estão carregados."
 
 #: ../usr/share/fedorajam-audio-config/main.py:444
 #, python-brace-format
@@ -342,9 +351,11 @@ msgid ""
 "\n"
 "Note: Many FireWire devices require a buffer size of 256 or larger."
 msgstr ""
-"Selecione o tamanho do buffer e a taxa de amostragem para o dispositivo FireWire.\n"
+"Selecione o tamanho do buffer e a taxa de amostragem para o dispositivo "
+"FireWire.\n"
 "\n"
-"Nota: Muitos dispositivos FireWire requerem um tamanho de buffer de 256 ou superior."
+"Nota: Muitos dispositivos FireWire requerem um tamanho de buffer de 256 ou "
+"superior."
 
 #: ../usr/share/fedorajam-audio-config/main.py:489
 #, python-brace-format
