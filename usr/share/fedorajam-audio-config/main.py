@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Fedora Jam Audio Configuration — main entry point."""
 
 from __future__ import annotations
