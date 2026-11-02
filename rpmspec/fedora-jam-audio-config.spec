@@ -1,17 +1,22 @@
+%global forgeurl https://github.com/eeickmeyer/fedora-jam-audio-configuration
+
 Name:           fedora-jam-audio-config
 Version:        2.0.3
+%global tag     %{version}
+%forgemeta
 Release:        1%{?dist}
 Summary:        PipeWire-JACK audio configuration tool for Fedora Jam
 
 BuildArch:      noarch
 
 License:        GPL-2.0-or-later
-URL:            https://pagure.io/fedora-jam-audio-configuration
-Source0:        https://pagure.io/fedora-jam-audio-configuration/archive/%{version}/fedora-jam-audio-configuration-%{version}.tar.gz
+URL:            %{forgeurl}
+Source0:        %{forgesource}
+BuildRequires:  desktop-file-utils
 BuildRequires:  systemd-rpm-macros
 BuildRequires:  gettext
 BuildRequires:  make
-BuildRequires:  python3
+BuildRequires:  python3-devel
 Requires:       grub2-common bash polkit systemd pipewire pipewire-utils pulseaudio-utils
 Requires:       python3 >= 3.9
 Requires:       (python3-gobject or python3-PyQt6)
@@ -24,48 +29,42 @@ GTK (via PyGObject) and Qt (via PyQt6) backends, and includes systemd
 user services to apply audio configuration automatically at login.
 
 %prep
-%autosetup -C
+%autosetup -n %{archivename}
 
-%check
-python3 -c "import py_compile; py_compile.compile('usr/bin/fedorajam-audio-config', doraise=True)"
-bash -n usr/sbin/fedorajam-pwjack-config
-python3 -m py_compile usr/share/fedorajam-audio-config/__init__.py
-python3 -m py_compile usr/share/fedorajam-audio-config/main.py
-python3 -m py_compile usr/share/fedorajam-audio-config/i18n.py
-python3 -m py_compile usr/share/fedorajam-audio-config/backend/__init__.py
-python3 -m py_compile usr/share/fedorajam-audio-config/backend/audio_config.py
-python3 -m py_compile usr/share/fedorajam-audio-config/ui/__init__.py
-python3 -m py_compile usr/share/fedorajam-audio-config/ui/base.py
-python3 -m py_compile usr/share/fedorajam-audio-config/ui/gtk_ui.py
-python3 -m py_compile usr/share/fedorajam-audio-config/ui/qt_ui.py
+%build
+%make_build -C po
 
 %install
-rm -rf %{buildroot}
-install -d -m 0755 %{buildroot}%{_bindir} %{buildroot}%{_sbindir} \
-  %{buildroot}%{_sysconfdir}/default/grub.d %{buildroot}%{_userunitdir} %{buildroot}%{_userpresetdir} %{buildroot}%{_docdir}/%{name} %{buildroot}%{_datadir}/applications
-
-# Source is the current directory after prep
-src="."
-
-install -m 0755 ${src}/usr/bin/fedorajam-audio-config %{buildroot}%{_bindir}/fedorajam-audio-config
-install -m 0755 ${src}/usr/sbin/fedorajam-pwjack-config %{buildroot}%{_sbindir}/fedorajam-pwjack-config
-install -m 0644 ${src}/usr/lib/systemd/user/fedorajam-dummy-audio.service %{buildroot}%{_userunitdir}/fedorajam-dummy-audio.service
-install -m 0644 ${src}/usr/lib/systemd/user/fedorajam-pwconfig-start.service %{buildroot}%{_userunitdir}/fedorajam-pwconfig-start.service
-install -m 0644 ${src}/usr/lib/systemd/user-preset/90_fedorajam-pwconfig-start.preset %{buildroot}%{_userpresetdir}/90_fedorajam-pwconfig-start.preset
-install -m 0644 ${src}/usr/share/applications/fedorajam-audio-config.desktop %{buildroot}%{_datadir}/applications/fedorajam-audio-config.desktop
-
-# Install minimal manpages
-install -d %{buildroot}%{_mandir}/man1
-install -m 0644 ${src}/usr/share/man/man1/fedorajam-audio-config.1 %{buildroot}%{_mandir}/man1/fedorajam-audio-config.1
-install -m 0644 ${src}/usr/share/man/man1/fedorajam-pwjack-config.1 %{buildroot}%{_mandir}/man1/fedorajam-pwjack-config.1
+install -Dpm 0755 usr/bin/fedorajam-audio-config -t %{buildroot}%{_bindir}
+install -Dpm 0755 usr/sbin/fedorajam-pwjack-config -t %{buildroot}%{_sbindir}
+install -Dpm 0644 usr/lib/systemd/user/fedorajam-dummy-audio.service -t %{buildroot}%{_userunitdir}
+install -Dpm 0644 usr/lib/systemd/user/fedorajam-pwconfig-start.service -t %{buildroot}%{_userunitdir}
+install -Dpm 0644 usr/lib/systemd/user-preset/90_fedorajam-pwconfig-start.preset -t %{buildroot}%{_userpresetdir}
+install -Dpm 0644 usr/share/applications/fedorajam-audio-config.desktop -t %{buildroot}%{_datadir}/applications
+install -Dpm 0644 usr/share/man/man1/fedorajam-audio-config.1 -t %{buildroot}%{_mandir}/man1
+install -Dpm 0644 usr/share/man/man1/fedorajam-pwjack-config.1 -t %{buildroot}%{_mandir}/man1
 
 # Install Python application
 install -d %{buildroot}%{_datadir}/fedorajam-audio-config
-cp -a ${src}/usr/share/fedorajam-audio-config/* %{buildroot}%{_datadir}/fedorajam-audio-config/
+cp -pr usr/share/fedorajam-audio-config/* %{buildroot}%{_datadir}/fedorajam-audio-config/
 
-# Build and install translations
-make -C ${src}/po all
-make -C ${src}/po install DESTDIR=%{buildroot}
+# Install translations
+%make_install -C po PREFIX=%{_datadir}/locale
+%find_lang --all-name %{name}
+
+%check
+desktop-file-validate %{buildroot}%{_datadir}/applications/fedorajam-audio-config.desktop
+%{python3} -m py_compile usr/bin/fedorajam-audio-config
+bash -n usr/sbin/fedorajam-pwjack-config
+%{python3} -m py_compile usr/share/fedorajam-audio-config/__init__.py
+%{python3} -m py_compile usr/share/fedorajam-audio-config/main.py
+%{python3} -m py_compile usr/share/fedorajam-audio-config/i18n.py
+%{python3} -m py_compile usr/share/fedorajam-audio-config/backend/__init__.py
+%{python3} -m py_compile usr/share/fedorajam-audio-config/backend/audio_config.py
+%{python3} -m py_compile usr/share/fedorajam-audio-config/ui/__init__.py
+%{python3} -m py_compile usr/share/fedorajam-audio-config/ui/base.py
+%{python3} -m py_compile usr/share/fedorajam-audio-config/ui/gtk_ui.py
+%{python3} -m py_compile usr/share/fedorajam-audio-config/ui/qt_ui.py
 
 %post
 %systemd_user_post fedorajam-dummy-audio.service fedorajam-pwconfig-start.service
@@ -73,27 +72,27 @@ if ! [ -f %{_sysconfdir}/profile.d/fedorajam-pwjack.sh ]; then
    %{_sbindir}/fedorajam-pwjack-config 1024 48000
 fi
 
-%pre
-%systemd_user_preun fedorajam-dummy-audio.service fedorajam-pwconfig-start.service
-
 %preun
 %systemd_user_preun fedorajam-dummy-audio.service fedorajam-pwconfig-start.service
-if [ -f %{_sysconfdir}/profile.d/fedorajam-pwjack.sh ]; then
-  %{__rm} -f %{_sysconfdir}/profile.d/fedorajam-pwjack.sh
-fi
-if [ -f %{_sysconfdir}/fedorajamboot.cfg ]; then
-  %{__rm} -f %{_sysconfdir}/fedorajamboot.cfg
+if [ "$1" -eq 0 ]; then
+  if [ -f %{_sysconfdir}/profile.d/fedorajam-pwjack.sh ]; then
+    %{__rm} -f %{_sysconfdir}/profile.d/fedorajam-pwjack.sh
+  fi
+  if [ -f %{_sysconfdir}/fedorajamboot.cfg ]; then
+    %{__rm} -f %{_sysconfdir}/fedorajamboot.cfg
+  fi
 fi
 
 %postun
 %systemd_user_postun_with_restart fedorajam-dummy-audio.service fedorajam-pwconfig-start.service
 
-%files
+%files -f %{name}.lang
 %license COPYING
 %{_bindir}/fedorajam-audio-config
 %{_sbindir}/fedorajam-pwjack-config
 %{_datadir}/fedorajam-audio-config/
-%{_datadir}/locale/*/LC_MESSAGES/fedorajam-audio-config.mo
+%ghost %{_sysconfdir}/profile.d/fedorajam-pwjack.sh
+%ghost %{_sysconfdir}/fedorajamboot.cfg
 %{_userunitdir}/fedorajam-dummy-audio.service
 %{_userunitdir}/fedorajam-pwconfig-start.service
 %{_userpresetdir}/90_fedorajam-pwconfig-start.preset
