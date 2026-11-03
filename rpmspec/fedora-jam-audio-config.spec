@@ -91,8 +91,8 @@ fi
 %{_bindir}/fedorajam-audio-config
 %{_sbindir}/fedorajam-pwjack-config
 %{_datadir}/fedorajam-audio-config/
-%ghost %{_sysconfdir}/profile.d/fedorajam-pwjack.sh
-%ghost %{_sysconfdir}/fedorajamboot.cfg
+%ghost %attr(0644,root,root) %{_sysconfdir}/profile.d/fedorajam-pwjack.sh
+%ghost %attr(0644,root,root) %{_sysconfdir}/fedorajamboot.cfg
 %{_userunitdir}/fedorajam-dummy-audio.service
 %{_userunitdir}/fedorajam-pwconfig-start.service
 %{_userpresetdir}/90_fedorajam-pwconfig-start.preset
@@ -102,6 +102,16 @@ fi
 %doc README.md
 
 %changelog
+* Mon Nov 02 2026 Erich Eickmeyer <erich@ericheickmeyer.com> 2.0.4-1
+- Update to version 2.0.4
+- Update Source0 and URL to GitHub (Pagure frontend retired)
+- Remove shebang from non-executable main.py
+- Build translations in %%build and use %%find_lang
+- Remove %%systemd_user_preun from %%pre
+- Only remove generated configuration on uninstall, not upgrade
+- Track generated configuration files as %%ghost
+- Use %%make_build, %%make_install, %%{python3} and desktop-file-validate
+
 * Sun Feb 22 2026 Erich Eickmeyer <erich@ericheickmeyer.com> 2.0.3-1
 - Complete rewrite in Python
 
