@@ -1,7 +1,7 @@
 %global forgeurl https://github.com/eeickmeyer/fedora-jam-audio-configuration
 
 Name:           fedora-jam-audio-config
-Version:        2.0.3
+Version:        2.0.4
 %global tag     %{version}
 %forgemeta
 Release:        1%{?dist}
@@ -50,7 +50,7 @@ cp -pr usr/share/fedorajam-audio-config/* %{buildroot}%{_datadir}/fedorajam-audi
 
 # Install translations
 %make_install -C po PREFIX=%{_datadir}/locale
-%find_lang --all-name %{name}
+%find_lang %{name} --all-name
 
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/fedorajam-audio-config.desktop
