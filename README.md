@@ -8,14 +8,14 @@ reliable low-latency audio.
 
 ## Features
 
-The `fedorajam-audio-config` GUI walks you through a set of configuration tasks via a
-simple menu:
+The `fedorajam-audio-config` GUI provides a single tabbed panel for audio, kernel,
+dummy-device, and FireWire configuration:
 
 ### Configure PipeWire / JACK Settings
 - Select the **buffer size** and **sample rate** (PipeWire quantum) for your session.
   - If the **PipeWire Settings Plasma Widget** (KDE) or the **PipeWire Settings GNOME
     Shell Extension** is detected, the GUI defers quantum management to that widget and
-    skips the buffer/rate step.
+    disables the buffer/rate controls.
 - Toggle JACK plugin options:
   - `jack.show-monitor` — expose the JACK Monitor client and its ports
   - `jack.merge-monitor` — merge capture and monitor ports on the same device client
@@ -26,6 +26,8 @@ simple menu:
 
 Settings are written to `~/.config/pipewire/jack.conf.d/fedorajam.conf` and applied
 immediately by restarting the relevant PipeWire services.
+PipeWire-JACK package availability remains managed by Fedora and is not changed by the
+panel.
 
 ### Kernel Boot Parameters
 Manage real-time–friendly kernel parameters written to

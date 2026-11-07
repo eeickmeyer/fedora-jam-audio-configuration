@@ -178,6 +178,242 @@ class QtUI(AudioConfigUI):
         return None
 
     # ------------------------------------------------------------------
+    # Tabbed control panel
+    # ------------------------------------------------------------------
+
+    def show_tabbed_control_panel(
+        self,
+        title: str,
+        text: str,
+        buffer_options: list[str],
+        sample_rate_options: list[str],
+        current_buffer: str,
+        current_sample_rate: str,
+        default_buffer: str,
+        default_sample_rate: str,
+        jack_items: list[ChecklistItem],
+        self_connect_items: list[ChecklistItem],
+        boot_items: list[ChecklistItem],
+        dummy_active: bool,
+        dummy_autostart: bool,
+        fw_present: bool,
+        fw_configured: bool,
+        quantum_managed_by_widget: bool = False,
+        on_apply: Callable[[dict[str, object]], None] | None = None,
+        ok_label: str = "Apply",
+        cancel_label: str = "Close",
+    ) -> None:
+        dlg = QDialog()
+        dlg.setWindowTitle(title)
+        dlg.setWindowIcon(QIcon(ICON_PATH))
+
+        layout = QVBoxLayout(dlg)
+        layout.setSpacing(10)
+        layout.setContentsMargins(12, 12, 12, 12)
+
+        if text.strip():
+            intro = QLabel(text)
+            intro.setWordWrap(True)
+            layout.addWidget(intro)
+
+        tabs = QTabWidget()
+        tabs.setDocumentMode(True)
+        layout.addWidget(tabs)
+
+        # Audio tab
+        audio_tab = QWidget()
+        audio_layout = QVBoxLayout(audio_tab)
+        audio_layout.setSpacing(8)
+
+        if quantum_managed_by_widget:
+            note = QLabel(
+                _(
+                    "Quantum and Sample Rate are managed by your desktop "
+                    "widget or extension."
+                )
+            )
+            note.setWordWrap(True)
+            audio_layout.addWidget(note)
+
+        quantum_row = QWidget()
+        quantum_layout = QHBoxLayout(quantum_row)
+        quantum_layout.setContentsMargins(0, 0, 0, 0)
+        quantum_layout.setSpacing(10)
+
+        quantum_layout.addWidget(
+            QLabel(
+                _("<b>Quantum</b> <small>(Default: {value})</small>").format(
+                    value=default_buffer,
+                )
+            )
+        )
+        audio_buffer_cb = QComboBox()
+        audio_buffer_cb.addItems(buffer_options)
+        if current_buffer in buffer_options:
+            audio_buffer_cb.setCurrentText(current_buffer)
+        audio_buffer_cb.setEnabled(not quantum_managed_by_widget)
+        quantum_layout.addWidget(audio_buffer_cb)
+
+        quantum_layout.addWidget(
+            QLabel(
+                _("<b>Sample Rate (Hz)</b> <small>(Default: {value} Hz)</small>").format(
+                    value=default_sample_rate,
+                )
+            )
+        )
+        audio_rate_cb = QComboBox()
+        audio_rate_cb.addItems(sample_rate_options)
+        if current_sample_rate in sample_rate_options:
+            audio_rate_cb.setCurrentText(current_sample_rate)
+        audio_rate_cb.setEnabled(not quantum_managed_by_widget)
+        quantum_layout.addWidget(audio_rate_cb)
+
+        audio_layout.addWidget(quantum_row)
+
+        jack_header = QLabel(f"<b>{_('JACK Options')}</b>")
+        audio_layout.addWidget(jack_header)
+        jack_container = QWidget()
+        jack_box = QVBoxLayout(jack_container)
+        jack_box.setSpacing(2)
+        jack_box.setContentsMargins(0, 0, 0, 0)
+        jack_checks: list[tuple[str, QCheckBox]] = []
+        for item in jack_items:
+            cb = QCheckBox()
+            cb.setChecked(item.checked)
+            jack_box.addWidget(_wrapping_row(cb, _item_text(item.label, item.description)))
+            jack_checks.append((item.key, cb))
+        audio_layout.addWidget(jack_container)
+
+        sc_header = QLabel(f"<b>{_('Self-Connect Mode')}</b>")
+        audio_layout.addWidget(sc_header)
+        sc_container = QWidget()
+        sc_box = QVBoxLayout(sc_container)
+        sc_box.setSpacing(2)
+        sc_box.setContentsMargins(0, 0, 0, 0)
+        sc_group = QButtonGroup(dlg)
+        sc_radios: list[tuple[str, QRadioButton]] = []
+        for item in self_connect_items:
+            rb = QRadioButton()
+            rb.setChecked(item.checked)
+            sc_group.addButton(rb)
+            sc_box.addWidget(_wrapping_row(rb, _item_text(item.label, item.description)))
+            sc_radios.append((item.key, rb))
+        audio_layout.addWidget(sc_container)
+        audio_layout.addStretch(1)
+
+        tabs.addTab(audio_tab, _("Audio"))
+
+        # Boot tab
+        boot_tab = QWidget()
+        boot_layout = QVBoxLayout(boot_tab)
+        boot_layout.setSpacing(8)
+        boot_note = QLabel(
+            _("Kernel low-latency options (restart required).")
+        )
+        boot_note.setWordWrap(True)
+        boot_layout.addWidget(boot_note)
+        boot_container = QWidget()
+        boot_box = QVBoxLayout(boot_container)
+        boot_box.setSpacing(2)
+        boot_box.setContentsMargins(0, 0, 0, 0)
+        boot_checks: list[tuple[str, QCheckBox]] = []
+        for item in boot_items:
+            cb = QCheckBox()
+            cb.setChecked(item.checked)
+            boot_box.addWidget(_wrapping_row(cb, _item_text(item.label, item.description)))
+            boot_checks.append((item.key, cb))
+        boot_layout.addWidget(boot_container)
+        boot_layout.addStretch(1)
+        tabs.addTab(boot_tab, _("Kernel"))
+
+        # Dummy tab
+        dummy_tab = QWidget()
+        dummy_layout = QVBoxLayout(dummy_tab)
+        dummy_layout.setSpacing(8)
+        dummy_note = QLabel(
+            _("Use a dummy device to isolate routing in studio workflows.")
+        )
+        dummy_note.setWordWrap(True)
+        dummy_layout.addWidget(dummy_note)
+        dummy_active_cb = QCheckBox(_("Dummy device active"))
+        dummy_active_cb.setChecked(dummy_active)
+        dummy_layout.addWidget(dummy_active_cb)
+        dummy_autostart_cb = QCheckBox(_("Start dummy device at login"))
+        dummy_autostart_cb.setChecked(dummy_autostart)
+        dummy_layout.addWidget(dummy_autostart_cb)
+        dummy_layout.addStretch(1)
+        tabs.addTab(dummy_tab, _("Dummy Device"))
+
+        fw_action_group = QButtonGroup(dlg)
+        fw_keep = None
+        fw_configure = None
+        fw_remove = None
+
+        if fw_present:
+            fw_tab = QWidget()
+            fw_layout = QVBoxLayout(fw_tab)
+            fw_layout.setSpacing(8)
+            fw_note = QLabel(_("Manage FireWire (FFADO) integration."))
+            fw_note.setWordWrap(True)
+            fw_layout.addWidget(fw_note)
+            fw_keep = QRadioButton(_("No changes"))
+            fw_keep.setChecked(True)
+            fw_action_group.addButton(fw_keep)
+            fw_layout.addWidget(fw_keep)
+            fw_configure = QRadioButton(_("Configure or reconfigure FireWire"))
+            fw_action_group.addButton(fw_configure)
+            fw_layout.addWidget(fw_configure)
+            if fw_configured:
+                fw_remove = QRadioButton(_("Remove FireWire configuration"))
+                fw_action_group.addButton(fw_remove)
+                fw_layout.addWidget(fw_remove)
+            fw_layout.addStretch(1)
+            tabs.addTab(fw_tab, _("FireWire"))
+
+        buttons = QDialogButtonBox()
+        apply_btn = buttons.addButton(ok_label, QDialogButtonBox.ButtonRole.ApplyRole)
+        close_btn = buttons.addButton(cancel_label, QDialogButtonBox.ButtonRole.RejectRole)
+
+        def _collect_result() -> dict[str, object]:
+            fw_action = "none"
+            if fw_present:
+                if fw_configure is not None and fw_configure.isChecked():
+                    fw_action = "configure"
+                elif fw_remove is not None and fw_remove.isChecked():
+                    fw_action = "remove"
+
+            return {
+                "audio_buffer": audio_buffer_cb.currentText(),
+                "audio_rate": audio_rate_cb.currentText(),
+                "audio_jack_selected": [key for key, cb in jack_checks if cb.isChecked()],
+                "audio_self_connect_mode": next(
+                    (key for key, rb in sc_radios if rb.isChecked()),
+                    self_connect_items[0].key,
+                ),
+                "boot_selected": [key for key, cb in boot_checks if cb.isChecked()],
+                "dummy_active": dummy_active_cb.isChecked(),
+                "dummy_autostart": dummy_autostart_cb.isChecked(),
+                "firewire_action": fw_action,
+            }
+
+        def _on_apply() -> None:
+            if on_apply is None:
+                return
+            try:
+                on_apply(_collect_result())
+            except Exception:
+                self.show_error(title, _("An error has occurred."))
+
+        apply_btn.clicked.connect(_on_apply)
+        close_btn.clicked.connect(dlg.reject)
+        layout.addWidget(buttons)
+
+        _auto_size(dlg, 740, 620)
+
+        dlg.exec()
+        return
+
+    # ------------------------------------------------------------------
     # Combo-box dialog
     # ------------------------------------------------------------------
 

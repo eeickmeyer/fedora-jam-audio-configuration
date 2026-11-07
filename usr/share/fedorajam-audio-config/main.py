@@ -30,6 +30,7 @@ from backend.audio_config import (  # noqa: E402
     dummy_device_active,
     dummy_device_disable,
     dummy_device_enable,
+    dummy_device_enabled,
     dummy_device_start,
     dummy_device_stop,
     ffado_pw_configured,
@@ -497,6 +498,162 @@ def _configure_firewire(ui: AudioConfigUI) -> None:
     )
 
 
+def _run_tabbed_control_panel(ui: AudioConfigUI) -> bool:
+    """Run the one-window tabbed control panel when the toolkit supports it."""
+    show_panel = getattr(ui, "show_tabbed_control_panel", None)
+    if not callable(show_panel):
+        return False
+
+    has_pw_widget = has_plasma_pw_widget()
+    has_gnome_ext = has_gnome_pw_extension()
+    widget_manages_quantum = has_pw_widget or has_gnome_ext
+
+    default_buf, default_rate = get_default_quantum()
+    user_buf, user_rate = get_user_quantum()
+    cfg = read_jack_config()
+    jack_items = [
+        ChecklistItem(
+            key=param,
+            label=param,
+            description=JACK_PARAM_DESCRIPTIONS[param],
+            checked=cfg.bool_params.get(param, False),
+        )
+        for param in JACK_BOOL_PARAMS
+    ]
+    sc_items = [
+        ChecklistItem(
+            key=mode,
+            label=mode,
+            description=SELF_CONNECT_DESCRIPTIONS[mode],
+            checked=(mode == cfg.self_connect_mode),
+        )
+        for mode in SELF_CONNECT_MODES
+    ]
+
+    boot_params = read_boot_params()
+    boot_items = [
+        ChecklistItem(
+            key=param,
+            label=param,
+            description=boot_params.PARAM_DESCRIPTIONS[param],
+            checked=enabled,
+        )
+        for param, enabled in boot_params.as_dict().items()
+    ]
+
+    dummy_active = dummy_device_active()
+    dummy_autostart = dummy_device_enabled()
+    fw_configured = ffado_pw_configured()
+    fw_present = firewire_controller_present() or fw_configured
+
+    def _apply_from_panel(result: dict[str, object]) -> None:
+        boot_before = read_boot_params()
+        dummy_active_before = dummy_device_active()
+
+        buffer_size = int(result["audio_buffer"])
+        sample_rate = int(result["audio_rate"])
+        if not validate_quantum(buffer_size, sample_rate):
+            ui.show_error(APP_TITLE, _("Invalid quantum or sample rate selected."))
+            return
+
+        selected_jack = result["audio_jack_selected"]
+        selected_self_connect = result["audio_self_connect_mode"]
+        new_bool_params = {param: param in selected_jack for param in JACK_BOOL_PARAMS}
+        write_jack_config(
+            JackConfig(
+                buffer_size=buffer_size,
+                sample_rate=sample_rate,
+                show_monitor=new_bool_params["jack.show-monitor"],
+                merge_monitor=new_bool_params["jack.merge-monitor"],
+                show_midi=new_bool_params["jack.show-midi"],
+                short_name=new_bool_params["jack.short-name"],
+                self_connect_mode=selected_self_connect,
+            ),
+            set_quantum=not widget_manages_quantum,
+        )
+
+        selected_boot = result["boot_selected"]
+        new_boot = BootParams(
+            preempt_full="preempt=full" in selected_boot,
+            threadirqs="threadirqs" in selected_boot,
+            rcu_nocbs_all="rcu_nocbs=all" in selected_boot,
+            nohz_full_all="nohz_full=all" in selected_boot,
+        )
+        if new_boot.as_dict() != boot_before.as_dict():
+            def _write_boot_params() -> None:
+                if not write_boot_params(new_boot):
+                    raise RuntimeError("boot-params-failed")
+
+            if not ui.show_progress(
+                APP_TITLE,
+                _("Applying boot parameters…"),
+                _write_boot_params,
+            ):
+                ui.show_error(
+                    APP_TITLE,
+                    _("An error has occurred or action was cancelled."),
+                )
+
+        desired_dummy_active = result["dummy_active"]
+        if desired_dummy_active and not dummy_active_before:
+            dummy_device_start()
+        elif not desired_dummy_active and dummy_active_before:
+            dummy_device_stop()
+
+        if result["dummy_autostart"]:
+            dummy_device_enable()
+        else:
+            dummy_device_disable()
+
+        fw_action = result["firewire_action"]
+        if fw_action == "configure":
+            _configure_firewire(ui)
+        elif fw_action == "remove" and fw_configured:
+            remove_ffado_pw_config()
+            ui.show_info(
+                APP_TITLE,
+                _("FireWire (FFADO) PipeWire configuration removed.\n"
+                  "PipeWire has been restarted."),
+            )
+
+        if widget_manages_quantum:
+            message = _(
+                "Settings applied.\n\n"
+                "Buffer and Sample Rate are managed by your\n"
+                "desktop widget / extension."
+            )
+        else:
+            message = _(
+                "Settings applied.\n\n"
+                "Quantum: {buf}\n"
+                "Sample Rate: {rate} Hz"
+            ).format(buf=buffer_size, rate=sample_rate)
+        ui.show_info(APP_TITLE, message)
+
+    show_panel(
+        APP_TITLE,
+        "",
+        buffer_options=[str(size) for size in VALID_BUFFER_SIZES],
+        sample_rate_options=[str(rate) for rate in VALID_SAMPLE_RATES],
+        current_buffer=str(user_buf),
+        current_sample_rate=str(user_rate),
+        default_buffer=str(default_buf),
+        default_sample_rate=str(default_rate),
+        jack_items=jack_items,
+        self_connect_items=sc_items,
+        boot_items=boot_items,
+        dummy_active=dummy_active,
+        dummy_autostart=dummy_autostart,
+        fw_present=fw_present,
+        fw_configured=fw_configured,
+        quantum_managed_by_widget=widget_manages_quantum,
+        on_apply=_apply_from_panel,
+        ok_label=_("Apply"),
+        cancel_label=_("Close"),
+    )
+    return True
+
+
 # ======================================================================
 # Main menu loop
 # ======================================================================
@@ -504,6 +661,9 @@ def _configure_firewire(ui: AudioConfigUI) -> None:
 
 def _main_loop(ui: AudioConfigUI) -> None:
     """Run the main menu in a loop until the user closes it."""
+
+    if _run_tabbed_control_panel(ui):
+        return
 
     while True:
         active = dummy_device_active()

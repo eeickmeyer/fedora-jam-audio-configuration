@@ -1,7 +1,7 @@
 %global forgeurl https://github.com/eeickmeyer/fedora-jam-audio-configuration
 
 Name:           fedora-jam-audio-config
-Version:        2.0.4
+Version:        2.1.0
 %global tag     %{version}
 %forgemeta
 Release:        1%{?dist}
@@ -102,6 +102,9 @@ fi
 %doc README.md
 
 %changelog
+* Sat Nov 07 2026 Erich Eickmeyer <erich@ericheickmeyer.com> 2.1.0-1
+- Update to version 2.1.0
+
 * Mon Nov 02 2026 Erich Eickmeyer <erich@ericheickmeyer.com> 2.0.4-1
 - Update to version 2.0.4
 - Update Source0 and URL to GitHub (Pagure frontend retired)

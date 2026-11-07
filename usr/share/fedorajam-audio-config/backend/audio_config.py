@@ -422,6 +422,16 @@ def dummy_device_disable() -> None:
     )
 
 
+def dummy_device_enabled() -> bool:
+    """Return True if the dummy audio service is enabled for user login."""
+    res = subprocess.run(
+        ["systemctl", "--user", "is-enabled", "fedorajam-dummy-audio.service"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    return res.returncode == 0
+
+
 # ---------------------------------------------------------------------------
 # Write configuration
 # ---------------------------------------------------------------------------

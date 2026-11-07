@@ -186,6 +186,295 @@ class GtkUI(AudioConfigUI):
         return None
 
     # ------------------------------------------------------------------
+    # Tabbed control panel
+    # ------------------------------------------------------------------
+
+    def show_tabbed_control_panel(
+        self,
+        title: str,
+        text: str,
+        buffer_options: list[str],
+        sample_rate_options: list[str],
+        current_buffer: str,
+        current_sample_rate: str,
+        default_buffer: str,
+        default_sample_rate: str,
+        jack_items: list[ChecklistItem],
+        self_connect_items: list[ChecklistItem],
+        boot_items: list[ChecklistItem],
+        dummy_active: bool,
+        dummy_autostart: bool,
+        fw_present: bool,
+        fw_configured: bool,
+        quantum_managed_by_widget: bool = False,
+        on_apply: Callable[[dict[str, object]], None] | None = None,
+        ok_label: str = "Apply",
+        cancel_label: str = "Close",
+    ) -> None:
+        dlg = Adw.MessageDialog(
+            heading=title,
+            transient_for=self._transient(),
+            modal=True,
+        )
+        dlg.set_body_use_markup(True)
+
+        root = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        root.set_margin_start(12)
+        root.set_margin_end(12)
+        root.set_margin_top(12)
+        root.set_margin_bottom(12)
+
+        if text.strip():
+            intro = Gtk.Label(label=text, wrap=True, use_markup=True)
+            intro.set_xalign(0)
+            root.append(intro)
+
+        notebook = Gtk.Notebook()
+        notebook.set_hexpand(True)
+        notebook.set_vexpand(True)
+        notebook.set_show_border(False)
+        root.append(notebook)
+
+        # Audio tab
+        audio_tab = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        audio_tab.set_margin_start(8)
+        audio_tab.set_margin_end(8)
+        audio_tab.set_margin_top(8)
+        audio_tab.set_margin_bottom(8)
+
+        if quantum_managed_by_widget:
+            note = Gtk.Label(
+                label=_(
+                    "Quantum and Sample Rate are managed by your desktop "
+                    "widget or extension."
+                ),
+                wrap=True,
+            )
+            note.set_xalign(0)
+            audio_tab.append(note)
+
+        quantum_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
+        buf_lbl = Gtk.Label(
+            label=_("<b>Quantum</b> <small>(Default: {value})</small>").format(
+                value=default_buffer,
+            ),
+            use_markup=True,
+        )
+        buf_lbl.set_xalign(0)
+        quantum_row.append(buf_lbl)
+
+        audio_buffer_dd = Gtk.DropDown(model=Gtk.StringList.new(buffer_options))
+        try:
+            audio_buffer_dd.set_selected(buffer_options.index(current_buffer))
+        except ValueError:
+            audio_buffer_dd.set_selected(0)
+        audio_buffer_dd.set_sensitive(not quantum_managed_by_widget)
+        quantum_row.append(audio_buffer_dd)
+
+        rate_lbl = Gtk.Label(
+            label=_("<b>Sample Rate (Hz)</b> <small>(Default: {value} Hz)</small>").format(
+                value=default_sample_rate,
+            ),
+            use_markup=True,
+        )
+        rate_lbl.set_xalign(0)
+        quantum_row.append(rate_lbl)
+
+        audio_rate_dd = Gtk.DropDown(model=Gtk.StringList.new(sample_rate_options))
+        try:
+            audio_rate_dd.set_selected(sample_rate_options.index(current_sample_rate))
+        except ValueError:
+            audio_rate_dd.set_selected(0)
+        audio_rate_dd.set_sensitive(not quantum_managed_by_widget)
+        quantum_row.append(audio_rate_dd)
+        audio_tab.append(quantum_row)
+
+        jack_header = Gtk.Label(label=f"<b>{_('JACK Options')}</b>", use_markup=True)
+        jack_header.set_xalign(0)
+        audio_tab.append(jack_header)
+
+        jack_checks: list[tuple[str, Gtk.CheckButton]] = []
+        for item in jack_items:
+            row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+            cb = Gtk.CheckButton(active=item.checked)
+            lbl = Gtk.Label(
+                label=(
+                    f"<b>{item.label}</b>  \u2014  {item.description}"
+                    if item.description
+                    else f"<b>{item.label}</b>"
+                ),
+                use_markup=True,
+            )
+            lbl.set_xalign(0)
+            lbl.set_wrap(True)
+            row.append(cb)
+            row.append(lbl)
+            audio_tab.append(row)
+            jack_checks.append((item.key, cb))
+
+        sc_header = Gtk.Label(label=f"<b>{_('Self-Connect Mode')}</b>", use_markup=True)
+        sc_header.set_xalign(0)
+        audio_tab.append(sc_header)
+
+        sc_group: Gtk.CheckButton | None = None
+        sc_radios: list[tuple[str, Gtk.CheckButton]] = []
+        for item in self_connect_items:
+            row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+            rb = Gtk.CheckButton(active=item.checked)
+            if sc_group is not None:
+                rb.set_group(sc_group)
+            else:
+                sc_group = rb
+            lbl = Gtk.Label(
+                label=(
+                    f"<b>{item.label}</b>  \u2014  {item.description}"
+                    if item.description
+                    else f"<b>{item.label}</b>"
+                ),
+                use_markup=True,
+            )
+            lbl.set_xalign(0)
+            lbl.set_wrap(True)
+            row.append(rb)
+            row.append(lbl)
+            audio_tab.append(row)
+            sc_radios.append((item.key, rb))
+
+        notebook.append_page(audio_tab, Gtk.Label(label=_("Audio")))
+
+        # Boot tab
+        boot_tab = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        boot_tab.set_margin_start(8)
+        boot_tab.set_margin_end(8)
+        boot_tab.set_margin_top(8)
+        boot_tab.set_margin_bottom(8)
+        boot_info = Gtk.Label(
+            label=_("Kernel low-latency options (restart required)."),
+            wrap=True,
+        )
+        boot_info.set_xalign(0)
+        boot_tab.append(boot_info)
+        boot_checks: list[tuple[str, Gtk.CheckButton]] = []
+        for item in boot_items:
+            row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+            cb = Gtk.CheckButton(active=item.checked)
+            lbl = Gtk.Label(
+                label=(
+                    f"<b>{item.label}</b>  \u2014  {item.description}"
+                    if item.description
+                    else f"<b>{item.label}</b>"
+                ),
+                use_markup=True,
+            )
+            lbl.set_xalign(0)
+            lbl.set_wrap(True)
+            row.append(cb)
+            row.append(lbl)
+            boot_tab.append(row)
+            boot_checks.append((item.key, cb))
+        notebook.append_page(boot_tab, Gtk.Label(label=_("Kernel")))
+
+        # Dummy tab
+        dummy_tab = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        dummy_tab.set_margin_start(8)
+        dummy_tab.set_margin_end(8)
+        dummy_tab.set_margin_top(8)
+        dummy_tab.set_margin_bottom(8)
+        dummy_info = Gtk.Label(
+            label=_("Use a dummy device to isolate routing in studio workflows."),
+            wrap=True,
+        )
+        dummy_info.set_xalign(0)
+        dummy_tab.append(dummy_info)
+        dummy_active_cb = Gtk.CheckButton(label=_("Dummy device active"))
+        dummy_active_cb.set_active(dummy_active)
+        dummy_tab.append(dummy_active_cb)
+        dummy_autostart_cb = Gtk.CheckButton(label=_("Start dummy device at login"))
+        dummy_autostart_cb.set_active(dummy_autostart)
+        dummy_tab.append(dummy_autostart_cb)
+        notebook.append_page(dummy_tab, Gtk.Label(label=_("Dummy Device")))
+
+        fw_keep = None
+        fw_configure = None
+        fw_remove = None
+
+        if fw_present:
+            fw_tab = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+            fw_tab.set_margin_start(8)
+            fw_tab.set_margin_end(8)
+            fw_tab.set_margin_top(8)
+            fw_tab.set_margin_bottom(8)
+            fw_info = Gtk.Label(
+                label=_("Manage FireWire (FFADO) integration."),
+                wrap=True,
+            )
+            fw_info.set_xalign(0)
+            fw_tab.append(fw_info)
+
+            fw_keep = Gtk.CheckButton(label=_("No changes"))
+            fw_keep.set_active(True)
+            fw_tab.append(fw_keep)
+
+            fw_configure = Gtk.CheckButton(label=_("Configure or reconfigure FireWire"))
+            fw_configure.set_group(fw_keep)
+            fw_tab.append(fw_configure)
+
+            if fw_configured:
+                fw_remove = Gtk.CheckButton(label=_("Remove FireWire configuration"))
+                fw_remove.set_group(fw_keep)
+                fw_tab.append(fw_remove)
+
+            notebook.append_page(fw_tab, Gtk.Label(label=_("FireWire")))
+
+        scroll = Gtk.ScrolledWindow(hscrollbar_policy=Gtk.PolicyType.NEVER)
+        scroll.set_min_content_width(720)
+        scroll.set_min_content_height(620)
+        scroll.set_propagate_natural_height(True)
+        scroll.set_child(root)
+
+        dlg.set_extra_child(scroll)
+        dlg.set_default_size(820, 700)
+        dlg.add_response("cancel", cancel_label)
+        dlg.add_response("apply", ok_label)
+        dlg.set_default_response("apply")
+        dlg.set_close_response("cancel")
+
+        def _collect_result() -> dict[str, object]:
+            fw_action = "none"
+            if fw_present:
+                if fw_configure is not None and fw_configure.get_active():
+                    fw_action = "configure"
+                elif fw_remove is not None and fw_remove.get_active():
+                    fw_action = "remove"
+
+            return {
+                "audio_buffer": buffer_options[audio_buffer_dd.get_selected()],
+                "audio_rate": sample_rate_options[audio_rate_dd.get_selected()],
+                "audio_jack_selected": [key for key, cb in jack_checks if cb.get_active()],
+                "audio_self_connect_mode": next(
+                    (key for key, rb in sc_radios if rb.get_active()),
+                    self_connect_items[0].key,
+                ),
+                "boot_selected": [key for key, cb in boot_checks if cb.get_active()],
+                "dummy_active": dummy_active_cb.get_active(),
+                "dummy_autostart": dummy_autostart_cb.get_active(),
+                "firewire_action": fw_action,
+            }
+
+        while True:
+            resp = self._run_adw_dialog(dlg)
+            if resp != "apply":
+                break
+
+            if on_apply is not None:
+                try:
+                    on_apply(_collect_result())
+                except Exception:
+                    self.show_error(title, _("An error has occurred."))
+
+        return
+
+    # ------------------------------------------------------------------
     # Combo-box dialog
     # ------------------------------------------------------------------
 
