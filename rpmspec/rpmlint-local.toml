@@ -1,6 +1,0 @@
-# Local rpmlint filters for this project
-Filters = [
-  'devel-file-in-non-devel-package.*/usr/bin/fedorajam-audio-config',
-  'devel-file-in-non-devel-package.*/usr/bin/fedorajam-pwjack-config',
-  'dangerous-command-in-%preun rm',
-]
